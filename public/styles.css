@@ -144,3 +144,28 @@ footer .underlined{color:#d6d5ce;font-size:11px;text-decoration:underline;text-u
   #skill-open:is(:hover,:focus-visible) .agent-icons img:nth-child(3){transform:translate(22px,-2px) rotate(2deg)}
   #skill-open:is(:hover,:focus-visible) .agent-icons img:nth-child(4){transform:translate(33px,-1px) rotate(5deg)}
 }
+/* A quiet thinking mark gives the wordmark a little life. */
+.brand-animated{white-space:nowrap}
+.brand-animated .brand-motion,.brand-animated .brand-index{display:inline-block;transition:transform 350ms cubic-bezier(.2,.7,.2,1),color 350ms ease}
+.brand-animated .brand-motion{font-weight:750}
+.brand-animated .brand-mark{position:relative;transform-origin:center;transition:transform 350ms cubic-bezier(.2,.7,.2,1),background-color 350ms ease}
+.brand-animated .brand-mark::before,.brand-animated .brand-mark::after{content:"";position:absolute;top:2px;width:3px;height:3px;border-radius:1px;background:#f38b74;opacity:0}
+.brand-animated .brand-mark::before{left:9px}.brand-animated .brand-mark::after{left:14px}
+@keyframes brand-think{0%,47%,100%{transform:translateY(0) scale(1)}52%{transform:translateY(-3px) scale(.92)}57%{transform:translateY(0) scale(1)}62%{transform:translateY(-2px) scale(.94)}67%,85%{transform:translateY(0) scale(1)}}
+@keyframes brand-thought{0%,48%,86%,100%{opacity:0;transform:translateY(1px) scale(.5)}57%,74%{opacity:.8;transform:translateY(0) scale(1)}}
+@media (prefers-reduced-motion:no-preference){
+  .brand-animated .brand-mark{animation:brand-think 6s ease-in-out infinite}
+  .brand-animated .brand-mark::before,.brand-animated .brand-mark::after{animation:brand-thought 6s ease-in-out infinite}
+  .brand-animated .brand-mark::after{animation-delay:.24s}
+  .brand-animated:is(:hover,:focus-visible) .brand-motion{transform:translateY(-2px)}
+  .brand-animated:is(:hover,:focus-visible) .brand-index{color:#f38b74;transform:translate(1px,2px)}
+  .brand-animated:is(:hover,:focus-visible) .brand-mark{animation:none;background:#f6ae98;transform:translateY(-2px) rotate(45deg) scale(1.2)}
+  .brand-animated:is(:hover,:focus-visible) .brand-mark::before,.brand-animated:is(:hover,:focus-visible) .brand-mark::after{animation:none;opacity:.7;transform:scale(1)}
+  body.paused .brand-animated .brand-mark,body.paused .brand-animated .brand-mark::before,body.paused .brand-animated .brand-mark::after{animation-play-state:paused}
+}
+/* Keep tile details readable on narrow screens and make the copy cue feel responsive. */
+.tile-info>div{min-width:0}
+.tile .scene{transition:box-shadow 250ms ease}
+.tile-arrow{transition:transform 250ms cubic-bezier(.2,.7,.2,1),background-color 250ms ease,color 250ms ease,border-color 250ms ease}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){.tile:hover .tile-arrow{transform:translate(2px,-2px)}}
+@media (prefers-reduced-motion:no-preference){.tile:focus-visible .tile-arrow{transform:translate(2px,-2px)}}
