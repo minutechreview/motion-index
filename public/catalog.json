@@ -1,0 +1,1041 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "shaan",
+      "author": "Shaan Johari",
+      "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+      "project": "Animation styles you can build with Claude (or Codex)",
+      "description": "The original collection of practical video animation recipes.",
+      "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+      "authorUrl": "https://www.instagram.com/viashaan/"
+    },
+    {
+      "id": "mndr",
+      "author": "Samer",
+      "name": "Samer · MNDR",
+      "project": "36 Motion Graphic Styles You Can Build with Claude",
+      "description": "A collection of code-built motion-graphics examples and prompts.",
+      "url": "https://mndr.ai/blog/motion-graphics-with-claude/",
+      "authorUrl": "https://mndr.ai/blog/author/samer/"
+    },
+    {
+      "id": "aimotions",
+      "author": "Alejandro López Martínez",
+      "name": "Alejandro López Martínez (develatter) · aimotions",
+      "project": "aimotions",
+      "description": "A visual library of animated text effects and motion references.",
+      "url": "https://aimotions.art/",
+      "authorUrl": "https://develatter.com/"
+    },
+    {
+      "id": "animaguru",
+      "author": "AnimaGuru / Docyrus, Inc.",
+      "name": "AnimaGuru · Docyrus, Inc.",
+      "project": "AnimaGuru Motion Library",
+      "description": "A motion library of hand-built examples across animation categories.",
+      "url": "https://animaguru.com/motion-library",
+      "authorUrl": "https://animaguru.com/about"
+    },
+    {
+      "id": "acid",
+      "author": "Étienne Mineur + Floot",
+      "name": "Étienne Mineur + Floot · Procedural Studio",
+      "project": "Procedural Studio",
+      "description": "A gallery of generative and procedural animation experiments.",
+      "url": "https://proceduralstudio.etienne.design/studio/flow-field-typography",
+      "authorUrl": "https://etienne.design/"
+    },
+    {
+      "id": "paper",
+      "author": "Paper Animators",
+      "name": "Paper Animators · Motion Library",
+      "project": "Paper Animators Motion Library",
+      "description": "Paper, print and editorial animation references.",
+      "url": "https://paperanimators.com/videos/",
+      "authorUrl": "https://paperanimators.com/about/"
+    }
+  ],
+  "entries": [
+    {
+      "id": "turntable",
+      "index": 1,
+      "title": "Product turntable",
+      "category": "Product",
+      "description": "A studio-lit product on a quiet rotating stage.",
+      "look": "A single hero product floats over a circular pedestal on a warm neutral studio ground. Use a controlled key light, a soft grounding shadow, and restrained product labeling.",
+      "motion": "Rotate the object slowly through one full turn; keep the camera steady and let the light travel across the surface.",
+      "use": "Product launches and feature reels",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Product turntable” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A single hero product floats over a circular pedestal on a warm neutral studio ground. Use a controlled key light, a soft grounding shadow, and restrained product labeling.\nMotion: Rotate the object slowly through one full turn; keep the camera steady and let the light travel across the surface.\nBest suited to: Product launches and feature reels.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "money",
+      "index": 2,
+      "title": "Money stack",
+      "category": "Data",
+      "description": "A growing stack makes the numbers tangible.",
+      "look": "Flat, layered banknote-like rectangles in deep green and warm cream, with one large legible numerical total.",
+      "motion": "Build the stack one layer at a time; increment the total in sync and settle with one small impact.",
+      "use": "Budgets, revenue and comparisons",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Money stack” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Flat, layered banknote-like rectangles in deep green and warm cream, with one large legible numerical total.\nMotion: Build the stack one layer at a time; increment the total in sync and settle with one small impact.\nBest suited to: Budgets, revenue and comparisons.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "flip",
+      "index": 3,
+      "title": "Card flip",
+      "category": "Product",
+      "description": "A simple card turns to reveal the offer.",
+      "look": "An oversized, tactile offer card with a concise front label and a contrasting reverse face; generous margins and real perspective.",
+      "motion": "Rotate the card 180 degrees on its vertical axis, briefly hold each side, then return cleanly.",
+      "use": "Offers and reveals",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Card flip” for [YOUR TOPIC OR BRAND].\n\nVisual direction: An oversized, tactile offer card with a concise front label and a contrasting reverse face; generous margins and real perspective.\nMotion: Rotate the card 180 degrees on its vertical axis, briefly hold each side, then return cleanly.\nBest suited to: Offers and reveals.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "receipt",
+      "index": 4,
+      "title": "Receipt",
+      "category": "Editorial",
+      "description": "A receipt rolls out to itemize the story.",
+      "look": "A narrow paper receipt on a dark backdrop, with monospaced line items, a dashed rule, and a strong total.",
+      "motion": "Unroll the receipt vertically, reveal items in order and stamp the final total.",
+      "use": "Costs and breakdowns",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Receipt” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A narrow paper receipt on a dark backdrop, with monospaced line items, a dashed rule, and a strong total.\nMotion: Unroll the receipt vertically, reveal items in order and stamp the final total.\nBest suited to: Costs and breakdowns.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "iceberg",
+      "index": 5,
+      "title": "Iceberg",
+      "category": "Illustration",
+      "description": "Show the small visible part and the depth below.",
+      "look": "A cutaway iceberg with a pale tip above a horizontal waterline and a much larger blue mass below. Keep labels few and direct.",
+      "motion": "Raise the iceberg into frame, draw the waterline, then reveal the submerged layers and their labels.",
+      "use": "Hidden work and layered explanations",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Iceberg” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A cutaway iceberg with a pale tip above a horizontal waterline and a much larger blue mass below. Keep labels few and direct.\nMotion: Raise the iceberg into frame, draw the waterline, then reveal the submerged layers and their labels.\nBest suited to: Hidden work and layered explanations.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "thread",
+      "index": 6,
+      "title": "Text thread",
+      "category": "Interface",
+      "description": "Messages arrive as a miniature story.",
+      "look": "A clean message thread with two contrasting bubble styles, a tiny typing indicator and comfortable negative space.",
+      "motion": "Bring in messages in conversational order with small position changes; let the typing indicator precede the reply.",
+      "use": "Storytime and conversations",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Text thread” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A clean message thread with two contrasting bubble styles, a tiny typing indicator and comfortable negative space.\nMotion: Bring in messages in conversational order with small position changes; let the typing indicator precede the reply.\nBest suited to: Storytime and conversations.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "scale",
+      "index": 7,
+      "title": "Scale lineup",
+      "category": "Data",
+      "description": "Objects line up to communicate relative size.",
+      "look": "Three clearly different objects aligned to a common baseline, with concise labels and a single scale reference.",
+      "motion": "Reveal the objects from small to large while the camera gently widens to preserve the common baseline.",
+      "use": "Scale comparisons",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Scale lineup” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Three clearly different objects aligned to a common baseline, with concise labels and a single scale reference.\nMotion: Reveal the objects from small to large while the camera gently widens to preserve the common baseline.\nBest suited to: Scale comparisons.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "trophy",
+      "index": 8,
+      "title": "Milestone trophy",
+      "category": "Product",
+      "description": "A small trophy marks a meaningful milestone.",
+      "look": "A sculptural gold trophy, dark plinth and one oversized milestone number against a muted backdrop.",
+      "motion": "Raise the trophy into position, count the number up and let a single highlight sweep across the cup.",
+      "use": "Milestones and announcements",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Milestone trophy” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A sculptural gold trophy, dark plinth and one oversized milestone number against a muted backdrop.\nMotion: Raise the trophy into position, count the number up and let a single highlight sweep across the cup.\nBest suited to: Milestones and announcements.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "donut",
+      "index": 9,
+      "title": "Donut breakdown",
+      "category": "Data",
+      "description": "A clean circular chart divides the whole.",
+      "look": "A thick segmented donut chart in three distinct colors, with a centered total and short external labels.",
+      "motion": "Draw each segment around the ring in sequence, then resolve the center number.",
+      "use": "Budget and category splits",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Donut breakdown” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A thick segmented donut chart in three distinct colors, with a centered total and short external labels.\nMotion: Draw each segment around the ring in sequence, then resolve the center number.\nBest suited to: Budget and category splits.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "globe",
+      "index": 10,
+      "title": "Globe arcs",
+      "category": "Data",
+      "description": "Routes sweep around a simple global view.",
+      "look": "A softly shaded globe with fine latitude and longitude lines, location points and a restrained accent route.",
+      "motion": "Rotate the globe gently while two arcs trace between points; hold long enough to read the destination.",
+      "use": "Global reach and maps",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Globe arcs” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A softly shaded globe with fine latitude and longitude lines, location points and a restrained accent route.\nMotion: Rotate the globe gently while two arcs trace between points; hold long enough to read the destination.\nBest suited to: Global reach and maps.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "laptop",
+      "index": 11,
+      "title": "Laptop reveal",
+      "category": "Product",
+      "description": "A device opens onto a product launch.",
+      "look": "A minimal laptop silhouette on a studio backdrop, showing a simplified product screen without fake tiny text.",
+      "motion": "Open the lid, push the screen gently forward and reveal the interface with a short stagger.",
+      "use": "Software launches",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Laptop reveal” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A minimal laptop silhouette on a studio backdrop, showing a simplified product screen without fake tiny text.\nMotion: Open the lid, push the screen gently forward and reveal the interface with a short stagger.\nBest suited to: Software launches.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "isometric",
+      "index": 12,
+      "title": "Isometric flow",
+      "category": "Illustration",
+      "description": "A process becomes a dimensional pathway.",
+      "look": "Three simple isometric blocks linked by fine lines on a clean ground. Give each block one role and a distinct accent.",
+      "motion": "Introduce blocks in order, trace the connectors between them and move one small marker through the system.",
+      "use": "Workflows and explainers",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Isometric flow” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Three simple isometric blocks linked by fine lines on a clean ground. Give each block one role and a distinct accent.\nMotion: Introduce blocks in order, trace the connectors between them and move one small marker through the system.\nBest suited to: Workflows and explainers.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "notifications",
+      "index": 13,
+      "title": "Notification stack",
+      "category": "Interface",
+      "description": "Proof points arrive as a tidy stack.",
+      "look": "Three readable notification cards with avatar dots, short names and numbers, on a warm neutral surface.",
+      "motion": "Slide each card into a vertical stack with a short delay; preserve a stable resting position.",
+      "use": "Social proof and activity",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Notification stack” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Three readable notification cards with avatar dots, short names and numbers, on a warm neutral surface.\nMotion: Slide each card into a vertical stack with a short delay; preserve a stable resting position.\nBest suited to: Social proof and activity.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "before-after",
+      "index": 14,
+      "title": "Before and after",
+      "category": "Interface",
+      "description": "A dividing line reveals the transformation.",
+      "look": "Two contrasting versions of the same composition separated by a clear draggable-looking vertical handle and BEFORE / AFTER labels.",
+      "motion": "Sweep the divider across the frame and back; keep both states registered to the same coordinates.",
+      "use": "Makeovers and comparisons",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Before and after” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Two contrasting versions of the same composition separated by a clear draggable-looking vertical handle and BEFORE / AFTER labels.\nMotion: Sweep the divider across the frame and back; keep both states registered to the same coordinates.\nBest suited to: Makeovers and comparisons.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "ranking",
+      "index": 15,
+      "title": "Ranking bars",
+      "category": "Data",
+      "description": "Order and magnitude come into focus together.",
+      "look": "Horizontal ranked bars on a dark grid, with large readable rank labels, a single accent and proportional lengths.",
+      "motion": "Grow the bars from a shared zero, then shift them gently into ranked order.",
+      "use": "Rankings and leaderboards",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Ranking bars” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Horizontal ranked bars on a dark grid, with large readable rank labels, a single accent and proportional lengths.\nMotion: Grow the bars from a shared zero, then shift them gently into ranked order.\nBest suited to: Rankings and leaderboards.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "social",
+      "index": 16,
+      "title": "Social post receipt",
+      "category": "Editorial",
+      "description": "A social post becomes a piece of evidence.",
+      "look": "A floating social post card with an avatar, short headline, engagement row and a small receipt-like border.",
+      "motion": "Reveal the author first, then the post and finally the engagement numbers with a concise counter.",
+      "use": "Testimonials and receipts",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Social post receipt” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A floating social post card with an avatar, short headline, engagement row and a small receipt-like border.\nMotion: Reveal the author first, then the post and finally the engagement numbers with a concise counter.\nBest suited to: Testimonials and receipts.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "day",
+      "index": 17,
+      "title": "Day counter",
+      "category": "Type",
+      "description": "A counter makes progress feel concrete.",
+      "look": "One oversized day number in a compact calendar tile with a clear progress indicator and spare supporting copy.",
+      "motion": "Flip through a few numbers quickly, land on the chosen day, and fill the progress line.",
+      "use": "Challenges and streaks",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Day counter” for [YOUR TOPIC OR BRAND].\n\nVisual direction: One oversized day number in a compact calendar tile with a clear progress indicator and spare supporting copy.\nMotion: Flip through a few numbers quickly, land on the chosen day, and fill the progress line.\nBest suited to: Challenges and streaks.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "versus",
+      "index": 18,
+      "title": "Versus",
+      "category": "Type",
+      "description": "A decisive split-screen comparison.",
+      "look": "Two high-contrast fields split diagonally or vertically, a central VS mark, and a short label on each side.",
+      "motion": "Bring both sides in from opposite edges, land the VS at the collision and hold the comparison.",
+      "use": "Head-to-head comparisons",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Versus” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Two high-contrast fields split diagonally or vertically, a central VS mark, and a short label on each side.\nMotion: Bring both sides in from opposite edges, land the VS at the collision and hold the comparison.\nBest suited to: Head-to-head comparisons.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "route",
+      "index": 19,
+      "title": "3D map route",
+      "category": "Data",
+      "description": "A path travels across a miniature map.",
+      "look": "A simplified dimensional map with a street grid, a destination pin and one high-contrast route. Avoid geographic claims unless real data is supplied.",
+      "motion": "Draw the route from origin to destination, follow it with a small marker and settle at the destination.",
+      "use": "Travel and location stories",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “3D map route” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A simplified dimensional map with a street grid, a destination pin and one high-contrast route. Avoid geographic claims unless real data is supplied.\nMotion: Draw the route from origin to destination, follow it with a small marker and settle at the destination.\nBest suited to: Travel and location stories.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "teardown",
+      "index": 20,
+      "title": "Exploded teardown",
+      "category": "Product",
+      "description": "A product separates into understandable layers.",
+      "look": "A simplified electronic object arranged as stacked component layers with clear depth and restrained technical annotations.",
+      "motion": "Separate the layers vertically in sequence, hold the exploded view, then bring them back together.",
+      "use": "Product teardowns",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Exploded teardown” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A simplified electronic object arranged as stacked component layers with clear depth and restrained technical annotations.\nMotion: Separate the layers vertically in sequence, hold the exploded view, then bring them back together.\nBest suited to: Product teardowns.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "ink",
+      "index": 21,
+      "title": "Ink wash",
+      "category": "Illustration",
+      "description": "Pigment spreads to uncover the title.",
+      "look": "An off-white paper ground, dark ink pools with soft irregular edges and one centered high-contrast title.",
+      "motion": "Let the pigment bloom outward organically, then reveal the title through the dark pool.",
+      "use": "Title cards and quiet stories",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Ink wash” for [YOUR TOPIC OR BRAND].\n\nVisual direction: An off-white paper ground, dark ink pools with soft irregular edges and one centered high-contrast title.\nMotion: Let the pigment bloom outward organically, then reveal the title through the dark pool.\nBest suited to: Title cards and quiet stories.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "paper-desk",
+      "index": 22,
+      "title": "Paper desk",
+      "category": "Editorial",
+      "description": "Paper pieces organize an explainer.",
+      "look": "Overhead desk composition with layered paper slips, restrained tape accents and short handwritten-feeling labels.",
+      "motion": "Slide individual sheets onto the desk in a deliberate sequence, as though placed by hand.",
+      "use": "Explainers and essays",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Paper desk” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Overhead desk composition with layered paper slips, restrained tape accents and short handwritten-feeling labels.\nMotion: Slide individual sheets onto the desk in a deliberate sequence, as though placed by hand.\nBest suited to: Explainers and essays.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "headline",
+      "index": 23,
+      "title": "Headline highlight",
+      "category": "Editorial",
+      "description": "A marker draws attention to the important line.",
+      "look": "A newspaper-like headline on warm paper with one colored marker stripe under the key phrase.",
+      "motion": "Set the headline in place, sweep the highlight behind one line, then reveal a small source label.",
+      "use": "News and commentary",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Headline highlight” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A newspaper-like headline on warm paper with one colored marker stripe under the key phrase.\nMotion: Set the headline in place, sweep the highlight behind one line, then reveal a small source label.\nBest suited to: News and commentary.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "chart",
+      "index": 24,
+      "title": "Stat chart",
+      "category": "Data",
+      "description": "A number and chart make the point together.",
+      "look": "An oversized metric beside a simple ascending chart, using one accent color and sparse axis marks.",
+      "motion": "Count the number up as the bars grow from the baseline; settle on the final value.",
+      "use": "Finance and data",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Stat chart” for [YOUR TOPIC OR BRAND].\n\nVisual direction: An oversized metric beside a simple ascending chart, using one accent color and sparse axis marks.\nMotion: Count the number up as the bars grow from the baseline; settle on the final value.\nBest suited to: Finance and data.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "app",
+      "index": 25,
+      "title": "App mockup",
+      "category": "Interface",
+      "description": "A clean phone frame introduces a product.",
+      "look": "A centered device silhouette containing a simple, legible app screen; use just a few interface elements and soft depth.",
+      "motion": "Bring the phone into view, stagger the screen elements and highlight one primary action.",
+      "use": "App launches",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “App mockup” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A centered device silhouette containing a simple, legible app screen; use just a few interface elements and soft depth.\nMotion: Bring the phone into view, stagger the screen elements and highlight one primary action.\nBest suited to: App launches.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "zoom",
+      "index": 26,
+      "title": "Screen recording zoom",
+      "category": "Interface",
+      "description": "A guided camera move directs attention.",
+      "look": "A desktop interface with one clear target control and a visible cursor; maintain enough context to understand the task.",
+      "motion": "Move the cursor to the control and smoothly zoom into that region before returning to the full interface.",
+      "use": "Tutorials and walkthroughs",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Screen recording zoom” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A desktop interface with one clear target control and a visible cursor; maintain enough context to understand the task.\nMotion: Move the cursor to the control and smoothly zoom into that region before returning to the full interface.\nBest suited to: Tutorials and walkthroughs.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "timeline",
+      "index": 27,
+      "title": "Timeline",
+      "category": "Data",
+      "description": "A sequence unfolds along one clear line.",
+      "look": "A horizontal timeline with a few dates, circular markers and brief event labels, on a calm light background.",
+      "motion": "Draw the line from left to right, then reveal each marker and its label in chronological order.",
+      "use": "Stories and histories",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Timeline” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A horizontal timeline with a few dates, circular markers and brief event labels, on a calm light background.\nMotion: Draw the line from left to right, then reveal each marker and its label in chronological order.\nBest suited to: Stories and histories.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "orb",
+      "index": 28,
+      "title": "Glow orb",
+      "category": "Abstract",
+      "description": "One breathing light with a quiet orbit.",
+      "look": "A pink-white orb slightly above center on near-black, surrounded by a few thin outline circles. Keep the corners dark and the typography restrained.",
+      "motion": "Start with the orb already lit, make one gentle expanding breath, then slowly pulse; allow an outline ring to lift away.",
+      "use": "Wellness and one-line statements",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Glow orb” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A pink-white orb slightly above center on near-black, surrounded by a few thin outline circles. Keep the corners dark and the typography restrained.\nMotion: Start with the orb already lit, make one gentle expanding breath, then slowly pulse; allow an outline ring to lift away.\nBest suited to: Wellness and one-line statements.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "glass",
+      "index": 29,
+      "title": "Frosted glass UI",
+      "category": "Interface",
+      "description": "Translucent layers float over color.",
+      "look": "A translucent frosted panel, subtle white edge, background color fields and a few crisp interface marks.",
+      "motion": "Move the colored background slowly behind the glass and bring the panel in with a measured lift.",
+      "use": "Polished UI demonstrations",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Frosted glass UI” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A translucent frosted panel, subtle white edge, background color fields and a few crisp interface marks.\nMotion: Move the colored background slowly behind the glass and bring the panel in with a measured lift.\nBest suited to: Polished UI demonstrations.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "one-take",
+      "index": 30,
+      "title": "Apple one-take",
+      "category": "Product",
+      "description": "A continuous product move with deliberate light.",
+      "look": "A minimal premium product silhouette on a light seamless studio ground with precise shadows and sparse type.",
+      "motion": "Use one continuous camera orbit or push without cuts; let the product turn and the light graze its edges.",
+      "use": "Premium product announcements",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Apple one-take” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A minimal premium product silhouette on a light seamless studio ground with precise shadows and sparse type.\nMotion: Use one continuous camera orbit or push without cuts; let the product turn and the light graze its edges.\nBest suited to: Premium product announcements.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "crt",
+      "index": 31,
+      "title": "Retro CRT glow",
+      "category": "Abstract",
+      "description": "An old-screen signal flickers into view.",
+      "look": "Dark phosphor green screen, scanlines, subtle curvature, blocky terminal type and a restrained glow.",
+      "motion": "Power on from a thin horizontal line, reveal the signal, then add a small intermittent flicker.",
+      "use": "Retro-futurist titles",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Retro CRT glow” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Dark phosphor green screen, scanlines, subtle curvature, blocky terminal type and a restrained glow.\nMotion: Power on from a thin horizontal line, reveal the signal, then add a small intermittent flicker.\nBest suited to: Retro-futurist titles.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "scope",
+      "index": 32,
+      "title": "Oscilloscope",
+      "category": "Abstract",
+      "description": "A luminous trace draws a living waveform.",
+      "look": "A thin electric-green waveform over a dark graticule, with a handful of dim technical markings.",
+      "motion": "Continuously trace a waveform from left to right with a slow change in amplitude and a soft afterglow.",
+      "use": "Audio and signal explainers",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Oscilloscope” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A thin electric-green waveform over a dark graticule, with a handful of dim technical markings.\nMotion: Continuously trace a waveform from left to right with a slow change in amplitude and a soft afterglow.\nBest suited to: Audio and signal explainers.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "magazine",
+      "index": 33,
+      "title": "Magazine layout and note",
+      "category": "Editorial",
+      "description": "An editorial spread meets a personal note.",
+      "look": "An asymmetric print-style layout: large serif-like headline, small columns, one image block and a contrasting paper note.",
+      "motion": "Slide the note into an already composed spread; reveal headline and image in a measured sequence.",
+      "use": "Editorial stories",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Magazine layout and note” for [YOUR TOPIC OR BRAND].\n\nVisual direction: An asymmetric print-style layout: large serif-like headline, small columns, one image block and a contrasting paper note.\nMotion: Slide the note into an already composed spread; reveal headline and image in a measured sequence.\nBest suited to: Editorial stories.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "blue",
+      "index": 34,
+      "title": "Blue editorial",
+      "category": "Type",
+      "description": "Bold editorial type moves across a blue field.",
+      "look": "Cobalt blue background, oversized cream text, an intentional grid and one small accent rule.",
+      "motion": "Reveal words in staggered horizontal movements, hold the headline, then replace it with the next line.",
+      "use": "Editorial kinetic titles",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Blue editorial” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Cobalt blue background, oversized cream text, an intentional grid and one small accent rule.\nMotion: Reveal words in staggered horizontal movements, hold the headline, then replace it with the next line.\nBest suited to: Editorial kinetic titles.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "riso",
+      "index": 35,
+      "title": "Risograph",
+      "category": "Illustration",
+      "description": "Overprinted color gives a tactile print feel.",
+      "look": "Two bright ink colors with slight registration offsets, halftone texture and simple geometric shapes on off-white paper.",
+      "motion": "Move one color layer slightly out of registration, then settle it into the poster with a subtle print jitter.",
+      "use": "Playful print-style promos",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Risograph” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Two bright ink colors with slight registration offsets, halftone texture and simple geometric shapes on off-white paper.\nMotion: Move one color layer slightly out of registration, then settle it into the poster with a subtle print jitter.\nBest suited to: Playful print-style promos.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "swiss",
+      "index": 36,
+      "title": "Swiss grid",
+      "category": "Editorial",
+      "description": "A disciplined grid makes motion feel precise.",
+      "look": "A strict typographic grid, black and warm white, a red geometric accent and generous negative space.",
+      "motion": "Move one shape across grid columns while type reveals in short, perfectly aligned steps.",
+      "use": "Modern editorial and design",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Swiss grid” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A strict typographic grid, black and warm white, a red geometric accent and generous negative space.\nMotion: Move one shape across grid columns while type reveals in short, perfectly aligned steps.\nBest suited to: Modern editorial and design.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "blueprint",
+      "index": 37,
+      "title": "Pencil to blueprint",
+      "category": "Illustration",
+      "description": "A sketch resolves into a technical drawing.",
+      "look": "A product outline with fine construction lines and a blueprint-blue field, using sparse measurement marks.",
+      "motion": "Draw the rough outline first, then transition to crisp blue technical lines and a single dimension callout.",
+      "use": "Engineering and process",
+      "source": {
+        "id": "shaan",
+        "author": "Shaan Johari",
+        "name": "Shaan Johari · Animation styles you can build with Claude (or Codex)",
+        "project": "Animation styles you can build with Claude (or Codex)",
+        "description": "The original collection of practical video animation recipes.",
+        "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
+        "authorUrl": "https://www.instagram.com/viashaan/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Pencil to blueprint” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A product outline with fine construction lines and a blueprint-blue field, using sparse measurement marks.\nMotion: Draw the rough outline first, then transition to crisp blue technical lines and a single dimension callout.\nBest suited to: Engineering and process.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "kinetic",
+      "index": 38,
+      "title": "Kinetic type",
+      "category": "Type",
+      "description": "Words land with rhythm and purpose.",
+      "look": "A short, oversized headline in strong black and cream with a single warm accent; emphasize hierarchy, not decoration.",
+      "motion": "Stagger words into frame on the beat, pause for readability, and clear with a solid color wipe.",
+      "use": "Hooks and announcements",
+      "source": {
+        "id": "mndr",
+        "author": "Samer",
+        "name": "Samer · MNDR",
+        "project": "36 Motion Graphic Styles You Can Build with Claude",
+        "description": "A collection of code-built motion-graphics examples and prompts.",
+        "url": "https://mndr.ai/blog/motion-graphics-with-claude/#1-kinetic-typography",
+        "authorUrl": "https://mndr.ai/blog/author/samer/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Kinetic type” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A short, oversized headline in strong black and cream with a single warm accent; emphasize hierarchy, not decoration.\nMotion: Stagger words into frame on the beat, pause for readability, and clear with a solid color wipe.\nBest suited to: Hooks and announcements.\n\nReference credit: Samer · MNDR\nOriginal reference: https://mndr.ai/blog/motion-graphics-with-claude/#1-kinetic-typography\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "scramble",
+      "index": 39,
+      "title": "Text scramble",
+      "category": "Type",
+      "description": "A headline decodes out of noise.",
+      "look": "A dark terminal-inspired composition with one large monospace-style line, an amber accent and a small progress indicator.",
+      "motion": "Cycle characters briefly and resolve from left to right into the final phrase.",
+      "use": "Launch teasers and technology",
+      "source": {
+        "id": "mndr",
+        "author": "Samer",
+        "name": "Samer · MNDR",
+        "project": "36 Motion Graphic Styles You Can Build with Claude",
+        "description": "A collection of code-built motion-graphics examples and prompts.",
+        "url": "https://mndr.ai/blog/motion-graphics-with-claude/#3-text-scramble",
+        "authorUrl": "https://mndr.ai/blog/author/samer/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Text scramble” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A dark terminal-inspired composition with one large monospace-style line, an amber accent and a small progress indicator.\nMotion: Cycle characters briefly and resolve from left to right into the final phrase.\nBest suited to: Launch teasers and technology.\n\nReference credit: Samer · MNDR\nOriginal reference: https://mndr.ai/blog/motion-graphics-with-claude/#3-text-scramble\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "line-draw",
+      "index": 40,
+      "title": "Line-draw logo",
+      "category": "Illustration",
+      "description": "A mark draws itself stroke by stroke.",
+      "look": "A simple line-art emblem and short wordmark on a clean contrasting ground. Work from the supplied logo instead of inventing brand marks.",
+      "motion": "Trace the outline with a stroke reveal, hold it, and softly fill the mark before resetting.",
+      "use": "Logo stings and outros",
+      "source": {
+        "id": "mndr",
+        "author": "Samer",
+        "name": "Samer · MNDR",
+        "project": "36 Motion Graphic Styles You Can Build with Claude",
+        "description": "A collection of code-built motion-graphics examples and prompts.",
+        "url": "https://mndr.ai/blog/motion-graphics-with-claude/#6-logo-line-draw-reveal",
+        "authorUrl": "https://mndr.ai/blog/author/samer/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Line-draw logo” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A simple line-art emblem and short wordmark on a clean contrasting ground. Work from the supplied logo instead of inventing brand marks.\nMotion: Trace the outline with a stroke reveal, hold it, and softly fill the mark before resetting.\nBest suited to: Logo stings and outros.\n\nReference credit: Samer · MNDR\nOriginal reference: https://mndr.ai/blog/motion-graphics-with-claude/#6-logo-line-draw-reveal\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "liquid",
+      "index": 41,
+      "title": "Liquid shape morph",
+      "category": "Abstract",
+      "description": "A soft form changes character.",
+      "look": "A single warm gradient shape that alternates between circle and organic blob, with ample negative space.",
+      "motion": "Morph the contour continuously, with small easing differences that make it feel fluid rather than mechanical.",
+      "use": "Playful products and brand loops",
+      "source": {
+        "id": "mndr",
+        "author": "Samer",
+        "name": "Samer · MNDR",
+        "project": "36 Motion Graphic Styles You Can Build with Claude",
+        "description": "A collection of code-built motion-graphics examples and prompts.",
+        "url": "https://mndr.ai/blog/motion-graphics-with-claude/#7-liquid-shape-morph",
+        "authorUrl": "https://mndr.ai/blog/author/samer/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Liquid shape morph” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A single warm gradient shape that alternates between circle and organic blob, with ample negative space.\nMotion: Morph the contour continuously, with small easing differences that make it feel fluid rather than mechanical.\nBest suited to: Playful products and brand loops.\n\nReference credit: Samer · MNDR\nOriginal reference: https://mndr.ai/blog/motion-graphics-with-claude/#7-liquid-shape-morph\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "bauhaus",
+      "index": 42,
+      "title": "Bauhaus geometry",
+      "category": "Illustration",
+      "description": "Flat shapes assemble into a moving poster.",
+      "look": "Circles, semicircles and rectangles in a restrained primary palette on an off-white grid.",
+      "motion": "Snap the pieces into a composition, make a few crisp quarter-turns, then reset.",
+      "use": "Event posters and brand graphics",
+      "source": {
+        "id": "mndr",
+        "author": "Samer",
+        "name": "Samer · MNDR",
+        "project": "36 Motion Graphic Styles You Can Build with Claude",
+        "description": "A collection of code-built motion-graphics examples and prompts.",
+        "url": "https://mndr.ai/blog/motion-graphics-with-claude/#8-bauhaus-geometric",
+        "authorUrl": "https://mndr.ai/blog/author/samer/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Bauhaus geometry” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Circles, semicircles and rectangles in a restrained primary palette on an off-white grid.\nMotion: Snap the pieces into a composition, make a few crisp quarter-turns, then reset.\nBest suited to: Event posters and brand graphics.\n\nReference credit: Samer · MNDR\nOriginal reference: https://mndr.ai/blog/motion-graphics-with-claude/#8-bauhaus-geometric\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "splitflap",
+      "index": 43,
+      "title": "Split-flap board",
+      "category": "Type",
+      "description": "A mechanical board clicks into place.",
+      "look": "A row of dark split-flap character tiles with a center seam, pale letters and a small station-style label.",
+      "motion": "Flip each tile through intermediate characters with a stagger until the final word is legible.",
+      "use": "Retro titles and travel stories",
+      "source": {
+        "id": "animaguru",
+        "author": "AnimaGuru / Docyrus, Inc.",
+        "name": "AnimaGuru · Docyrus, Inc.",
+        "project": "AnimaGuru Motion Library",
+        "description": "A motion library of hand-built examples across animation categories.",
+        "url": "https://animaguru.com/motion-library",
+        "authorUrl": "https://animaguru.com/about"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Split-flap board” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A row of dark split-flap character tiles with a center seam, pale letters and a small station-style label.\nMotion: Flip each tile through intermediate characters with a stagger until the final word is legible.\nBest suited to: Retro titles and travel stories.\n\nReference credit: AnimaGuru · Docyrus, Inc.\nOriginal reference: https://animaguru.com/motion-library\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "marquee",
+      "index": 44,
+      "title": "Crossing marquees",
+      "category": "Type",
+      "description": "Two bands carry type through the frame.",
+      "look": "Two high-contrast, diagonally crossing text ribbons, with one oversized central word and a restrained background.",
+      "motion": "Scroll the ribbons in opposite directions at constant speed and bring the central word forward briefly.",
+      "use": "Drops, music and streetwear",
+      "source": {
+        "id": "animaguru",
+        "author": "AnimaGuru / Docyrus, Inc.",
+        "name": "AnimaGuru · Docyrus, Inc.",
+        "project": "AnimaGuru Motion Library",
+        "description": "A motion library of hand-built examples across animation categories.",
+        "url": "https://animaguru.com/motion-library",
+        "authorUrl": "https://animaguru.com/about"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Crossing marquees” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Two high-contrast, diagonally crossing text ribbons, with one oversized central word and a restrained background.\nMotion: Scroll the ribbons in opposite directions at constant speed and bring the central word forward briefly.\nBest suited to: Drops, music and streetwear.\n\nReference credit: AnimaGuru · Docyrus, Inc.\nOriginal reference: https://animaguru.com/motion-library\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "particles",
+      "index": 45,
+      "title": "Particle logo assembly",
+      "category": "Abstract",
+      "description": "Points gather into a recognizable mark.",
+      "look": "A field of small colored points around a simple supplied logo silhouette against a near-black background.",
+      "motion": "Draw scattered points inward to form the mark, hold, then let them disperse smoothly.",
+      "use": "Brand reveals and technology",
+      "source": {
+        "id": "animaguru",
+        "author": "AnimaGuru / Docyrus, Inc.",
+        "name": "AnimaGuru · Docyrus, Inc.",
+        "project": "AnimaGuru Motion Library",
+        "description": "A motion library of hand-built examples across animation categories.",
+        "url": "https://animaguru.com/motion-library",
+        "authorUrl": "https://animaguru.com/about"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Particle logo assembly” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A field of small colored points around a simple supplied logo silhouette against a near-black background.\nMotion: Draw scattered points inward to form the mark, hold, then let them disperse smoothly.\nBest suited to: Brand reveals and technology.\n\nReference credit: AnimaGuru · Docyrus, Inc.\nOriginal reference: https://animaguru.com/motion-library\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "accordion",
+      "index": 46,
+      "title": "Accordion print",
+      "category": "Editorial",
+      "description": "A folded page catches light as it opens.",
+      "look": "A paper strip folded into alternating panels, with a restrained print graphic across its surface and directional shadows.",
+      "motion": "Open the folds one after another with a subtle perspective shift; keep the printed graphic continuous.",
+      "use": "Paper transitions and editorial",
+      "source": {
+        "id": "paper",
+        "author": "Paper Animators",
+        "name": "Paper Animators · Motion Library",
+        "project": "Paper Animators Motion Library",
+        "description": "Paper, print and editorial animation references.",
+        "url": "https://paperanimators.com/videos/accordion-photo/",
+        "authorUrl": "https://paperanimators.com/about/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Accordion print” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A paper strip folded into alternating panels, with a restrained print graphic across its surface and directional shadows.\nMotion: Open the folds one after another with a subtle perspective shift; keep the printed graphic continuous.\nBest suited to: Paper transitions and editorial.\n\nReference credit: Paper Animators · Motion Library\nOriginal reference: https://paperanimators.com/videos/accordion-photo/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "magnifier",
+      "index": 47,
+      "title": "Fisheye magnifier",
+      "category": "Type",
+      "description": "A lens enlarges the letters beneath it.",
+      "look": "A clean oversized word, an outlined circular lens and a light neutral field; maintain high contrast at the lens edge.",
+      "motion": "Move the lens steadily across the word, magnifying the portion it passes over.",
+      "use": "Interactive headlines",
+      "source": {
+        "id": "aimotions",
+        "author": "Alejandro López Martínez",
+        "name": "Alejandro López Martínez (develatter) · aimotions",
+        "project": "aimotions",
+        "description": "A visual library of animated text effects and motion references.",
+        "url": "https://aimotions.art/styles/fisheye-lens/",
+        "authorUrl": "https://develatter.com/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Fisheye magnifier” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A clean oversized word, an outlined circular lens and a light neutral field; maintain high contrast at the lens edge.\nMotion: Move the lens steadily across the word, magnifying the portion it passes over.\nBest suited to: Interactive headlines.\n\nReference credit: Alejandro López Martínez (develatter) · aimotions\nOriginal reference: https://aimotions.art/styles/fisheye-lens/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "flow",
+      "index": 48,
+      "title": "Flow field typography",
+      "category": "Abstract",
+      "description": "Fine lines sweep around a central message.",
+      "look": "A dark field of thin directional curves with a single bright central word and limited accent colors.",
+      "motion": "Drift the paths like a slow vector field while the centered type remains still and readable.",
+      "use": "Generative title cards",
+      "source": {
+        "id": "acid",
+        "author": "Étienne Mineur + Floot",
+        "name": "Étienne Mineur + Floot · Procedural Studio",
+        "project": "Procedural Studio",
+        "description": "A gallery of generative and procedural animation experiments.",
+        "url": "https://proceduralstudio.etienne.design/studio/flow-field-typography",
+        "authorUrl": "https://etienne.design/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Flow field typography” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A dark field of thin directional curves with a single bright central word and limited accent colors.\nMotion: Drift the paths like a slow vector field while the centered type remains still and readable.\nBest suited to: Generative title cards.\n\nReference credit: Étienne Mineur + Floot · Procedural Studio\nOriginal reference: https://proceduralstudio.etienne.design/studio/flow-field-typography\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "watercolor",
+      "index": 49,
+      "title": "Watercolor bloom",
+      "category": "Illustration",
+      "description": "Soft pigment blooms into a title.",
+      "look": "Translucent overlapping watercolor patches on warm paper, with a small dark headline and irregular edges.",
+      "motion": "Expand each pigment wash at a different pace and let the colors overlap before the title appears.",
+      "use": "Handmade explainers and intros",
+      "source": {
+        "id": "aimotions",
+        "author": "Alejandro López Martínez",
+        "name": "Alejandro López Martínez (develatter) · aimotions",
+        "project": "aimotions",
+        "description": "A visual library of animated text effects and motion references.",
+        "url": "https://aimotions.art/styles/watercolor-bloom/",
+        "authorUrl": "https://develatter.com/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Watercolor bloom” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Translucent overlapping watercolor patches on warm paper, with a small dark headline and irregular edges.\nMotion: Expand each pigment wash at a different pace and let the colors overlap before the title appears.\nBest suited to: Handmade explainers and intros.\n\nReference credit: Alejandro López Martínez (develatter) · aimotions\nOriginal reference: https://aimotions.art/styles/watercolor-bloom/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    }
+  ]
+}

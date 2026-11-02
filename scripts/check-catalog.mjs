@@ -1,0 +1,27 @@
+import { readFileSync } from 'node:fs';
+import assert from 'node:assert/strict';
+import { validateSubmission } from '../api/submit.js';
+const {entries,sources} = JSON.parse(readFileSync('public/catalog.json', 'utf8'));
+const app = readFileSync('public/app.js', 'utf8');
+assert.equal(entries.length, 49);
+assert.equal(new Set(entries.map(e=>e.id)).size, entries.length);
+assert.equal(new Set(sources.map(source=>source.id)).size, sources.length);
+for (const source of sources) {
+  assert.ok(source.author && source.name && source.project && source.description);
+  assert.ok(source.url.startsWith('https://') && source.authorUrl.startsWith('https://'));
+  assert.ok(entries.some(entry=>entry.source.id===source.id), `Unreferenced credit: ${source.id}`);
+}
+for (const entry of entries) {
+  assert.ok(entry.prompt.includes(entry.title));
+  assert.ok(entry.prompt.includes('[YOUR TOPIC OR BRAND]'));
+  assert.ok(entry.source.url.startsWith('https://'));
+  assert.ok(sources.some(source=>source.id===entry.source.id && source.author===entry.source.author), `Missing creator credit: ${entry.id}`);
+  assert.ok(entry.prompt.includes(entry.source.name) && entry.prompt.includes(entry.source.url), `Prompt missing credit: ${entry.id}`);
+  assert.ok(app.includes(`${entry.id.includes('-') ? "'" + entry.id + "'" : entry.id}:`), `Missing preview: ${entry.id}`);
+}
+assert.equal(validateSubmission({title:'Paper',url:'https://example.com/demo'}).title, 'Paper');
+assert.ok(validateSubmission({title:'Paper',url:'javascript:alert(1)'}).error);
+assert.ok(validateSubmission({title:'',url:'https://example.com'}).error);
+assert.ok(validateSubmission({title:'Paper',url:'https://example.com',note:'x'.repeat(1001)}).error);
+assert.ok(validateSubmission({website:'spam'}).honeypot);
+console.log(`Validated ${entries.length} previews and credited prompts across ${sources.length} sources, plus submission validation.`);
