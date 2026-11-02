@@ -16,34 +16,18 @@
 </head>
 <body>
   <a class="skip" href="#library">Skip to library</a>
-  <header class="topbar">
+  <header class="topbar" id="top">
     <a href="#top" class="brand" aria-label="Motion Index home">motion<span>index</span><i></i></a>
-    <div class="top-note">A living library of motion <span class="bullet">●</span></div>
+    <div class="top-note">Motion styles to browse, copy and hand to your agent</div>
     <div class="top-actions">
       <a class="text-button credits-nav" href="#credits">Credits</a>
       <button class="text-button" id="submit-open">Submit a style <span aria-hidden="true">↗</span></button>
       <button class="pill-button" id="skill-open"><span class="spark" aria-hidden="true">✳</span> Give to your agent <span class="arrow" aria-hidden="true">↗</span></button>
     </div>
   </header>
-  <main id="top">
-    <section class="intro" aria-labelledby="hero-heading">
-      <div class="intro-copy">
-        <div class="eyebrow"><span class="live-dot"></span> THE MOTION REFERENCE LIBRARY <span class="eyebrow-index">/ VOL. 01</span></div>
-        <h1 id="hero-heading">Find the feeling.<br><span>Make it move.</span></h1>
-        <p>A visual library of animation ideas for your next video, website, or big idea. Find a style, copy its prompt, make it yours.</p>
-        <a class="inline-link" href="#library">Explore the library <span aria-hidden="true">↘</span></a>
-      </div>
-      <div class="intro-art" aria-hidden="true">
-        <span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="orbit orbit-three"></span>
-        <span class="hero-sun"><span></span></span><span class="hero-cross cross-a">✳</span><span class="hero-cross cross-b">+</span>
-        <div class="art-label"><span>FORM / 01</span><span>ALWAYS IN MOTION ↗</span></div>
-      </div>
-    </section>
+  <main>
     <section class="library" id="library" aria-labelledby="library-heading">
-      <div class="section-heading">
-        <div><div class="eyebrow">THE COLLECTION <span class="muted">/ WATCH · COPY · CREATE</span></div><h2 id="library-heading">Good ideas move.</h2></div>
-        <p class="section-sources"><span>Original interpretations of styles from<br>creators we love. </span><a href="#credits">Credits &amp; sources ↗</a></p>
-      </div>
+      <h1 class="sr-only" id="library-heading">Motion Index, a visual library of motion-graphics styles</h1>
       <div class="controls">
         <div class="filters" id="filters" aria-label="Filter styles"></div>
         <div class="control-right">
@@ -51,32 +35,22 @@
           <button class="pause-button" id="pause" aria-pressed="false" title="Pause previews"><span id="pause-icon" aria-hidden="true">Ⅱ</span><span class="sr-only">Pause previews</span></button>
         </div>
       </div>
-      <div class="results-line"><span id="result-count">Loading the collection</span><span>SELECT A TILE TO OPEN &amp; COPY ITS PROMPT ↗</span></div>
+      <div class="results-line"><span id="result-count">Loading the collection</span><span>CLICK A STYLE TO COPY ITS PROMPT</span></div>
       <div class="grid" id="grid" aria-live="polite"></div>
       <div class="empty" id="empty" hidden><strong>Nothing moving here.</strong><p>Try another search or category.</p><button class="underlined" id="clear-filters">Clear filters</button></div>
     </section>
     <section class="credits" id="credits" aria-labelledby="credits-heading">
-      <div class="credits-intro">
-        <div><div class="eyebrow">GIVING CREDIT / THE PEOPLE BEHIND THE REFERENCES</div><h2 id="credits-heading">Good work deserves credit.</h2></div>
-        <p>These previews are independently built interpretations, informed by the work of the creators and teams below. Visit their original collections and explore the ideas that inspired each study.</p>
-      </div>
+      <div class="credits-head"><h2 id="credits-heading">Credits</h2><p>Every preview is an original interpretation of a style from the creators below. Each prompt links back to its reference.</p></div>
       <div class="credit-grid" id="credit-list" aria-label="Reference creators"></div>
-      <article class="type-credit">
-        <div><span class="credit-number">DESIGN &amp; TYPE / 07</span><h3>Hassan &amp; Youssef · Fontzz</h3><p>The Fontzz site inspired this library’s interface. Its Halden typeface is used here under the SIL Open Font License 1.1. Copyright 2026 The fontzz Project Authors.</p></div>
-        <div class="credit-links"><a href="https://fontzz.vercel.app/" target="_blank" rel="noopener noreferrer">Explore Fontzz ↗</a><a href="/fonts/OFL.txt" target="_blank" rel="noopener noreferrer">View font license ↗</a></div>
-      </article>
-    </section>
-    <section class="bottom-note">
-      <div><div class="eyebrow">KEEP THE GOOD STUFF MOVING</div><h2>Found something<br>worth sharing?</h2></div>
-      <div><p>Great references are better shared. Send us an animation, experiment, or visual technique we should know about.</p><button class="pill-button light-pill" id="submit-bottom">Submit a style <span aria-hidden="true">↗</span></button></div>
+      <p class="type-credit">Interface inspired by <a href="https://fontzz.vercel.app/" target="_blank" rel="noopener noreferrer">Fontzz</a> (Hassan &amp; Youssef). Halden typeface © 2026 The fontzz Project Authors, <a href="/fonts/OFL.txt" target="_blank" rel="noopener noreferrer">SIL OFL 1.1</a>.</p>
     </section>
   </main>
-  <footer><a href="#top" class="brand small">motion<span>index</span><i></i></a><p>A collection made for curious people.</p><a href="#credits">Credits &amp; sources</a><a href="#top">Back to top ↑</a></footer>
+  <footer><a href="#top" class="brand small">motion<span>index</span><i></i></a><p>Found a style worth adding? <button class="underlined" id="submit-bottom">Submit it ↗</button></p><a href="#top">Back to top ↑</a></footer>
   <dialog id="detail-dialog" class="detail-dialog" aria-labelledby="detail-title">
     <div class="modal-top"><span id="detail-kicker">STYLE / 01</span><button class="icon-button close" aria-label="Close details">×</button></div>
     <div class="detail-body"><div class="detail-preview" id="detail-preview" aria-hidden="true"></div>
       <div class="detail-copy"><span class="eyebrow" id="detail-category"></span><h2 id="detail-title"></h2><p id="detail-description"></p><div class="detail-meta"><span>BEST FOR</span><strong id="detail-use"></strong></div>
-      <div class="prompt-head"><span>YOUR STARTING PROMPT</span><button id="detail-copy" class="copy-small">Copy prompt ↗</button></div><pre id="detail-prompt" tabindex="0"></pre><p class="source-line">Inspired by <a id="detail-source" target="_blank" rel="noopener noreferrer"></a> ↗</p><p class="copy-status" id="copy-status" role="status"></p></div>
+      <div class="prompt-head"><span>YOUR STARTING PROMPT</span><span class="prompt-actions"><button id="detail-link" class="copy-small">Copy link</button><button id="detail-copy" class="copy-small">Copy prompt ↗</button></span></div><pre id="detail-prompt" tabindex="0"></pre><p class="source-line">Inspired by <a id="detail-source" target="_blank" rel="noopener noreferrer"></a> ↗</p><p class="copy-status" id="copy-status" role="status"></p></div>
     </div>
   </dialog>
   <dialog id="skill-dialog" class="text-dialog" aria-labelledby="skill-title">

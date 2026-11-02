@@ -75,7 +75,7 @@ function render() {
 function renderCredits(sources) {
  $('#credit-list').innerHTML=sources.map((source,index)=>{
    const count=entries.filter(entry=>entry.source.id===source.id).length;
-   return `<article class="credit-card"><div class="credit-top"><span class="credit-number">REFERENCE / ${String(index+1).padStart(2,'0')}</span><span>${count} ${count===1?'STYLE':'STYLES'}</span></div><h3>${escapeText(source.author)}</h3><div class="credit-project">${escapeText(source.project)}</div><p>${escapeText(source.description)}</p><div class="credit-links"><a href="${escapeText(source.url)}" target="_blank" rel="noopener noreferrer">Explore the original ↗</a><a href="${escapeText(source.authorUrl)}" target="_blank" rel="noopener noreferrer">About the source ↗</a></div></article>`;
+   return `<a class="credit-card" href="${escapeText(source.url)}" target="_blank" rel="noopener noreferrer"><b>${escapeText(source.author)}</b><span>${escapeText(source.project)}</span><em>${count} ${count===1?'style':'styles'} ↗</em></a>`;
  }).join('');
 }
 async function copyText(value) {
@@ -109,6 +109,7 @@ $('#filters').addEventListener('click', event=>{const button=event.target.closes
 $('#search').addEventListener('input',event=>{query=event.target.value.trim().toLowerCase();render();});
 $('#clear-filters').addEventListener('click',()=>{category='All';query='';$('#search').value='';render();});
 grid.addEventListener('click',event=>{const button=event.target.closest('[data-id]');if(button){const entry=entries.find(e=>e.id===button.dataset.id);if(entry)void openEntry(entry);}});
+$('#detail-link').addEventListener('click',async()=>{if(!selected)return;const ok=await copyText(`${location.origin}/#style-${selected.id}`);if(ok)showToast('Link copied');});
 $('#detail-copy').addEventListener('click',async()=>{if(!selected)return;const ok=await copyText(selected.prompt);$('#copy-status').textContent=ok?'Prompt copied to your clipboard.':'Could not copy automatically; select the prompt text.';if(ok)showToast('Prompt copied to clipboard');});
 $('#pause').addEventListener('click',()=>{paused=!paused;document.body.classList.toggle('paused',paused);$('#pause').setAttribute('aria-pressed',String(paused));$('#pause').title=paused?'Play previews':'Pause previews';$('#pause-icon').textContent=paused?'▶':'Ⅱ';$('#pause .sr-only').textContent=paused?'Play previews':'Pause previews';});
 $('#skill-open').addEventListener('click',()=>{$('#skill-text').textContent=skillText();$('#skill-status').textContent='';openDialog(skillDialog);});
