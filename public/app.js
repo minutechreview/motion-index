@@ -53,8 +53,11 @@ const shapes = {
  watercolor: '<div class="wash w1"></div><div class="wash w2"></div><div class="wash w3"></div><b class="wash-type">a softer<br>kind of story.</b>'
 };
 let entries = [], category = 'All', query = '', paused = false, selected = null, observer = null;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const grid = $('#grid'), detailDialog = $('#detail-dialog'), skillDialog = $('#skill-dialog'), submitDialog = $('#submit-dialog');
-const scene = id => `<div class="scene scene-${id}" aria-hidden="true">${shapes[id] ?? ''}</div>`;
+const scene = entry => entry.demo
+ ? `<div class="scene scene-video" aria-hidden="true">${reducedMotion.matches ? `<img src="${escapeText(entry.poster)}" alt="">` : `<video muted loop playsinline preload="none" poster="${escapeText(entry.poster)}" src="${escapeText(entry.demo)}"></video>`}</div>`
+ : `<div class="scene scene-${entry.id}" aria-hidden="true">${shapes[entry.id] ?? ''}</div>`;
 const escapeText = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function updateFilters() {
  const names=['All','Product','Type','Data','Editorial','Illustration','Interface','Abstract'];
@@ -62,15 +65,26 @@ function updateFilters() {
 }
 function render() {
  const filtered=entries.filter(e=>(category==='All'||e.category===category)&&`${e.title} ${e.category} ${e.description} ${e.use} ${e.look} ${e.source.author} ${e.source.project}`.toLowerCase().includes(query));
- grid.innerHTML=filtered.map(e=>`<button class="tile" id="style-${escapeText(e.id)}" data-id="${e.id}" aria-label="Open ${escapeText(e.title)} and copy its prompt, reference by ${escapeText(e.source.author)}">${scene(e.id)}<div class="tile-info"><div><span class="tile-index">${String(e.index).padStart(2,'0')} / ${escapeText(e.category.toUpperCase())}</span><h3>${escapeText(e.title)}</h3><p>${escapeText(e.description)}</p><div class="tile-credit">REFERENCE · ${escapeText(e.source.author)}</div></div><span class="tile-arrow" aria-hidden="true">↗</span></div></button>`).join('');
+ if(category==='All')filtered.sort((a,b)=>(a.featured ?? Infinity)-(b.featured ?? Infinity));
+ $$('.tile video',grid).forEach(video=>video.pause());
+ grid.innerHTML=filtered.map(e=>`<button class="tile" id="style-${escapeText(e.id)}" data-id="${e.id}" aria-label="Open ${escapeText(e.title)} and copy its prompt, reference by ${escapeText(e.source.author)}">${scene(e)}<div class="tile-info"><div><span class="tile-index">${String(e.index).padStart(2,'0')} / ${escapeText(e.category.toUpperCase())}</span><h3>${escapeText(e.title)}</h3><p>${escapeText(e.description)}</p><div class="tile-credit">REFERENCE · ${escapeText(e.source.author)}</div></div><span class="tile-arrow" aria-hidden="true">↗</span></div></button>`).join('');
  $('#result-count').textContent=`${filtered.length} ${filtered.length===1?'STYLE':'STYLES'} ${category==='All'?'IN THE COLLECTION':'IN '+category.toUpperCase()}`;
  $('#empty').hidden=filtered.length!==0;
  updateFilters();
  if (observer) observer.disconnect();
  if ('IntersectionObserver' in window) {
-   observer = new IntersectionObserver(items => items.forEach(item => item.target.classList.toggle('offscreen', !item.isIntersecting)), {rootMargin:'100px'});
+   observer = new IntersectionObserver(items => {items.forEach(item => {item.target.classList.toggle('offscreen', !item.isIntersecting);item.target.dataset.inView=String(item.isIntersecting);});syncVideos();});
    $$('.tile').forEach(tile => observer.observe(tile));
- }
+ } else { $$('.tile').forEach(tile=>tile.dataset.inView='true');syncVideos(); }
+}
+function syncVideos() {
+ const blocked=paused||reducedMotion.matches||document.hidden;
+ $$('.tile video',grid).forEach(video=>{
+   const shouldPlay=!blocked&&!detailDialog.open&&video.closest('.tile').dataset.inView==='true';
+   if(shouldPlay){if(video.paused)video.play().catch(()=>{});}else if(!video.paused)video.pause();
+ });
+ const detailVideo=$('video',$('#detail-preview'));
+ if(detailVideo){if(!blocked&&detailDialog.open){if(detailVideo.paused)detailVideo.play().catch(()=>{});}else if(!detailVideo.paused)detailVideo.pause();}
 }
 function renderCredits(sources) {
  $('#credit-list').innerHTML=sources.map((source,index)=>{
@@ -95,8 +109,9 @@ async function openEntry(entry) {
  $('#detail-prompt').textContent=entry.prompt;
  $('#detail-source').textContent=entry.source.name;
  $('#detail-source').href=entry.source.url;
- $('#detail-preview').innerHTML=scene(entry.id);
+ $('#detail-preview').innerHTML=scene(entry);
  openDialog(detailDialog);
+ syncVideos();
  const copied=await copyText(entry.prompt);
  $('#copy-status').textContent=copied?'Prompt copied to your clipboard.':'Copy the prompt below or use the copy button.';
  if(copied) showToast('Prompt copied to clipboard');
@@ -111,7 +126,10 @@ $('#clear-filters').addEventListener('click',()=>{category='All';query='';$('#se
 grid.addEventListener('click',event=>{const button=event.target.closest('[data-id]');if(button){const entry=entries.find(e=>e.id===button.dataset.id);if(entry)void openEntry(entry);}});
 $('#detail-link').addEventListener('click',async()=>{if(!selected)return;const ok=await copyText(`${location.origin}/#style-${selected.id}`);if(ok)showToast('Link copied');});
 $('#detail-copy').addEventListener('click',async()=>{if(!selected)return;const ok=await copyText(selected.prompt);$('#copy-status').textContent=ok?'Prompt copied to your clipboard.':'Could not copy automatically; select the prompt text.';if(ok)showToast('Prompt copied to clipboard');});
-$('#pause').addEventListener('click',()=>{paused=!paused;document.body.classList.toggle('paused',paused);$('#pause').setAttribute('aria-pressed',String(paused));$('#pause').title=paused?'Play previews':'Pause previews';$('#pause-icon').textContent=paused?'▶':'Ⅱ';$('#pause .sr-only').textContent=paused?'Play previews':'Pause previews';});
+$('#pause').addEventListener('click',()=>{paused=!paused;document.body.classList.toggle('paused',paused);$('#pause').setAttribute('aria-pressed',String(paused));$('#pause').title=paused?'Play previews':'Pause previews';$('#pause-icon').textContent=paused?'▶':'Ⅱ';$('#pause .sr-only').textContent=paused?'Play previews':'Pause previews';syncVideos();});
+detailDialog.addEventListener('close',syncVideos);
+document.addEventListener('visibilitychange',syncVideos);
+reducedMotion.addEventListener('change',()=>{render();if(detailDialog.open&&selected){$('#detail-preview').innerHTML=scene(selected);syncVideos();}});
 $('#skill-open').addEventListener('click',()=>{$('#skill-text').textContent=skillText();$('#skill-status').textContent='';openDialog(skillDialog);});
 $('#skill-copy').addEventListener('click',async()=>{const ok=await copyText(skillText());$('#skill-status').textContent=ok?'Skill copied. Save it as SKILL.md in your agent’s skills folder.':'Select the skill text below to copy it.';if(ok)showToast('Skill copied to clipboard');});
 $('#skill-download').addEventListener('click',()=>{const blob=new Blob([skillText()],{type:'text/markdown;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='SKILL.md';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1088,height=800">
+<title>FORM 01 — Product turntable</title>
+<style>
+@font-face{font-family:Manrope;src:url('assets/fonts/manrope600.ttf');font-weight:600}
+@font-face{font-family:DMMono;src:url('assets/fonts/dmmono500.ttf');font-weight:500}
+*{box-sizing:border-box}html,body{margin:0;width:1088px;height:800px;overflow:hidden}
+#root{position:relative;width:1088px;height:800px;overflow:hidden;background:radial-gradient(ellipse at 50% 52%,#30343b 0%,#16181c 38%,#090a0c 88%);color:#f1f3f6}
+canvas{position:absolute;inset:0;width:100%;height:100%}h1{position:absolute;top:56px;left:0;width:100%;text-align:center;font:600 48px/1 Manrope,sans-serif;letter-spacing:-.045em;margin:0}
+.kicker{position:absolute;top:119px;left:0;width:100%;text-align:center;color:#8c939d;font:500 16px DMMono,monospace;letter-spacing:.22em}
+.callout{position:absolute;height:74px;top:0;left:0;width:100%;font-family:Manrope,sans-serif}.dot{position:absolute;top:-3px;width:6px;height:6px;border-radius:50%;background:#f1f3f6}.rule{position:absolute;height:1px;top:0;background:#bec4cc;transform-origin:left center}.left .rule{transform-origin:right center}
+.label{position:absolute;top:-25px;width:230px;overflow:hidden}.left .label{text-align:right}.value{font:600 41px/1 Manrope,sans-serif;letter-spacing:-.04em}.caption{margin-top:7px;color:#a9afb8;font:500 15px/1 DMMono,monospace;letter-spacing:.15em;text-transform:uppercase}
+.grain{position:absolute;inset:0;pointer-events:none;background:url('assets/noise.png') repeat;opacity:.08}
+</style>
+</head>
+<body><main data-hf-id="hf-9se9" id="root" data-composition-id="main" data-start="0" data-duration="5" data-width="1088" data-height="800" data-fps="30">
+<canvas data-hf-id="hf-ia36" id="stage" class="clip" data-start="0" data-duration="5" data-track-index="1" data-layout-ignore></canvas>
+<h1 data-hf-id="hf-p17z">FORM 01</h1><div data-hf-id="hf-kdnn" class="kicker">OBJECT STUDY / 001</div>
+<div data-hf-id="hf-t4tt" class="callout left" id="callout-1"><i data-hf-id="hf-6bgx" class="dot"></i><i data-hf-id="hf-05s6" class="rule"></i><div data-hf-id="hf-x0aa" class="label"><div data-hf-id="hf-aevm" class="value">280 g</div><div data-hf-id="hf-r86g" class="caption">TOTAL WEIGHT</div></div></div>
+<div data-hf-id="hf-prch" class="callout right" id="callout-2"><i data-hf-id="hf-0j5x" class="dot"></i><i data-hf-id="hf-mc0a" class="rule"></i><div data-hf-id="hf-wwom" class="label"><div data-hf-id="hf-2h4q" class="value">18 h</div><div data-hf-id="hf-x6lt" class="caption">PLAY TIME</div></div></div>
+<div data-hf-id="hf-111v" class="callout left" id="callout-3"><i data-hf-id="hf-1q30" class="dot"></i><i data-hf-id="hf-mqbb" class="rule"></i><div data-hf-id="hf-xazn" class="label"><div data-hf-id="hf-xaq1" class="value">42 mm</div><div data-hf-id="hf-e3og" class="caption">PRECISION DRIVER</div></div></div>
+<div data-hf-id="hf-l1kn" class="callout right" id="callout-4"><i data-hf-id="hf-1brz" class="dot"></i><i data-hf-id="hf-n4mc" class="rule"></i><div data-hf-id="hf-xpao" class="label"><div data-hf-id="hf-rvo3" class="value">USB-C</div><div data-hf-id="hf-298b" class="caption">QUICK CHARGE</div></div></div>
+<div data-hf-id="hf-ryn8" class="grain" data-layout-ignore></div></main>
+<script src="assets/vendor/three.min.js"></script><script src="assets/vendor/gsap.min.js"></script><script>
+/* Original deterministic geometry and animation, inspired by Shaan Johari's written recipe. */
+(() => {
+ const T=THREE, W=1088, H=800, clamp=(n)=>Math.max(0,Math.min(1,n));
+ const smooth=(a,b,t)=>{const x=clamp((t-a)/(b-a));return x*x*(3-2*x)};
+ const renderer=new T.WebGLRenderer({canvas:document.querySelector('#stage'),antialias:true,alpha:true,preserveDrawingBuffer:true});
+ renderer.setPixelRatio(1);renderer.setSize(W,H,false);renderer.outputColorSpace=T.SRGBColorSpace;
+ renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;
+ const scene=new T.Scene(), camera=new T.PerspectiveCamera(31,W/H,.1,100);
+ const ambient=new T.HemisphereLight(0xdde8ff,0x242934,1.5);scene.add(ambient);
+ const light=(color,intensity,x,y,z)=>{const l=new T.DirectionalLight(color,intensity);l.position.set(x,y,z);scene.add(l)};
+ light(0xffffff,2.5,-4,7,5);light(0xc7ddff,2.1,4,4,-3);light(0xffffff,.8,-4,1,-4);
+ const dark=new T.MeshStandardMaterial({color:0x353940,metalness:.52,roughness:.48});
+ const metal=new T.MeshStandardMaterial({color:0x8a8f98,metalness:.72,roughness:.29});
+ const discMat=new T.MeshStandardMaterial({color:0x1a1d21,metalness:.55,roughness:.42});
+ const mesh=(geometry,material,x,y,z,parent=scene)=>{const m=new T.Mesh(geometry,material);m.position.set(x,y,z);parent.add(m);return m};
+ const base=mesh(new T.CylinderGeometry(1.32,1.38,.18,96),discMat,0,.1,0);
+ mesh(new T.CylinderGeometry(1.30,1.30,.035,96),metal,0,.20,0);
+ mesh(new T.CylinderGeometry(1.26,1.26,.04,96),discMat,0,.225,0);
+ const product=new T.Group();product.position.y=.23;scene.add(product);
+ mesh(new T.CylinderGeometry(.64,.68,2.42,96,1),dark,0,1.26,0,product);
+ mesh(new T.CylinderGeometry(.62,.64,.15,96),metal,0,2.54,0,product);
+ mesh(new T.CylinderGeometry(.61,.61,.035,96),dark,0,2.635,0,product);
+ mesh(new T.CylinderGeometry(.68,.68,.11,96),metal,0,.09,0,product);
+ const logoCanvas=document.createElement('canvas');logoCanvas.width=512;logoCanvas.height=512;
+ const cx=logoCanvas.getContext('2d');cx.clearRect(0,0,512,512);cx.fillStyle='#dae0e7';cx.textAlign='center';cx.font='600 85px Manrope';cx.fillText('FORM',256,225);cx.font='500 25px DMMono';cx.fillText('01 / OBJECT',256,275);
+ const logoMap=new T.CanvasTexture(logoCanvas);logoMap.colorSpace=T.SRGBColorSpace;
+ const logo=mesh(new T.PlaneGeometry(.98,.98),new T.MeshBasicMaterial({map:logoMap,transparent:true,depthWrite:false}),0,1.33,.682,product);
+ const dots=[[-.58,2.1,.25],[.59,1.85,.3],[-.59,1.03,.32],[.60,.72,.30]];
+ const callouts=[...document.querySelectorAll('.callout')];
+ function draw(t){
+   const forward=smooth(0,3.55,t), reset=smooth(4.05,4.9,t), progress=forward*(1-reset);
+   product.rotation.y=-.50+.68*progress;base.rotation.y=product.rotation.y;
+   camera.position.set(0,4.4-1.2*progress,10.4);camera.lookAt(0,1.38,0);camera.updateMatrixWorld();product.updateMatrixWorld();
+   callouts.forEach((el,i)=>{
+     const v=new T.Vector3(...dots[i]).applyMatrix4(product.matrixWorld).project(camera);
+     const x=(v.x*.5+.5)*W,y=(-v.y*.5+.5)*H, left=i%2===0;
+     const reveal=smooth(1+i*.28,1.16+i*.28,t)*(1-smooth(4.12,4.92,t));
+     const end=left?308:780, line=el.querySelector('.rule'), dot=el.querySelector('.dot'), label=el.querySelector('.label');
+     dot.style.left=`${x-3}px`;dot.style.top=`${y-3}px`;dot.style.transform=`scale(${Math.min(1,reveal*3)})`;
+     line.style.left=`${Math.min(x,end)}px`;line.style.top=`${y}px`;line.style.width=`${Math.abs(x-end)}px`;line.style.transform=`scaleX(${reveal})`;
+     label.style.left=`${left?65:793}px`;label.style.top=`${y-22}px`;
+     label.style.clipPath=`inset(${(1-smooth(.3,.95,reveal))*100}% 0 0 0)`;
+   });
+   renderer.render(scene,camera);
+ }
+ document.fonts.ready.then(()=>{
+   const clock={t:0},tl=gsap.timeline({paused:true});tl.to(clock,{t:5,duration:5,ease:'none',onUpdate:()=>draw(clock.t)},0);
+   window.__timelines=window.__timelines||{};window.__timelines["main"]=tl;window.addEventListener('hf-seek',e=>draw(e.detail.time));draw(0);
+ });
+})();
+
+</script>
+</body></html>

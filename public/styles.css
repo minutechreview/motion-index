@@ -103,3 +103,7 @@ footer .underlined{color:#d6d5ce;font-size:11px;text-decoration:underline;text-u
 @media (max-width:1050px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:700px){.topbar{height:56px}.controls{top:56px;padding:10px 14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:10px 14px 30px}.results-line{padding:10px 14px 2px}.tile-arrow{display:none}.credits{padding:22px 14px 6px}.credits-head{display:block}.credits-head p{margin-top:6px}footer{padding:16px 14px 22px}footer p{display:block}}
 @media (max-width:700px){html,body{overflow-x:hidden}.top-note{display:none}.topbar{gap:12px}.top-actions{gap:10px;min-width:0}.pill-button{padding:9px 12px}.pill-button .arrow{display:none}.controls .search{width:100%}.control-right{width:100%}}
+/* Original video studies share the same crop as the illustrated previews. */
+.scene-video video,.scene-video img{display:block;width:100%;height:100%;object-fit:cover}
+.detail-preview .scene-video{aspect-ratio:1.36}
+@media (max-width:700px){.detail-preview .scene-video{aspect-ratio:1.36}}

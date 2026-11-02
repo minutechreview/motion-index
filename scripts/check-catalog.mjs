@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import { validateSubmission } from '../api/submit.js';
 const {entries,sources} = JSON.parse(readFileSync('public/catalog.json', 'utf8'));
@@ -6,6 +6,15 @@ const app = readFileSync('public/app.js', 'utf8');
 assert.equal(entries.length, 49);
 assert.equal(new Set(entries.map(e=>e.id)).size, entries.length);
 assert.equal(new Set(sources.map(source=>source.id)).size, sources.length);
+const featured = entries.filter(entry=>entry.featured).sort((a,b)=>a.featured-b.featured);
+assert.deepEqual(featured.map(entry=>entry.id), ['turntable','money','flip','receipt']);
+assert.deepEqual(featured.map(entry=>entry.featured), [1,2,3,4]);
+for (const entry of featured) {
+  assert.equal(entry.demo, `/demos/${entry.id}.mp4`);
+  assert.equal(entry.poster, `/demos/${entry.id}.jpg`);
+  assert.ok(existsSync(`public${entry.demo}`), `Missing demo: ${entry.id}`);
+  assert.ok(existsSync(`public${entry.poster}`), `Missing poster: ${entry.id}`);
+}
 for (const source of sources) {
   assert.ok(source.author && source.name && source.project && source.description);
   assert.ok(source.url.startsWith('https://') && source.authorUrl.startsWith('https://'));

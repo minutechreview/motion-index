@@ -5,3 +5,8 @@ outputs/
 .env*
 .DS_Store
 .vercel
+
+# HyperFrames generated review and render artifacts
+.hyperframes/
+demos-src/*/renders/
+demos-src/*/.thumbnails/

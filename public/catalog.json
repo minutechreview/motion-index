@@ -63,8 +63,8 @@
       "title": "Product turntable",
       "category": "Product",
       "description": "A studio-lit product on a quiet rotating stage.",
-      "look": "A single hero product floats over a circular pedestal on a warm neutral studio ground. Use a controlled key light, a soft grounding shadow, and restrained product labeling.",
-      "motion": "Rotate the object slowly through one full turn; keep the camera steady and let the light travel across the surface.",
+      "look": "A closed matte-graphite product on a dark turntable in a near-black studio, with a centered name, silver accents and four alternating hairline spec callouts.",
+      "motion": "Turn slowly as the camera settles from above. Reveal the four labels in sequence, hold, then return smoothly to the starting pose.",
       "use": "Product launches and feature reels",
       "source": {
         "id": "shaan",
@@ -75,7 +75,10 @@
         "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
         "authorUrl": "https://www.instagram.com/viashaan/"
       },
-      "prompt": "Create an original motion-graphics piece inspired by “Product turntable” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A single hero product floats over a circular pedestal on a warm neutral studio ground. Use a controlled key light, a soft grounding shadow, and restrained product labeling.\nMotion: Rotate the object slowly through one full turn; keep the camera steady and let the light travel across the surface.\nBest suited to: Product launches and feature reels.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+      "prompt": "Create an original motion-graphics piece inspired by “Product turntable” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A closed matte-graphite product on a dark turntable in a near-black studio, with a centered name, silver accents and four alternating hairline spec callouts.\nMotion: Turn slowly as the camera settles from above. Reveal the four labels in sequence, hold, then return smoothly to the starting pose.\nBest suited to: Product launches and feature reels.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets.",
+      "demo": "/demos/turntable.mp4",
+      "poster": "/demos/turntable.jpg",
+      "featured": 1
     },
     {
       "id": "money",
@@ -83,8 +86,8 @@
       "title": "Money stack",
       "category": "Data",
       "description": "A growing stack makes the numbers tangible.",
-      "look": "Flat, layered banknote-like rectangles in deep green and warm cream, with one large legible numerical total.",
-      "motion": "Build the stack one layer at a time; increment the total in sync and settle with one small impact.",
+      "look": "A neat tower of invented pale grey-green banknote bricks on a slate pallet in a cool light-grey studio. Use crisp white paper bands, no real currency imagery, and one large total beneath.",
+      "motion": "Drop eight bricks per layer as the camera rises. Step the number once per completed layer and turn it green at the final total, then smoothly reset.",
       "use": "Budgets, revenue and comparisons",
       "source": {
         "id": "shaan",
@@ -95,7 +98,10 @@
         "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
         "authorUrl": "https://www.instagram.com/viashaan/"
       },
-      "prompt": "Create an original motion-graphics piece inspired by “Money stack” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Flat, layered banknote-like rectangles in deep green and warm cream, with one large legible numerical total.\nMotion: Build the stack one layer at a time; increment the total in sync and settle with one small impact.\nBest suited to: Budgets, revenue and comparisons.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+      "prompt": "Create an original motion-graphics piece inspired by “Money stack” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A neat tower of invented pale grey-green banknote bricks on a slate pallet in a cool light-grey studio. Use crisp white paper bands, no real currency imagery, and one large total beneath.\nMotion: Drop eight bricks per layer as the camera rises. Step the number once per completed layer and turn it green at the final total, then smoothly reset.\nBest suited to: Budgets, revenue and comparisons.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets.",
+      "demo": "/demos/money.mp4",
+      "poster": "/demos/money.jpg",
+      "featured": 2
     },
     {
       "id": "flip",
@@ -103,8 +109,8 @@
       "title": "Card flip",
       "category": "Product",
       "description": "A simple card turns to reveal the offer.",
-      "look": "An oversized, tactile offer card with a concise front label and a contrasting reverse face; generous margins and real perspective.",
-      "motion": "Rotate the card 180 degrees on its vertical axis, briefly hold each side, then return cleanly.",
+      "look": "A landscape black titanium membership card with real thickness, etched white type and a single orange accent, floating in a pale-grey studio. Place a large tier and price on the reverse and three concise perks below.",
+      "motion": "Flip in real perspective with a small lift, settle on the reverse, then reveal three orange tick circles and their labels in sequence before returning to the front.",
       "use": "Offers and reveals",
       "source": {
         "id": "shaan",
@@ -115,7 +121,10 @@
         "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
         "authorUrl": "https://www.instagram.com/viashaan/"
       },
-      "prompt": "Create an original motion-graphics piece inspired by “Card flip” for [YOUR TOPIC OR BRAND].\n\nVisual direction: An oversized, tactile offer card with a concise front label and a contrasting reverse face; generous margins and real perspective.\nMotion: Rotate the card 180 degrees on its vertical axis, briefly hold each side, then return cleanly.\nBest suited to: Offers and reveals.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+      "prompt": "Create an original motion-graphics piece inspired by “Card flip” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A landscape black titanium membership card with real thickness, etched white type and a single orange accent, floating in a pale-grey studio. Place a large tier and price on the reverse and three concise perks below.\nMotion: Flip in real perspective with a small lift, settle on the reverse, then reveal three orange tick circles and their labels in sequence before returning to the front.\nBest suited to: Offers and reveals.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets.",
+      "demo": "/demos/flip.mp4",
+      "poster": "/demos/flip.jpg",
+      "featured": 3
     },
     {
       "id": "receipt",
@@ -123,8 +132,8 @@
       "title": "Receipt",
       "category": "Editorial",
       "description": "A receipt rolls out to itemize the story.",
-      "look": "A narrow paper receipt on a dark backdrop, with monospaced line items, a dashed rule, and a strong total.",
-      "motion": "Unroll the receipt vertically, reveal items in order and stamp the final total.",
+      "look": "A softly curled thermal-paper receipt emerging from a charcoal printer in a midnight-blue studio. Set invented store copy, four items, a large total and barcode in IBM Plex Mono.",
+      "motion": "Feed the paper out in short physical steps, revealing each printed line at the slot; the total and barcode follow before the paper smoothly retracts.",
       "use": "Costs and breakdowns",
       "source": {
         "id": "shaan",
@@ -135,7 +144,10 @@
         "url": "https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf",
         "authorUrl": "https://www.instagram.com/viashaan/"
       },
-      "prompt": "Create an original motion-graphics piece inspired by “Receipt” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A narrow paper receipt on a dark backdrop, with monospaced line items, a dashed rule, and a strong total.\nMotion: Unroll the receipt vertically, reveal items in order and stamp the final total.\nBest suited to: Costs and breakdowns.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+      "prompt": "Create an original motion-graphics piece inspired by “Receipt” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A softly curled thermal-paper receipt emerging from a charcoal printer in a midnight-blue studio. Set invented store copy, four items, a large total and barcode in IBM Plex Mono.\nMotion: Feed the paper out in short physical steps, revealing each printed line at the slot; the total and barcode follow before the paper smoothly retracts.\nBest suited to: Costs and breakdowns.\n\nReference credit: Shaan Johari · Animation styles you can build with Claude (or Codex)\nOriginal reference: https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets.",
+      "demo": "/demos/receipt.mp4",
+      "poster": "/demos/receipt.jpg",
+      "featured": 4
     },
     {
       "id": "iceberg",

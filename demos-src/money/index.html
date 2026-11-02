@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1088,height=800"><title>Money stack</title>
+<style>
+@font-face{font-family:Jakarta;src:url('assets/fonts/jakarta700.ttf');font-weight:700}@font-face{font-family:Jakarta;src:url('assets/fonts/jakarta800.ttf');font-weight:800}
+*{box-sizing:border-box}html,body{margin:0;width:1088px;height:800px;overflow:hidden}#root{width:1088px;height:800px;position:relative;overflow:hidden;background:linear-gradient(#f3f5f7,#e3e7eb);color:#101b16}
+canvas{position:absolute;inset:0;width:100%;height:100%}.stat{position:absolute;left:0;right:0;top:612px;text-align:center}.label{font:700 23px/1 Jakarta,sans-serif;color:#5b6a63;letter-spacing:.02em}.number{margin-top:9px;font:800 71px/.95 Jakarta,sans-serif;letter-spacing:-.055em;font-variant-numeric:tabular-nums}.grain{position:absolute;inset:0;pointer-events:none;background:url('assets/noise.png') repeat;opacity:.06}
+</style></head><body><main id="root" data-composition-id="main" data-start="0" data-duration="5" data-width="1088" data-height="800" data-fps="30"><canvas id="stage" class="clip" data-start="0" data-duration="5" data-track-index="1" data-layout-ignore></canvas><div class="stat"><div class="label">THE STACK</div><div class="number">$100,000</div></div><div class="grain" data-layout-ignore></div></main><script src="assets/vendor/three.min.js"></script><script src="assets/vendor/gsap.min.js"></script><script>
+/* Original invented paper bricks; seek-time is the only animation clock. */
+(() => {
+ const T=THREE,W=1088,H=800,clamp=n=>Math.max(0,Math.min(1,n));
+ const smooth=(a,b,t)=>{const x=clamp((t-a)/(b-a));return x*x*(3-2*x)};
+ const renderer=new T.WebGLRenderer({canvas:document.querySelector('#stage'),alpha:true,antialias:true,preserveDrawingBuffer:true});renderer.setSize(W,H,false);renderer.setPixelRatio(1);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.16;
+ const scene=new T.Scene(),camera=new T.OrthographicCamera(-4.25,4.25,3.125,-3.125,.1,100);
+ scene.add(new T.HemisphereLight(0xffffff,0xc4d0ca,2.0));const key=new T.DirectionalLight(0xffffff,2.8);key.position.set(-5,8,6);scene.add(key);
+ const mat=c=>new T.MeshStandardMaterial({color:c,roughness:.84});const slate=mat(0x5c6774),paper=mat(0xcfdccf),band=mat(0xeef2ef),ink=mat(0x718a78);
+ const mesh=(geo,m,x,y,z,parent=scene)=>{const v=new T.Mesh(geo,m);v.position.set(x,y,z);parent.add(v);return v};
+ const base=new T.Group();scene.add(base);
+ mesh(new T.BoxGeometry(3.18,.15,2.22),slate,0,.075,0,base);
+ for(const x of [-1.25,0,1.25])mesh(new T.BoxGeometry(.25,.13,2.15),slate,x,-.065,0,base);
+ const floorTex=document.createElement('canvas');floorTex.width=floorTex.height=256;const f=floorTex.getContext('2d'),g=f.createRadialGradient(128,128,2,128,128,128);g.addColorStop(0,'rgba(40,50,50,.28)');g.addColorStop(1,'rgba(40,50,50,0)');f.fillStyle=g;f.fillRect(0,0,256,256);
+ const shadow=mesh(new T.PlaneGeometry(5.5,4.2),new T.MeshBasicMaterial({map:new T.CanvasTexture(floorTex),transparent:true,depthWrite:false}),0,-.14,0);shadow.rotation.x=-Math.PI/2;
+ const geom=new T.BoxGeometry(.74,.20,1.02),wrap=new T.BoxGeometry(.22,.211,1.035),strip=new T.BoxGeometry(.025,.217,1.04);
+ const edgeMat=mat(0x98ae9e),edge=new T.BoxGeometry(.746,.010,1.023),paperLine=new T.BoxGeometry(.74,.005,.005);
+ const note=document.createElement('canvas');note.width=256;note.height=384;const n=note.getContext('2d');n.fillStyle='#cfdccf';n.fillRect(0,0,256,384);n.strokeStyle='#8fa998';n.lineWidth=3;n.strokeRect(18,18,220,348);for(const y of [96,288]){n.beginPath();n.arc(128,y,39,0,Math.PI*2);n.stroke();n.beginPath();n.arc(128,y,27,0,Math.PI*2);n.stroke()};const noteTex=new T.CanvasTexture(note);noteTex.colorSpace=T.SRGBColorSpace;const noteMat=new T.MeshStandardMaterial({map:noteTex,roughness:1});const noteGeo=new T.PlaneGeometry(.71,.98);
+ const layers=[];
+ for(let i=0;i<10;i++)for(let j=0;j<8;j++){
+   const x=(j%4-1.5)*.77,z=(Math.floor(j/4)-.5)*1.055, group=new T.Group();
+   mesh(geom,paper,0,0,0,group);mesh(edge,edgeMat,0,-.096,0,group);
+   for(const y of [-.06,-.02,.02,.06])mesh(paperLine,edgeMat,0,y,.512,group);
+   const top=mesh(noteGeo,noteMat,0,.102,0,group);top.rotation.x=-Math.PI/2;
+   mesh(wrap,band,0,0,0,group);mesh(strip,ink,-.084,0,0,group);mesh(strip,ink,.084,0,0,group);
+   scene.add(group);layers.push({group,i,j,x,z,y:.26+i*.205});
+ }
+ const label=document.querySelector('.number');
+ function draw(t){
+   const build=smooth(0,3.1,t)*(1-smooth(4,4.9,t));
+   for(const {group,i,j,x,z,y} of layers){
+     const phase=i===0?1:clamp((build*9.7-(i-1)-j*.035)/.8);
+     const settle=phase*phase*(3-2*phase),squash=Math.max(0,1-Math.abs(phase-.9)/.1)*.08;
+     group.position.set(x,y+(1-settle)*5.2,z);group.rotation.z=(1-settle)*(.08+(j%3)*.018);group.scale.y=1-squash;
+   }
+   const landed=Math.max(1,Math.min(10,1+Math.floor(Math.max(0,build*9.7-.045))));
+   label.textContent='$'+(landed*100000).toLocaleString('en-US');label.style.color=landed===10?'#0e7a4c':'#101b16';
+   camera.position.set(6.8,5.4+build*1.2,8.5);camera.lookAt(0,.57+build*.25,0);camera.updateProjectionMatrix();renderer.render(scene,camera);
+ }
+ document.fonts.ready.then(()=>{const clock={t:0},tl=gsap.timeline({paused:true});tl.to(clock,{t:5,duration:5,ease:'none',onUpdate:()=>draw(clock.t)},0);window.__timelines=window.__timelines||{};window.__timelines["main"]=tl;window.addEventListener('hf-seek',e=>draw(e.detail.time));draw(0)});
+})();
+
+</script></body></html>
