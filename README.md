@@ -1,6 +1,6 @@
 # Motion Index
 
-A visual library of 49 motion-graphics interpretations, with source links, prompt copying, search, category filters, a downloadable agent skill, and a suggestion form.
+A visual library of 50 motion-graphics interpretations, with source links, prompt copying, search, category filters, a downloadable agent skill, and a suggestion form.
 
 Production: https://motion-index-library.vercel.app/
 
@@ -35,6 +35,7 @@ The previews are independently built interpretations; each card and copied promp
 - [Alejandro López Martínez (develatter)](https://develatter.com/) — [aimotions](https://aimotions.art/).
 - [AnimaGuru / Docyrus, Inc.](https://animaguru.com/about) — [AnimaGuru Motion Library](https://animaguru.com/motion-library).
 - [Étienne Mineur and Floot](https://proceduralstudio.etienne.design/studio/flow-field-typography) — Procedural Studio.
+- [EA DESIGN (@eadesignofficial)](https://www.instagram.com/eadesignofficial/) — [Brand-consistent social design pack reel](https://www.instagram.com/reel/DcGaekAMU90/).
 - [Paper Animators](https://paperanimators.com/about/) — [Paper Animators Motion Library](https://paperanimators.com/videos/). The source does not publicly identify an individual creator.
 
 [Fontzz](https://fontzz.vercel.app/), built by Hassan and Youssef, inspired the interface. The Halden typeface is copyright 2026 The fontzz Project Authors and is distributed under the SIL Open Font License 1.1; see `public/fonts/OFL.txt`.

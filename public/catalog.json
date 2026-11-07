@@ -47,6 +47,15 @@
       "authorUrl": "https://etienne.design/"
     },
     {
+      "id": "ea",
+      "author": "EA DESIGN",
+      "name": "EA DESIGN · @eadesignofficial",
+      "project": "Brand-consistent social design pack reel",
+      "description": "A motion-designed reel on making a social media design pack feel like one brand.",
+      "url": "https://www.instagram.com/reel/DcGaekAMU90/",
+      "authorUrl": "https://www.instagram.com/eadesignofficial/"
+    },
+    {
       "id": "paper",
       "author": "Paper Animators",
       "name": "Paper Animators · Motion Library",
@@ -1048,6 +1057,29 @@
         "authorUrl": "https://develatter.com/"
       },
       "prompt": "Create an original motion-graphics piece inspired by “Watercolor bloom” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Translucent overlapping watercolor patches on warm paper, with a small dark headline and irregular edges.\nMotion: Expand each pigment wash at a different pace and let the colors overlap before the title appears.\nBest suited to: Handmade explainers and intros.\n\nReference credit: Alejandro López Martínez (develatter) · aimotions\nOriginal reference: https://aimotions.art/styles/watercolor-bloom/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "design-pack",
+      "index": 50,
+      "title": "Design-pack edit",
+      "category": "Editorial",
+      "description": "A fast kinetic edit built from design-tool moments.",
+      "look": "A light grey canvas with 3D-tilted dark artboards, bold grotesk type, one saturated accent, selection boxes with square handles, a large outlined cursor, colour-block cards, repeated-word walls and a soft window-light shadow.",
+      "motion": "Never hold still: artboards settle with expo easing, directional motion-blur whips, zoom-throughs and exposure flashes link the beats, words rise with a vertical smear, cards fan out with a springy overshoot, and a light sweep crosses the frame.",
+      "use": "Voiceover reels, design tutorials and creator explainers",
+      "source": {
+        "id": "ea",
+        "author": "EA DESIGN",
+        "name": "EA DESIGN · @eadesignofficial",
+        "project": "Brand-consistent social design pack reel",
+        "description": "A motion-designed reel on making a social media design pack feel like one brand.",
+        "url": "https://www.instagram.com/reel/DcGaekAMU90/",
+        "authorUrl": "https://www.instagram.com/eadesignofficial/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Design-pack edit” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A light grey canvas with 3D-tilted dark artboards, bold grotesk type, one saturated accent, selection boxes with square handles, a large outlined cursor, colour-block cards, repeated-word walls and a soft window-light shadow.\nMotion: Never hold still: artboards settle with expo easing, directional motion-blur whips, zoom-throughs and exposure flashes link the beats, words rise with a vertical smear, cards fan out with a springy overshoot, and a light sweep crosses the frame.\nBest suited to: Voiceover reels, design tutorials and creator explainers.\n\nReference credit: EA DESIGN · @eadesignofficial\nOriginal reference: https://www.instagram.com/reel/DcGaekAMU90/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets.",
+      "demo": "/demos/design-pack.mp4",
+      "poster": "/demos/design-pack.jpg",
+      "featured": 5
     }
   ]
 }

@@ -4,7 +4,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 const base = 'https://motion-index-library.vercel.app/';
 const { sources, entries } = JSON.parse(readFileSync('public/catalog.json', 'utf8'));
 const byId = new Map(sources.map(source => [source.id, source]));
-const knownTypes = { shaan: 'Person', mndr: 'Person', aimotions: 'Person', animaguru: 'Organization', paper: 'Organization' };
+const knownTypes = { shaan: 'Person', mndr: 'Person', aimotions: 'Person', animaguru: 'Organization', paper: 'Organization', ea: 'Organization' };
 const nodeId = suffix => `${base}#${suffix}`;
 const ref = suffix => ({ '@id': nodeId(suffix) });
 const creators = [];

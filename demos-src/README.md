@@ -1,6 +1,6 @@
 # Motion Index video studies
 
-These four original, silent 3D scenes interpret Shaan Johari's written Part 4 recipes; they do not use the source GIFs or frames. Each folder is a self-contained HyperFrames composition with vendored runtime files and locally embedded typefaces. The fonts are distributed under the included SIL Open Font Licenses; Three.js is MIT licensed, and GSAP's distribution header names its standard license.
+These four original, silent 3D scenes interpret Shaan Johari's written Part 4 recipes; they do not use the source GIFs or frames. The fifth study, `design-pack`, is an original GSAP composition that interprets the editing style of EA DESIGN's design-pack reel; it uses none of that reel's frames, footage or artwork. Each folder is a self-contained HyperFrames composition with vendored runtime files and locally embedded typefaces. The fonts are distributed under the included SIL Open Font Licenses; Three.js is MIT licensed, and GSAP's distribution header names its standard license.
 
 Each composition is 1088 × 800, five seconds long and driven by deterministic seek time. The final portion reverses the move to return smoothly to frame one. The card and receipt masters are sampled at 60 fps and blended down to 30 fps to give their fast movements a short exposure blur.
 

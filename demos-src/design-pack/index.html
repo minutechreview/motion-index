@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1088,height=800"><title>Design-pack edit</title><style>
+@font-face{font-family:Manrope;src:url('assets/fonts/manrope600.ttf');font-weight:600}@font-face{font-family:Manrope;src:url('assets/fonts/manrope800.ttf');font-weight:800}
+*{box-sizing:border-box}html,body{margin:0;width:1088px;height:800px;overflow:hidden}
+#root{position:relative;width:1088px;height:800px;overflow:hidden;background:#ecebe8;font-family:Manrope,sans-serif}
+.layer{position:absolute;inset:0;overflow:hidden}.mb{position:absolute;inset:0}.persp{position:absolute;inset:0;perspective:1500px}
+.ab{position:absolute;left:254px;top:150px;width:580px;height:500px;border-radius:8px;background:#0d0d0f;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.32)}
+.glow{position:absolute;left:250px;top:250px;width:420px;height:420px;border-radius:50%;background:#ff6200;opacity:.55;filter:blur(55px)}
+.t1,.t2{position:absolute;left:0;right:0;text-align:center;font-weight:800;letter-spacing:-.05em;line-height:1}.t1{top:120px;font-size:92px;color:#fff}.t2{top:225px;font-size:104px;color:#ff6200}
+.sel{position:absolute;left:58px;top:106px;width:464px;height:122px;border:2px solid #ff6200}.sel i{position:absolute;width:14px;height:14px;background:#fff;border:2px solid #ff6200}
+.cur{position:absolute;left:0;top:0;width:86px;height:86px;filter:drop-shadow(0 8px 14px rgba(0,0,0,.4));z-index:9}
+.icon{position:absolute;left:424px;top:250px;width:240px;height:240px;border-radius:58px;background:linear-gradient(150deg,#2a2a2e,#0f0f11);box-shadow:0 30px 70px rgba(0,0,0,.35);display:grid;place-items:center}
+.icon b{width:96px;height:96px;border-radius:24px;background:#ff6200;box-shadow:0 0 40px rgba(255,98,0,.6)}
+.plus{position:absolute;left:630px;top:220px;width:66px;height:66px;border-radius:50%;background:#ff6200;color:#fff;font:600 50px/62px Manrope;text-align:center;box-shadow:0 0 30px rgba(255,98,0,.7)}
+.card{position:absolute;left:469px;top:300px;width:150px;height:150px;border-radius:10px;padding:14px;color:#fff;box-shadow:0 18px 40px rgba(0,0,0,.25)}
+.card small{font:600 11px/1 Manrope;letter-spacing:.12em;opacity:.8}.card strong{position:absolute;left:14px;bottom:12px;font:800 30px/1 Manrope;letter-spacing:-.04em}.card span{position:absolute;left:62px;bottom:14px;font:600 15px/1.05 Manrope}
+.tbar{position:absolute;left:444px;top:560px;width:200px;height:46px;border-radius:16px;background:#151517;display:flex;gap:14px;align-items:center;justify-content:center}.tbar i{width:17px;height:17px;border-radius:5px;border:2.5px solid #8b8b90}
+.wall{position:absolute;left:-300px;width:1800px;white-space:nowrap;font:800 64px/1 Manrope;letter-spacing:-.04em;color:#0a0a0a}.wall b{color:#fff;font-size:100px;vertical-align:-.1em;display:inline-block}
+.same{position:absolute;left:0;right:0;text-align:center;font:800 150px/1 Manrope;letter-spacing:-.06em;color:#0a0a0a}
+.sweep{position:absolute;left:0;top:-300px;width:360px;height:1500px;rotate:24deg;background:linear-gradient(90deg,transparent,rgba(0,0,0,.13) 35%,rgba(0,0,0,.18) 50%,rgba(0,0,0,.13) 65%,transparent);filter:blur(24px);pointer-events:none}
+</style></head><body><main id="root" data-composition-id="main" data-start="0" data-duration="5" data-width="1088" data-height="800" data-fps="30">
+<svg width="0" height="0" style="position:absolute"><defs>
+<filter id="bA" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur id="bAn" stdDeviation="0 0"/></filter>
+<filter id="bB" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur id="bBn" stdDeviation="0 0"/></filter>
+<filter id="bD" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur id="bDn" stdDeviation="0 0"/></filter>
+</defs></svg>
+<div class="layer" id="LA"><div class="mb" id="mA" style="filter:url(#bA)"><div class="persp"><div class="ab" id="ab"><div class="glow" id="glow"></div><div class="t1">Make it</div><div class="t2">one brand</div>
+<div class="sel"><i style="left:-8px;top:-8px"></i><i style="left:224px;top:-8px"></i><i style="left:456px;top:-8px"></i><i style="left:-8px;top:114px"></i><i style="left:224px;top:114px"></i><i style="left:456px;top:114px"></i></div></div></div></div></div>
+<div class="layer" id="LB"><div class="mb" id="mB" style="filter:url(#bB)"><div class="layer" id="camB">
+<div class="card" id="c1" style="background:#12a99a"><small>BRAND</small><strong>01</strong><span>Type</span></div>
+<div class="card" id="c2" style="background:#ee4b5f"><small>BRAND</small><strong>02</strong><span>Colour</span></div>
+<div class="card" id="c3" style="background:#ff6200"><small>BRAND</small><strong>03</strong><span>Motif</span></div>
+<div class="icon" id="icon"><b></b></div><div class="plus" id="plus">+</div><div class="tbar"><i></i><i></i><i></i><i></i><i></i></div></div></div></div>
+<div class="layer" id="LC" style="background:#ff6200"><div class="layer" id="camC" style="rotate:-8deg">
+<div class="wall" id="w0" style="top:-30px">consistent consistent consistent consistent consistent</div>
+<div class="wall" id="w1" style="top:80px">consistent consistent consistent consistent consistent</div>
+<div class="wall" id="w2" style="top:190px">consistent consistent consistent consistent consistent</div>
+<div class="wall" id="w3" style="top:300px">consistent consistent <b id="lit">THIS</b> consistent consistent</div>
+<div class="wall" id="w4" style="top:430px">consistent consistent consistent consistent consistent</div>
+<div class="wall" id="w5" style="top:540px">consistent consistent consistent consistent consistent</div>
+<div class="wall" id="w6" style="top:650px">consistent consistent consistent consistent consistent</div>
+<div class="wall" id="w7" style="top:760px">consistent consistent consistent consistent consistent</div></div></div>
+<div class="layer" id="LD" style="background:#f4f3ef"><div class="mb" id="mD" style="filter:url(#bD)"><div class="persp"><div class="layer" id="camD" style="transform-style:preserve-3d">
+<div class="same" id="s0" style="top:120px;color:#ff6200">SAME.</div><div class="same" id="s1" style="top:290px">SAME.</div><div class="same" id="s2" style="top:460px">SAME.</div></div></div></div></div>
+<div class="sweep" id="sweep"></div>
+<div class="cur" id="cur"><svg viewBox="0 0 24 24"><path d="M4 2l15 11-6.6 1.1 3.9 7-2.6 1.4-3.9-7.1L4 20z" fill="#fff" stroke="#0a0a0a" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+</main><script src="assets/vendor/gsap.min.js"></script><script>
+/* Original study of a design-pack edit: tilted artboard, whip, icon + cards, zoom-through word wall, push to SAME. stack, whip home. */
+(() => {
+ const tl = gsap.timeline({ paused: true });
+ const blur = (id, t, d, peak, axis) => { const o = { v: 0 }, n = document.getElementById(id), w = () => n.setAttribute('stdDeviation', axis === 'y' ? `0 ${o.v}` : `${o.v} 0`);
+   tl.fromTo(o, { v: 0 }, { v: peak, duration: d / 2, ease: 'power3.in', onUpdate: w, immediateRender: false }, t); tl.to(o, { v: 0, duration: d / 2, ease: 'power3.out', onUpdate: w }, t + d / 2); };
+ const vis = (id, a, b) => { tl.set(id, { autoAlpha: 0 }, 0); tl.set(id, { autoAlpha: 1 }, a); if (b < 5) tl.set(id, { autoAlpha: 0 }, b); };
+ // Layer windows (A is visible at both ends so frame 5.0 matches frame 0).
+ tl.set('#LA', { autoAlpha: 1 }, 0); tl.set('#LA', { autoAlpha: 0 }, 1.15); tl.set('#LA', { autoAlpha: 1 }, 4.4);
+ vis('#LB', 0.85, 2.36); vis('#LC', 2.3, 3.62); vis('#LD', 3.3, 4.75);
+ // A: settled tilted artboard drifts; cursor taps the selection.
+ tl.fromTo('#ab', { rotationY: -14, rotationX: 6, rotationZ: -3 }, { rotationY: -6, rotationX: 3, rotationZ: -1.5, duration: 0.9, ease: 'sine.inOut' }, 0);
+ tl.fromTo('#glow', { x: 0 }, { x: -120, duration: 0.9, ease: 'sine.inOut' }, 0);
+ tl.fromTo('#cur', { x: 700, y: 330 }, { x: 610, y: 280, duration: 0.45, ease: 'expo.out' }, 0.15);
+ tl.to('#cur', { scale: .82, duration: .07, yoyo: true, repeat: 1, transformOrigin: '0 0' }, 0.62);
+ // whip A -> B
+ tl.to('#mA', { x: -1200, duration: 0.28, ease: 'power3.in' }, 0.87); blur('bAn', 0.87, 0.34, 40);
+ tl.fromTo('#mB', { x: 1200 }, { x: 0, duration: 0.4, ease: 'expo.out' }, 1.13); blur('bBn', 1.08, 0.4, 40);
+ tl.to('#cur', { x: 1150, y: 700, duration: 0.25, ease: 'expo.in' }, 0.85);
+ // B: "+" pops, cursor clicks it, cards fan out.
+ tl.fromTo('#plus', { scale: 0 }, { scale: 1, duration: 0.4, ease: 'back.out(3)' }, 1.3);
+ tl.fromTo('#cur', { x: 900, y: 760 }, { x: 664, y: 255, duration: 0.4, ease: 'expo.out', immediateRender: false }, 1.3);
+ tl.to(['#plus', '#cur'], { scale: .82, duration: .07, yoyo: true, repeat: 1, transformOrigin: '50% 50%' }, 1.7);
+ [['#c1', -270, -40, -10], ['#c2', 0, -190, 3], ['#c3', 270, -40, 10]].forEach(([id, x, y, r], i) =>
+   tl.fromTo(id, { x: 0, y: 0, scale: .4, rotation: 0, filter: 'blur(8px)' }, { x, y, scale: 1.05, rotation: r, filter: 'blur(0px)', duration: 0.45, ease: 'back.out(2)' }, 1.78 + i * 0.05));
+ tl.to('#cur', { x: 1150, y: 900, duration: 0.25, ease: 'expo.in' }, 1.85);
+ tl.fromTo('#camB', { scale: 1 }, { scale: 1.06, duration: 0.93, ease: 'sine.inOut' }, 1.1);
+ // zoom-through into the orange card -> word wall
+ tl.to('#camB', { scale: 9, transformOrigin: '544px 300px', filter: 'blur(12px)', duration: 0.32, ease: 'expo.in' }, 2.04);
+ tl.fromTo('#camC', { scale: 1.5, filter: 'blur(14px)' }, { scale: 1.1, filter: 'blur(0px)', duration: 0.42, ease: 'expo.out' }, 2.3);
+ for (let r = 0; r < 8; r++) tl.fromTo(`#w${r}`, { x: r % 2 ? -200 : 200 }, { x: r % 2 ? 200 : -200, duration: 1.4, ease: 'sine.inOut' }, 2.3);
+ tl.fromTo('#lit', { opacity: 0, scale: 2.2, filter: 'blur(8px)' }, { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.35, ease: 'back.out(2.5)' }, 2.7);
+ tl.to('.wall:not(#w3)', { opacity: .3, duration: 0.25 }, 2.7);
+ tl.to('#camC', { scale: 1.32, duration: 0.6, ease: 'expo.out' }, 2.72);
+ // vertical push C -> D
+ tl.to('#LC', { y: -800, filter: 'blur(10px)', duration: 0.32, ease: 'expo.inOut' }, 3.3);
+ tl.fromTo('#LD', { y: 800 }, { y: 0, duration: 0.32, ease: 'expo.inOut', immediateRender: false }, 3.3);
+ ['#s2', '#s1', '#s0'].forEach((id, i) => {
+   tl.fromTo(id, { opacity: 0, rotationY: 75, x: 450, scale: 1.15 }, { opacity: 1, rotationY: -8, x: 0, scale: 1, duration: 0.45, ease: 'power4.out' }, 3.55 + i * 0.07);
+   tl.to(id, { rotationY: 4, duration: 0.6, ease: 'sine.inOut' }, 4.0 + i * 0.07); });
+ // whip D -> A (A lands back on frame-0 pose)
+ tl.to('#mD', { x: -1200, duration: 0.28, ease: 'power3.in' }, 4.42); blur('bDn', 4.42, 0.34, 40);
+ tl.fromTo('#mA', { x: 1200 }, { x: 0, duration: 0.55, ease: 'expo.out', immediateRender: false }, 4.45); blur('bAn', 4.4, 0.42, 40);
+ tl.to('#ab', { rotationY: -14, rotationX: 6, rotationZ: -3, duration: 0.55, ease: 'expo.out' }, 4.45);
+ tl.to('#glow', { x: 0, duration: 0.55, ease: 'expo.out' }, 4.45);
+ tl.fromTo('#cur', { x: 1150, y: 800 }, { x: 700, y: 330, duration: 0.5, ease: 'expo.out', immediateRender: false }, 4.5);
+ tl.fromTo('#sweep', { x: -500 }, { x: 1400, duration: 2.2, ease: 'sine.inOut' }, 0.1);
+ tl.set('#sweep', { x: -500 }, 4.98);
+ window.__timelines = window.__timelines || {}; window.__timelines["main"] = tl;
+})();
+</script></body></html>

@@ -169,3 +169,4 @@ footer .underlined{color:#d6d5ce;font-size:11px;text-decoration:underline;text-u
 .tile-arrow{transition:transform 250ms cubic-bezier(.2,.7,.2,1),background-color 250ms ease,color 250ms ease,border-color 250ms ease}
 @media (hover:hover) and (prefers-reduced-motion:no-preference){.tile:hover .tile-arrow{transform:translate(2px,-2px)}}
 @media (prefers-reduced-motion:no-preference){.tile:focus-visible .tile-arrow{transform:translate(2px,-2px)}}
+.scene-design-pack{background:#ecebe8}.dp-board{width:56%;aspect-ratio:1.16;background:#0d0d0f;border-radius:4px;transform:perspective(600px) rotateY(-12deg) rotateZ(-2deg);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 18px 40px #0004;font-weight:800;letter-spacing:-.05em;line-height:1}.dp-board b{color:#fff;font-size:clamp(16px,2.4vw,28px)}.dp-board span{color:#ff6200;font-size:clamp(18px,2.8vw,32px)}

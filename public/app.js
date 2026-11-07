@@ -2,6 +2,7 @@ const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const html = (strings, ...values) => strings.reduce((out, part, i) => out + part + (values[i] ?? ''), '');
 const shapes = {
+ 'design-pack': '<div class="dp-board"><b>Make it</b><span>one brand</span></div>',
  turntable: '<div class="floor"></div><div class="bottle"><span>FORM<br><small>01 / DAILY</small></span></div><div class="plinth"></div>',
  money: '<div class="money-stack"><i></i><i></i><i></i><i></i><i></i><b>$</b></div><div class="scene-caption">BUILDING VALUE <b>+24%</b></div>',
  flip: '<div class="flip-card"><div class="flip-front">GOOD<br>THINGS<span>01 — OFFER</span></div><div class="flip-back">20%<small>OFF TODAY</small></div></div>',
