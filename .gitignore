@@ -10,3 +10,6 @@ outputs/
 .hyperframes/
 demos-src/*/renders/
 demos-src/*/.thumbnails/
+
+# local icon assets symlink for testing the icons page
+public/_assets

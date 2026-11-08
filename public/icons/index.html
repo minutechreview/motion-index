@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10100f">
+  <meta name="description" content="Icon Index: 40 free 3D icons in one matching style. Spin them, recolour them and use them anywhere, free for commercial use.">
+  <title>Icon Index — free 3D icons</title>
+  <link rel="canonical" href="https://motion.minutechbuilds.com/icons/">
+  <meta property="og:title" content="Icon Index — free 3D icons">
+  <meta property="og:description" content="40 free 3D icons. Spin them, recolour them, use them anywhere.">
+  <meta property="og:image" content="https://motion.minutechbuilds.com/icons/og.jpg">
+  <link rel="stylesheet" href="/icons/icons.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="/icons/" class="brand">icon<span>index</span><i aria-hidden="true"></i></a>
+    <div class="top-note">Free 3D icons to spin, recolour and drop anywhere</div>
+    <nav class="top-actions">
+      <a class="text-button" href="/">Motion Index</a>
+      <a class="text-button" href="https://github.com/minutechreview/hermes-icon-index" target="_blank" rel="noopener noreferrer">Hermes plugin ↗</a>
+      <a class="pill-button" href="https://github.com/minutechreview/3d-icons" target="_blank" rel="noopener noreferrer">Get all files ↗</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <h1>40 free 3D icons.<br><em>One style. Any colour.</em></h1>
+      <p>GLB for the web, Blender and games, transparent PNGs, and spinning loops for video. Free for anything, including commercial work. No credit needed.</p>
+    </section>
+    <div class="controls">
+      <div class="filters" id="filters" aria-label="Filter icons"></div>
+      <div class="control-right">
+        <div class="swatches" id="page-colors" aria-label="Preview colour"></div>
+        <label class="search"><span aria-hidden="true">⌕</span><span class="sr-only">Search icons</span><input id="search" type="search" placeholder="Search: security, money, launch…" autocomplete="off"></label>
+      </div>
+    </div>
+    <div class="grid" id="grid" aria-live="polite"></div>
+    <p class="empty" id="empty" hidden>No icons match. Try another word.</p>
+  </main>
+  <dialog id="detail" aria-labelledby="detail-title">
+    <div class="detail">
+      <div class="viewer"><iframe id="viewer" title="3D icon viewer" allow="fullscreen"></iframe><span>Drag to spin</span></div>
+      <div class="info">
+        <button class="close" id="close" aria-label="Close">×</button>
+        <small id="detail-cat"></small>
+        <h2 id="detail-title"></h2>
+        <p id="detail-desc"></p>
+        <h3>Accent colour</h3>
+        <div class="swatches big" id="detail-colors"></div>
+        <h3>Download</h3>
+        <div class="downloads" id="downloads"></div>
+        <p class="hint" id="custom-hint" hidden>Custom colour: use “Download GLB” under the 3D view.</p>
+        <h3>Embed</h3>
+        <button class="pill-button wide" id="copy-embed">Copy embed code</button>
+        <p class="license">CC0: free for any use, no credit needed. Made by <a href="https://instagram.com/minutechbuilds" target="_blank" rel="noopener noreferrer">@minutechbuilds</a> with Meshy.</p>
+      </div>
+    </div>
+  </dialog>
+  <footer><a href="/icons/" class="brand small">icon<span>index</span><i></i></a><p>Part of <a class="underlined" href="/">Motion Index</a>. Icons generated with Meshy from original designs.</p></footer>
+  <script type="module" src="/icons/icons.js"></script>
+</body>
+</html>

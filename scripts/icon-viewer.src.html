@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Icon Index viewer</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: transparent; font: 600 12px/1 system-ui, sans-serif; }
+  canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+  canvas:active { cursor: grabbing; }
+  #dl { position: absolute; right: 12px; bottom: 12px; display: none; padding: 9px 14px; border: 0; border-radius: 99px;
+    background: #f0eee9; color: #10100f; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.35); }
+  #dl:hover { background: #ff6200; color: #fff; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<button id="dl" type="button">Download GLB</button>
+<script type="module">
+// One icon, drag to spin, optional recolour of the orange accent (?color=3b82f6) and a GLB download (?dl=1).
+// Used by the Icon Index page and the Hermes plugin (inside a sandboxed frame).
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { GLTFExporter } from "three/addons/exporters/GLTFExporter.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
+
+const q = new URLSearchParams(location.hash.slice(1) || location.search);
+addEventListener("hashchange", () => location.reload());
+const id = /^[a-z0-9-]{1,40}$/.test(q.get("id") || "") ? q.get("id") : "rocket";
+const color = /^[0-9a-f]{6}$/i.test(q.get("color") || "") ? q.get("color").toLowerCase() : "";
+const base = q.get("base") === "local" ? "models" : "__ASSET_BASE__/icons";
+const src = base === "models" ? `models/${id}.glb` : `${base}/${id}/model.glb`;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+const key = new THREE.DirectionalLight(0xffffff, 1.6);
+key.position.set(3, 5, 4);
+const rim = new THREE.DirectionalLight(0xffffff, 0.8);
+rim.position.set(-4, 2, -3);
+scene.add(key, rim);
+const cam = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+cam.position.set(0, 1.5, 4.4);
+const controls = new OrbitControls(cam, renderer.domElement);
+Object.assign(controls, { enableZoom: false, enablePan: false, enableDamping: true, autoRotate: q.get("spin") !== "0", autoRotateSpeed: 2.5 });
+
+// Swap the orange accent (#FF6200) for the target colour, keeping each pixel's own shading.
+function recolorTexture(tex, hex) {
+  const img = tex.image;
+  const canvas = document.createElement("canvas");
+  canvas.width = img.width; canvas.height = img.height;
+  const g = canvas.getContext("2d");
+  g.drawImage(img, 0, 0);
+  const d = g.getImageData(0, 0, canvas.width, canvas.height);
+  const t = [0, 2, 4].map(i => parseInt(hex.slice(i, i + 2), 16) / 255);
+  const grey = (t[0] + t[1] + t[2]) / 3;
+  for (let i = 0; i < d.data.length; i += 4) {
+    const r = d.data[i] / 255, gg = d.data[i + 1] / 255, b = d.data[i + 2] / 255;
+    const mx = Math.max(r, gg, b), mn = Math.min(r, gg, b), dd = mx - mn;
+    if (dd < 1e-6) continue;
+    let h = mx === r ? ((gg - b) / dd) % 6 : mx === gg ? (b - r) / dd + 2 : (r - gg) / dd + 4;
+    h = ((h * 60) + 360) % 360;
+    const s = dd / mx;
+    const w = Math.max(0, 1 - Math.abs(h - 24) / 22) * Math.min(1, Math.max(0, (s - 0.25) / 0.25));
+    if (!w) continue;
+    for (let c = 0; c < 3; c++) {
+      const tinted = Math.min(1, (grey + (t[c] - grey) * s) * mx);
+      const orig = d.data[i + c] / 255;
+      d.data[i + c] = Math.round((orig * (1 - w) + tinted * w) * 255);
+    }
+  }
+  g.putImageData(d, 0, 0);
+  const out = new THREE.CanvasTexture(canvas);
+  out.flipY = tex.flipY; out.colorSpace = tex.colorSpace; out.wrapS = tex.wrapS; out.wrapT = tex.wrapT;
+  return out;
+}
+
+const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
+loader.load(src, (gltf) => {
+  const obj = gltf.scene;
+  const box = new THREE.Box3().setFromObject(obj);
+  const size = box.getSize(new THREE.Vector3());
+  obj.position.sub(box.getCenter(new THREE.Vector3()));
+  const pivot = new THREE.Group();
+  pivot.add(obj);
+  pivot.scale.setScalar(1.7 / Math.max(size.x, size.y, size.z));
+  pivot.rotation.y = -0.5;
+  scene.add(pivot);
+  if (color) obj.traverse(m => { if (m.material && m.material.map) m.material.map = recolorTexture(m.material.map, color); });
+  if (q.get("dl") === "1") {
+    const btn = document.getElementById("dl");
+    btn.style.display = "block";
+    btn.onclick = () => new GLTFExporter().parse(obj, (glb) => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([glb], { type: "model/gltf-binary" }));
+      a.download = `${id}${color ? "-" + color : ""}.glb`;
+      a.click();
+    }, console.error, { binary: true });
+  }
+});
+
+function frame() {
+  const w = innerWidth, h = innerHeight;
+  if (renderer.domElement.width !== Math.floor(w * renderer.getPixelRatio())) {
+    renderer.setSize(w, h, false);
+    cam.aspect = w / h; cam.updateProjectionMatrix();
+  }
+  controls.update();
+  renderer.render(scene, cam);
+  requestAnimationFrame(frame);
+}
+frame();
+</script>
+</body>
+</html>
