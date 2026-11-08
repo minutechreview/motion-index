@@ -10,7 +10,7 @@ const number = icon => `No. ${String(data.icons.indexOf(icon) + 1).padStart(2, '
 const hexOf = name => PRESETS.find(([n]) => n === name)?.[1]
 const nameOf = hex => PRESETS.find(([, h]) => h === hex)?.[0] || ''
 const folder = (icon, color = 'orange') => `${data.asset_base}/icons/${icon.id}${color === 'orange' ? '' : `/colors/${color}`}`
-const viewerUrl = (icon, hex, dl) => `/icons/viewer.html#id=${icon.id}${hex !== 'ff6200' ? `&color=${hex}` : ''}${dl ? '&dl=1' : ''}`
+const viewerUrl = (icon, hex, dl) => `/icons/viewer.html#id=${icon.id}${hex !== 'ff6200' ? `&color=${hex}` : ''}${dl ? '&dl=1&dark=1' : ''}`
 
 function el(tag, attrs = {}, children = []) {
   const node = document.createElement(tag)

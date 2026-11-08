@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Icon Index viewer</title>
+<script>
+  // Inside a dark page or app, match its colour scheme so the frame stays see-through (#dark=1).
+  if (/[#&?]dark=1/.test(location.href)) document.documentElement.style.colorScheme = 'dark'
+</script>
 <style>
   html, body { margin: 0; height: 100%; overflow: hidden; background: transparent; font: 600 12px/1 system-ui, sans-serif; }
   canvas { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
