@@ -93,7 +93,7 @@ loader.load(src, (gltf) => {
   obj.position.sub(box.getCenter(new THREE.Vector3()));
   const pivot = new THREE.Group();
   pivot.add(obj);
-  pivot.scale.setScalar(1.7 / Math.max(size.x, size.y, size.z));
+  pivot.scale.setScalar(1.45 / Math.max(size.x, size.y, size.z));
   pivot.rotation.y = -0.5;
   scene.add(pivot);
   if (color) obj.traverse(m => { if (m.material && m.material.map) m.material.map = recolorTexture(m.material.map, color); });

@@ -4,59 +4,109 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10100f">
-  <meta name="description" content="Icon Index: 40 free 3D icons in one matching style. Spin them, recolour them and use them anywhere, free for commercial use.">
-  <title>Icon Index — free 3D icons</title>
+  <meta name="description" content="Icon Index: 40 free 3D icons in one matching style. Spin them, recolour them and add them to your site. CC0, free for commercial use.">
+  <title>Icon Index — free 3D icons for your site</title>
   <link rel="canonical" href="https://motion.minutechbuilds.com/icons/">
-  <meta property="og:title" content="Icon Index — free 3D icons">
+  <meta property="og:title" content="Icon Index — free 3D icons for your site">
   <meta property="og:description" content="40 free 3D icons. Spin them, recolour them, use them anywhere.">
   <meta property="og:image" content="https://motion.minutechbuilds.com/icons/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preload" href="/icons/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/icons/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/icons/icons.css">
+  <script type="importmap">
+  { "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  } }
+  </script>
 </head>
 <body>
-  <header class="topbar">
-    <a href="/icons/" class="brand">icon<span>index</span><i aria-hidden="true"></i></a>
-    <div class="top-note">Free 3D icons to spin, recolour and drop anywhere</div>
-    <nav class="top-actions">
-      <a class="text-button" href="/">Motion Index</a>
-      <a class="text-button" href="https://github.com/minutechreview/hermes-icon-index" target="_blank" rel="noopener noreferrer">Hermes plugin ↗</a>
-      <a class="pill-button" href="https://github.com/minutechreview/3d-icons" target="_blank" rel="noopener noreferrer">Get all files ↗</a>
+  <header class="bar">
+    <a href="/icons/" class="mark" aria-label="Icon Index home">Icon<b>Index</b><i aria-hidden="true"></i></a>
+    <span class="bar-meta mono">Vol. 01 &nbsp;/&nbsp; 40 objects &nbsp;/&nbsp; CC0</span>
+    <nav class="bar-nav">
+      <a href="#catalogue">Catalogue</a>
+      <a href="#use">Use it</a>
+      <a href="/">Motion Index</a>
+      <a class="btn small" href="https://github.com/minutechreview/3d-icons" target="_blank" rel="noopener noreferrer">All files ↗</a>
     </nav>
   </header>
+
   <main>
     <section class="hero">
-      <h1>40 free 3D icons.<br><em>One style. Any colour.</em></h1>
-      <p>GLB for the web, Blender and games, transparent PNGs, and spinning loops for video. Free for anything, including commercial work. No credit needed.</p>
-    </section>
-    <div class="controls">
-      <div class="filters" id="filters" aria-label="Filter icons"></div>
-      <div class="control-right">
-        <div class="swatches" id="page-colors" aria-label="Preview colour"></div>
-        <label class="search"><span aria-hidden="true">⌕</span><span class="sr-only">Search icons</span><input id="search" type="search" placeholder="Search: security, money, launch…" autocomplete="off"></label>
+      <canvas id="stage" aria-hidden="true"></canvas>
+      <div class="hero-copy">
+        <p class="kicker mono"><span class="dot"></span>Free 3D icons · No sign-up · Commercial OK</p>
+        <h1>Add a 3D <span class="rot"><em id="rot-text">rocket</em><span class="caret" id="caret"></span></span><br>to your site.</h1>
+        <p class="lede">Forty glossy objects in one matching style. Spin them, paint them your brand colour, and drop them into a landing page, an app, a deck or a reel.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#catalogue">Browse all 40</a>
+          <a class="btn ghost" href="https://github.com/minutechreview/hermes-icon-index" target="_blank" rel="noopener noreferrer">Use it in Hermes ↗</a>
+        </div>
+        <div class="hero-chips" id="hero-chips" aria-label="Paint it"></div>
       </div>
-    </div>
-    <div class="grid" id="grid" aria-live="polite"></div>
-    <p class="empty" id="empty" hidden>No icons match. Try another word.</p>
+      <dl class="specs mono">
+        <div><dt>Formats</dt><dd>GLB · PNG · MP4</dd></div>
+        <div><dt>Colours</dt><dd>8 + any hex</dd></div>
+        <div><dt>Licence</dt><dd>CC0</dd></div>
+      </dl>
+    </section>
+
+    <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+
+    <section class="catalogue" id="catalogue">
+      <header class="cat-head">
+        <h2>The <em>catalogue</em></h2>
+        <p class="mono" id="count">40 objects</p>
+      </header>
+      <div class="toolbar">
+        <div class="tabs" id="tabs" role="tablist" aria-label="Categories"></div>
+        <label class="search"><span class="sr-only">Search icons</span><input id="search" type="search" placeholder="Search — money, launch, security" autocomplete="off"></label>
+      </div>
+      <div class="chips" id="chips" aria-label="Paint the catalogue"></div>
+      <div class="grid" id="grid"></div>
+      <p class="empty" id="empty" hidden>Nothing on this shelf. Try another word.</p>
+    </section>
+
+    <section class="use" id="use">
+      <h2>Use it <em>anywhere</em></h2>
+      <div class="use-grid">
+        <article><span class="mono">01 — Websites</span><h3>Drop in a live 3D object</h3><p>Paste one line and the icon spins on your page. People can grab it too.</p><pre class="mono"><code>&lt;iframe src="…/icons/viewer.html#id=rocket"&gt;</code></pre></article>
+        <article><span class="mono">02 — Slides &amp; docs</span><h3>Transparent PNGs</h3><p>1024 px renders with no background, in every colour. Ready for Keynote, Figma or Notion.</p></article>
+        <article><span class="mono">03 — Video</span><h3>Seamless spin loops</h3><p>Four-second turntables that loop forever. Put them behind your talking head or in a reel.</p></article>
+        <article><span class="mono">04 — Your agent</span><h3>Ask Hermes</h3><p>“Add a blue rocket to my hero.” The Icon Index plugin finds it, shows it in chat and saves it into your project.</p><pre class="mono"><code>hermes plugins install minutechreview/hermes-icon-index</code></pre></article>
+      </div>
+    </section>
   </main>
-  <dialog id="detail" aria-labelledby="detail-title">
-    <div class="detail">
-      <div class="viewer"><iframe id="viewer" title="3D icon viewer" allow="fullscreen"></iframe><span>Drag to spin</span></div>
-      <div class="info">
-        <button class="close" id="close" aria-label="Close">×</button>
-        <small id="detail-cat"></small>
-        <h2 id="detail-title"></h2>
-        <p id="detail-desc"></p>
-        <h3>Accent colour</h3>
-        <div class="swatches big" id="detail-colors"></div>
-        <h3>Download</h3>
-        <div class="downloads" id="downloads"></div>
-        <p class="hint" id="custom-hint" hidden>Custom colour: use “Download GLB” under the 3D view.</p>
-        <h3>Embed</h3>
-        <button class="pill-button wide" id="copy-embed">Copy embed code</button>
-        <p class="license">CC0: free for any use, no credit needed. Made by <a href="https://instagram.com/minutechbuilds" target="_blank" rel="noopener noreferrer">@minutechbuilds</a> with Meshy.</p>
+
+  <dialog id="detail" aria-labelledby="d-title">
+    <div class="sheet">
+      <div class="sheet-stage"><iframe id="viewer" title="3D icon viewer"></iframe><span class="mono">Drag to spin</span></div>
+      <div class="sheet-info">
+        <button class="close" id="close" aria-label="Close">Close ✕</button>
+        <p class="mono" id="d-no"></p>
+        <h2 id="d-title"></h2>
+        <p id="d-desc"></p>
+        <h3 class="mono">Colour</h3>
+        <div class="chips small" id="d-chips"></div>
+        <h3 class="mono">Files</h3>
+        <ul class="files" id="d-files"></ul>
+        <p class="note" id="d-custom" hidden>Custom colour: press “Download GLB” on the 3D view to save it.</p>
+        <button class="btn wide" id="copy">Copy embed code</button>
+        <p class="note">CC0. Free for any use, no credit needed.</p>
       </div>
     </div>
   </dialog>
-  <footer><a href="/icons/" class="brand small">icon<span>index</span><i></i></a><p>Part of <a class="underlined" href="/">Motion Index</a>. Icons generated with Meshy from original designs.</p></footer>
+
+  <footer class="foot">
+    <div class="foot-mark" aria-hidden="true">Icon<b>Index</b></div>
+    <div class="foot-row mono">
+      <span>Made by <a href="https://instagram.com/minutechbuilds" target="_blank" rel="noopener noreferrer">@minutechbuilds</a></span>
+      <span>Models made with Meshy from original concept art</span>
+      <span>A sister library of <a href="/">Motion Index</a></span>
+    </div>
+  </footer>
   <script type="module" src="/icons/icons.js"></script>
 </body>
 </html>

@@ -35,7 +35,7 @@ const q = new URLSearchParams(location.hash.slice(1) || location.search);
 addEventListener("hashchange", () => location.reload());
 const id = /^[a-z0-9-]{1,40}$/.test(q.get("id") || "") ? q.get("id") : "rocket";
 const color = /^[0-9a-f]{6}$/i.test(q.get("color") || "") ? q.get("color").toLowerCase() : "";
-const base = q.get("base") === "local" ? "models" : "https://cdn.jsdelivr.net/gh/minutechreview/3d-icons@aee7c0abd462cb20202df81a2cc171e5ab2d3f06/icons";
+const base = q.get("base") === "local" ? "models" : "https://cdn.jsdelivr.net/gh/minutechreview/3d-icons@4d93eb140d57949d3c93c10260baf74d4302109c/icons";
 const src = base === "models" ? `models/${id}.glb` : `${base}/${id}/model.glb`;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -93,7 +93,7 @@ loader.load(src, (gltf) => {
   obj.position.sub(box.getCenter(new THREE.Vector3()));
   const pivot = new THREE.Group();
   pivot.add(obj);
-  pivot.scale.setScalar(1.7 / Math.max(size.x, size.y, size.z));
+  pivot.scale.setScalar(1.45 / Math.max(size.x, size.y, size.z));
   pivot.rotation.y = -0.5;
   scene.add(pivot);
   if (color) obj.traverse(m => { if (m.material && m.material.map) m.material.map = recolorTexture(m.material.map, color); });

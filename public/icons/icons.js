@@ -1,17 +1,15 @@
-// Icon Index page: grid of 3D icons (PNG, spinning loop on hover) and a detail dialog with the
-// interactive viewer, colour picker, downloads and embed code. Data comes from icons.json.
-const PRESETS = [
-  ['orange', 'ff6200'], ['blue', '3b82f6'], ['purple', '8b5cf6'], ['green', '22c55e'],
-  ['pink', 'ec4899'], ['red', 'ef4444'], ['teal', '14b8a6'], ['yellow', 'facc15']
-]
+// Icon Index page: hero stage, ticker, catalogue of spinning icons (one looping video per card,
+// played only while on screen), paint-chip colours and the detail sheet. Data: icons.json.
+import { PRESETS } from './recolor.js'
+
 const CATEGORIES = ['All', 'Tech', 'Money', 'Social', 'Work']
 const $ = id => document.getElementById(id)
-const state = { category: 'All', query: '', color: 'orange', open: null, detailHex: 'ff6200' }
-let data
-
-const presetName = hex => (PRESETS.find(([, h]) => h === hex) || [])[0] || ''
-const folder = icon => `${data.asset_base}/icons/${icon.id}`
-const pngUrl = (icon, color) => color === 'orange' ? `${folder(icon)}/icon.png` : `${folder(icon)}/colors/${color}/icon.png`
+const state = { category: 'All', query: '', color: 'orange', open: null, sheetHex: 'ff6200' }
+const data = await (await fetch('/icons/icons.json')).json()
+const number = icon => `No. ${String(data.icons.indexOf(icon) + 1).padStart(2, '0')}`
+const hexOf = name => PRESETS.find(([n]) => n === name)?.[1]
+const nameOf = hex => PRESETS.find(([, h]) => h === hex)?.[0] || ''
+const folder = (icon, color = 'orange') => `${data.asset_base}/icons/${icon.id}${color === 'orange' ? '' : `/colors/${color}`}`
 const viewerUrl = (icon, hex, dl) => `/icons/viewer.html#id=${icon.id}${hex !== 'ff6200' ? `&color=${hex}` : ''}${dl ? '&dl=1' : ''}`
 
 function el(tag, attrs = {}, children = []) {
@@ -21,67 +19,104 @@ function el(tag, attrs = {}, children = []) {
     else if (key.startsWith('on')) node.addEventListener(key.slice(2), value)
     else node.setAttribute(key, value)
   }
-  for (const child of [].concat(children)) node.append(child)
+  node.append(...[].concat(children).filter(Boolean))
   return node
 }
 
-function swatches(container, active, onPick, withCustom) {
-  container.replaceChildren(...PRESETS.map(([name, hex]) => el('button', {
-    type: 'button', title: name, 'aria-label': `${name} accent`, 'aria-pressed': String(active === hex),
-    style: `background:#${hex}`, onclick: () => onPick(hex)
-  })))
+// Colour dots. The custom dot opens the system colour picker.
+function chips(container, activeHex, onPick, withCustom) {
+  const list = PRESETS.map(([name, hex]) => el('button', {
+    class: 'chip', type: 'button', title: name, 'aria-pressed': String(activeHex === hex), 'aria-label': `${name} accent`,
+    style: `--c:#${hex}`, onclick: () => onPick(hex)
+  }))
   if (withCustom) {
-    container.append(el('input', { type: 'color', value: `#${active}`, 'aria-label': 'Any colour', title: 'Any colour', oninput: e => onPick(e.target.value.slice(1)) }))
+    const custom = !nameOf(activeHex)
+    const picker = el('input', { type: 'color', value: `#${activeHex}`, 'aria-label': 'Any colour', oninput: e => onPick(e.target.value.slice(1).toLowerCase()) })
+    list.push(el('label', { class: `chip custom${custom ? ' set' : ''}`, title: 'Any colour', 'aria-pressed': String(custom), style: `--c:#${activeHex}` }, [picker]))
   }
+  container.replaceChildren(...list)
 }
 
-function tile(icon) {
-  const video = el('video', { muted: '', loop: '', playsinline: '', preload: 'none', src: `${folder(icon)}/turntable.mp4` })
+// ---- catalogue -------------------------------------------------------------------------------
+const playing = new IntersectionObserver(entries => {
+  for (const entry of entries) {
+    const card = entry.target
+    const video = card.querySelector('video')
+    if (entry.isIntersecting) {
+      card.classList.add('in')
+      if (!video.src) {
+        // stagger the loops so the wall doesn't turn edge-on all at once
+        video.addEventListener('loadedmetadata', () => { video.currentTime = Number(video.dataset.offset) % video.duration }, { once: true })
+        video.src = video.dataset.src
+      }
+      video.play().catch(() => {})
+    } else {
+      video.pause()
+    }
+  }
+}, { rootMargin: '120px' })
+
+function card(icon, i) {
+  const video = el('video', { muted: '', loop: '', playsinline: '', preload: 'none', 'data-src': `${folder(icon, state.color)}/spin.mp4`, 'data-offset': String((i * 1.37) % 4), 'aria-hidden': 'true' })
   video.muted = true
-  video.addEventListener('playing', () => video.classList.add('ready'))
-  const node = el('button', { class: 'tile', type: 'button', 'aria-label': `Open ${icon.title}`, onclick: () => openIcon(icon) }, [
-    el('div', { class: 'media' }, [el('img', { src: pngUrl(icon, state.color), alt: `3D ${icon.title.toLowerCase()} icon`, loading: 'lazy', width: 512, height: 512 }), state.color === 'orange' ? video : '']),
-    el('div', {}, [el('b', { text: icon.title })]),
-    el('small', { text: icon.category })
+  video.addEventListener('playing', () => video.classList.add('playing'))
+  const node = el('button', { class: 'card', type: 'button', style: `transition-delay:${(i % 8) * 45}ms`, 'aria-label': `Open ${icon.title}`, onclick: () => openSheet(icon) }, [
+    el('div', { class: 'media' }, [el('img', { src: `${folder(icon, state.color)}/icon.png`, alt: '', loading: 'lazy' }), video, el('span', { class: 'open mono', text: 'Open →' })]),
+    el('div', { class: 'meta' }, [el('b', { text: icon.title }), el('span', { class: 'mono', text: number(icon) })])
   ])
-  node.addEventListener('mouseenter', () => { if (state.color === 'orange') video.play().catch(() => {}) })
-  node.addEventListener('mouseleave', () => video.pause())
+  playing.observe(node)
   return node
 }
 
-function render() {
+function renderGrid() {
   const words = state.query.toLowerCase().split(/\s+/).filter(Boolean)
   const list = data.icons.filter(icon => (state.category === 'All' || icon.category === state.category) &&
     words.every(w => `${icon.title} ${icon.category} ${icon.description} ${icon.tags.join(' ')}`.toLowerCase().includes(w)))
-  $('grid').replaceChildren(...list.map(tile))
+  playing.disconnect()
+  $('grid').replaceChildren(...list.map(card))
   $('empty').hidden = list.length > 0
-  $('filters').replaceChildren(...CATEGORIES.map(name => el('button', {
-    type: 'button', 'aria-pressed': String(state.category === name), text: name,
-    onclick: () => { state.category = name; render() }
-  })))
-  swatches($('page-colors'), PRESETS.find(([n]) => n === state.color)[1], hex => { state.color = presetName(hex); render() }, false)
+  $('count').textContent = `${list.length} object${list.length === 1 ? '' : 's'}`
 }
 
-function renderDetail() {
+function renderTabs() {
+  $('tabs').replaceChildren(...CATEGORIES.map(name => {
+    const n = name === 'All' ? data.icons.length : data.icons.filter(i => i.category === name).length
+    return el('button', { role: 'tab', type: 'button', 'aria-selected': String(state.category === name), onclick: () => { state.category = name; renderTabs(); renderGrid() } },
+      [name, el('sup', { text: n })])
+  }))
+}
+
+function setColor(hex) {
+  state.color = nameOf(hex) || 'orange'
+  chips($('chips'), hexOf(state.color), setColor, false)
+  chips($('hero-chips'), hexOf(state.color), setColor, false)
+  stage?.setColor(hexOf(state.color))
+  renderGrid()
+}
+
+// ---- detail sheet ----------------------------------------------------------------------------
+function renderSheet() {
   const icon = state.open
-  const hex = state.detailHex
-  const preset = presetName(hex)
+  const hex = state.sheetHex
+  const preset = nameOf(hex)
   $('viewer').src = viewerUrl(icon, hex, true)
-  swatches($('detail-colors'), hex, next => { state.detailHex = next.toLowerCase(); renderDetail() }, true)
-  const links = preset === 'orange'
-    ? [['GLB · web', 'model.glb'], ['GLB · full', 'model-full.glb'], ['PNG', 'icon.png'], ['MP4 loop', 'turntable.mp4']].map(([label, file]) => [label, `${folder(icon)}/${file}`])
-    : preset ? [['GLB · web', `${folder(icon)}/colors/${preset}/model.glb`], ['PNG', `${folder(icon)}/colors/${preset}/icon.png`]] : []
-  $('downloads').replaceChildren(...links.map(([label, href]) => el('a', { href, download: '', target: '_blank', rel: 'noopener', text: label })))
-  $('custom-hint').hidden = Boolean(preset)
+  chips($('d-chips'), hex, next => { state.sheetHex = next; renderSheet() }, true)
+  const rows = preset === 'orange'
+    ? [['GLB · web', 'model.glb', 'Websites, three.js'], ['GLB · full', 'model-full.glb', 'Blender, Unity'], ['PNG', 'icon.png', 'Slides, docs'], ['MP4 loop', 'turntable.mp4', 'Video, reels']]
+    : preset ? [['GLB · web', 'model.glb', 'Websites, three.js'], ['PNG', 'icon.png', 'Slides, docs'], ['MP4 loop', 'spin.mp4', 'Video, reels']] : []
+  $('d-files').replaceChildren(...rows.map(([label, file, use]) => el('li', {}, [
+    el('a', { href: `${folder(icon, preset)}/${file}`, download: '', target: '_blank', rel: 'noopener' }, [el('b', { text: label }), el('small', { text: use }), el('span', { text: '↓' })])
+  ])))
+  $('d-custom').hidden = Boolean(preset)
 }
 
-function openIcon(icon) {
+function openSheet(icon) {
   state.open = icon
-  state.detailHex = PRESETS.find(([n]) => n === state.color)[1]
-  $('detail-cat').textContent = icon.category
-  $('detail-title').textContent = icon.title
-  $('detail-desc').textContent = icon.description
-  renderDetail()
+  state.sheetHex = hexOf(state.color)
+  $('d-no').textContent = `${number(icon)} — ${icon.category}`
+  $('d-title').textContent = icon.title
+  $('d-desc').textContent = icon.description
+  renderSheet()
   $('detail').showModal()
   history.replaceState(null, '', `#${icon.id}`)
 }
@@ -89,15 +124,49 @@ function openIcon(icon) {
 $('close').onclick = () => $('detail').close()
 $('detail').addEventListener('close', () => { $('viewer').src = 'about:blank'; history.replaceState(null, '', location.pathname) })
 $('detail').addEventListener('click', e => { if (e.target === $('detail')) $('detail').close() })
-$('search').addEventListener('input', e => { state.query = e.target.value; render() })
-$('copy-embed').onclick = async () => {
-  const code = `<iframe src="${location.origin}${viewerUrl(state.open, state.detailHex, false)}" title="3D ${state.open.title.toLowerCase()} icon" width="320" height="320" style="border:0;background:transparent" loading="lazy"></iframe>`
+$('copy').onclick = async () => {
+  const code = `<iframe src="${location.origin}${viewerUrl(state.open, state.sheetHex, false)}" title="3D ${state.open.title.toLowerCase()} icon" width="320" height="320" style="border:0;background:transparent" loading="lazy"></iframe>`
   await navigator.clipboard.writeText(code)
-  $('copy-embed').textContent = 'Copied ✓'
-  setTimeout(() => { $('copy-embed').textContent = 'Copy embed code' }, 1500)
+  $('copy').textContent = 'Copied ✓'
+  setTimeout(() => { $('copy').textContent = 'Copy embed code' }, 1600)
 }
+$('search').addEventListener('input', e => { state.query = e.target.value; renderGrid() })
 
-data = await (await fetch('/icons/icons.json')).json()
-render()
+// ---- ticker + hero ---------------------------------------------------------------------------
+const names = data.icons.map(i => el('span', { text: i.title }))
+$('ticker').replaceChildren(...names, ...names.map(n => n.cloneNode(true)))
+
+// Headline: the icon name deletes and retypes itself, and that icon pops into the page.
+const HERO = [['rocket', 'rocket'], ['wallet', 'wallet'], ['robot', 'robot'], ['trophy', 'trophy'],
+  ['padlock', 'lock'], ['light bulb', 'bulb'], ['gift', 'gift'], ['chat bubble', 'chat']]
+let stage = null
+try {
+  const { createStage } = await import('./hero.js')
+  stage = createStage($('stage'), { base: data.asset_base })
+  HERO.forEach(([, id]) => stage.preload(id))
+} catch { /* no WebGL: the headline still types */ }
+
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms))
+async function typeLoop() {
+  const text = $('rot-text'), caret = $('caret')
+  let i = 0
+  stage?.show(HERO[0][1])
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  for (;;) {
+    await wait(2600)
+    caret.classList.add('typing')
+    for (let n = text.textContent.length; n > 0; n--) { text.textContent = text.textContent.slice(0, -1); await wait(34) }
+    i = (i + 1) % HERO.length
+    const [word, id] = HERO[i]
+    await wait(160)
+    for (let n = 1; n <= word.length; n++) { text.textContent = word.slice(0, n); await wait(68) }
+    stage?.show(id)
+    caret.classList.remove('typing')
+  }
+}
+document.fonts.ready.then(typeLoop)
+
+renderTabs()
+setColor('ff6200')
 const linked = data.icons.find(icon => icon.id === location.hash.slice(1))
-if (linked) openIcon(linked)
+if (linked) openSheet(linked)
