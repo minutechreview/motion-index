@@ -92,6 +92,33 @@
       "description": "MIT-licensed agent skills for code-built three.js scenes, scroll films and exploded views.",
       "url": "https://github.com/Moh4696/open-3d-skills",
       "authorUrl": "https://github.com/Moh4696"
+    },
+    {
+      "id": "flat3d",
+      "author": "Samnang Aing",
+      "name": "Samnang Aing · Flat to 3D",
+      "project": "Flat to 3D (seven scroll-built architecture demos)",
+      "description": "MIT-licensed three.js demos that turn flat architectural drawings into 3D as you scroll.",
+      "url": "https://github.com/Sam1983Aing/flat-to-3d",
+      "authorUrl": "https://github.com/Sam1983Aing"
+    },
+    {
+      "id": "prothreads",
+      "author": "kubai",
+      "name": "kubai · PRO Threads",
+      "project": "PRO Threads",
+      "description": "An MIT-licensed live WebGL wallpaper with a full A–Z typeface woven from threads of light.",
+      "url": "https://github.com/kubai087/pro-threads",
+      "authorUrl": "https://github.com/kubai087"
+    },
+    {
+      "id": "livingascii",
+      "author": "yusen-dev",
+      "name": "yusen-dev · living-ascii",
+      "project": "living-ascii",
+      "description": "MIT-licensed three.js shaders that turn a still image into a seamless swaying ASCII loop.",
+      "url": "https://github.com/yusen-dev/living-ascii",
+      "authorUrl": "https://github.com/yusen-dev"
     }
   ],
   "entries": [
@@ -1411,6 +1438,69 @@
         "authorUrl": "https://github.com/Moh4696"
       },
       "prompt": "Create an original motion-graphics piece inspired by “Golden hour to night” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A small round pavilion with a dome and columns on a lawn with a path and lamp posts, under a warm golden-hour sky with a low sun and long soft shadows; built from simple shapes, no photos.\nMotion: Sink the sun and slide the sky from gold to deep navy, let the shadows stretch then fade, bring out the stars, then light the lantern inside and the path lamps one after another while a small clock advances.\nBest suited to: Time-lapse moments, before/after, launches at night and mood openers.\n\nReference credit: Moh4696 · Open 3D Skills\nOriginal reference: https://github.com/Moh4696/open-3d-skills\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "flat-to-3d",
+      "index": 63,
+      "added": "2026-11-09",
+      "title": "Flat drawing to 3D",
+      "category": "Illustration",
+      "description": "A flat plan stands up into a building as you scroll.",
+      "look": "A crisp black-line floor plan on a pale blueprint grid, with small monospace room labels and one orange door, seen straight from above so it reads as a flat drawing.",
+      "motion": "Tie the motion to scroll: tilt the camera from top-down to a three-quarter view, raise every wall out of its plan line, fill the floor with a warm material and hold on the finished house.",
+      "use": "Architecture, interiors, property launches and any before/after build story",
+      "source": {
+        "id": "flat3d",
+        "author": "Samnang Aing",
+        "name": "Samnang Aing · Flat to 3D",
+        "project": "Flat to 3D (seven scroll-built architecture demos)",
+        "description": "MIT-licensed three.js demos that turn flat architectural drawings into 3D as you scroll.",
+        "url": "https://github.com/Sam1983Aing/flat-to-3d",
+        "authorUrl": "https://github.com/Sam1983Aing"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Flat drawing to 3D” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A crisp black-line floor plan on a pale blueprint grid, with small monospace room labels and one orange door, seen straight from above so it reads as a flat drawing.\nMotion: Tie the motion to scroll: tilt the camera from top-down to a three-quarter view, raise every wall out of its plan line, fill the floor with a warm material and hold on the finished house.\nBest suited to: Architecture, interiors, property launches and any before/after build story.\n\nReference credit: Samnang Aing · Flat to 3D\nOriginal reference: https://github.com/Sam1983Aing/flat-to-3d\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "thread-type",
+      "index": 64,
+      "added": "2026-11-09",
+      "title": "Threads of light type",
+      "category": "Type",
+      "description": "A word woven from thousands of glowing threads.",
+      "look": "Huge bold letters built from fine parallel threads in a blue-to-violet ramp, on a deep navy-black backdrop with a soft halo; no solid fills.",
+      "motion": "Let the light breathe and run along the threads in slow sweeps, with fibres warming as the highlight passes; keep the letters still so the light does the moving.",
+      "use": "Premium hero wallpapers, launch titles, brand words and loopable backgrounds",
+      "source": {
+        "id": "prothreads",
+        "author": "kubai",
+        "name": "kubai · PRO Threads",
+        "project": "PRO Threads",
+        "description": "An MIT-licensed live WebGL wallpaper with a full A–Z typeface woven from threads of light.",
+        "url": "https://github.com/kubai087/pro-threads",
+        "authorUrl": "https://github.com/kubai087"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Threads of light type” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Huge bold letters built from fine parallel threads in a blue-to-violet ramp, on a deep navy-black backdrop with a soft halo; no solid fills.\nMotion: Let the light breathe and run along the threads in slow sweeps, with fibres warming as the highlight passes; keep the letters still so the light does the moving.\nBest suited to: Premium hero wallpapers, launch titles, brand words and loopable backgrounds.\n\nReference credit: kubai · PRO Threads\nOriginal reference: https://github.com/kubai087/pro-threads\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "living-ascii",
+      "index": 65,
+      "added": "2026-11-09",
+      "title": "Living ASCII field",
+      "category": "Abstract",
+      "description": "A still image comes alive as swaying ASCII strokes.",
+      "look": "A landscape rebuilt as a grid of monospace stroke glyphs that keep the image colours: dotted sky above, dense grass of | /  strokes below, on a near-black ground.",
+      "motion": "Sway every stroke like grass in the wind in rolling waves, turning each glyph with the strand under it, and loop seamlessly so the last frame flows into the first.",
+      "use": "Calm loops, wallpapers, music visuals and nature or tech openers",
+      "source": {
+        "id": "livingascii",
+        "author": "yusen-dev",
+        "name": "yusen-dev · living-ascii",
+        "project": "living-ascii",
+        "description": "MIT-licensed three.js shaders that turn a still image into a seamless swaying ASCII loop.",
+        "url": "https://github.com/yusen-dev/living-ascii",
+        "authorUrl": "https://github.com/yusen-dev"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Living ASCII field” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A landscape rebuilt as a grid of monospace stroke glyphs that keep the image colours: dotted sky above, dense grass of | /  strokes below, on a near-black ground.\nMotion: Sway every stroke like grass in the wind in rolling waves, turning each glyph with the strand under it, and loop seamlessly so the last frame flows into the first.\nBest suited to: Calm loops, wallpapers, music visuals and nature or tech openers.\n\nReference credit: yusen-dev · living-ascii\nOriginal reference: https://github.com/yusen-dev/living-ascii\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
     }
   ]
 }

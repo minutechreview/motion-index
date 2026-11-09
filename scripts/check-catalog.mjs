@@ -5,7 +5,7 @@ import { newChecker, libraryOrder } from '../public/freshness.js';
 const catalog = JSON.parse(readFileSync('public/catalog.json', 'utf8'));
 const {entries,sources} = catalog;
 const app = readFileSync('public/app.js', 'utf8') + readFileSync('public/scenes-ultra.js', 'utf8') + readFileSync('public/scenes-scout.js', 'utf8');
-assert.equal(entries.length, 62);
+assert.equal(entries.length, 65);
 assert.equal(new Set(entries.map(e=>e.id)).size, entries.length);
 assert.equal(new Set(sources.map(source=>source.id)).size, sources.length);
 const featured = entries.filter(entry=>entry.featured).sort((a,b)=>a.featured-b.featured);

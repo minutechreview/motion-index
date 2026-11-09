@@ -18,7 +18,29 @@ const dayNight = `<div class="dn-sky"></div><div class="dn-stars">${stars}</div>
 <div class="dn-pavilion"><div class="dn-dome"></div><div class="dn-cols">${columns}</div><div class="dn-glow"></div><div class="dn-base"></div></div>
 <div class="dn-tag"><b class="dn-time"></b><small>SAME SCENE · RELIT</small></div>`;
 
+// Flat drawing to 3D (from Samnang Aing's flat-to-3d): a floor plan tilts up and its walls stand into a house.
+const walls = [['n', 0, 0, 100, 0], ['s', 0, 100, 100, 100], ['w', 0, 0, 0, 100], ['e', 100, 0, 100, 100], ['i', 0, 55, 60, 55], ['j', 60, 55, 60, 100]]
+  .map(([k, x1, y1, x2, y2]) => `<i class="ft-wall ft-${x1 === x2 ? 'v' : 'h'}" style="--x:${x1}%;--y:${y1}%;--l:${Math.abs(x2 - x1 + y2 - y1)}%"></i>`).join('');
+const flatTo3d = `<div class="ft-grid"></div><div class="ft-stage"><div class="ft-plan"><div class="ft-floor"></div>${walls}
+<i class="ft-door"></i><i class="ft-room" style="--x:8%;--y:10%">LIVING</i><i class="ft-room" style="--x:8%;--y:66%">BED</i><i class="ft-room" style="--x:66%;--y:66%">BATH</i></div></div>
+<div class="ft-tag"><b>PLAN</b><b>→ 3D</b><small>SCROLL TO BUILD</small></div>`;
+
+// Threads of light type (from kubai's pro-threads): a word woven from fine glowing threads with light running along them.
+const threadType = `<div class="tt-haze"></div><div class="tt-word" data-w="GLOW">GLOW</div><div class="tt-word tt-sweep" data-w="GLOW">GLOW</div>
+<small class="tt-cap">WOVEN FROM LIGHT</small>`;
+
+// Living ASCII field (from yusen-dev's living-ascii): a still landscape rebuilt as stroke glyphs that sway in the wind.
+const asciiCells = Array.from({ length: 14 * 22 }, (_, k) => {
+  const x = k % 22, y = Math.floor(k / 22);
+  const sky = y < 5;
+  return `<i style="--x:${x};--y:${y};--h:${sky ? 205 - y * 4 : 70 + (y * 7 + x * 3) % 40}">${sky ? (x + y) % 5 ? '·' : '-' : '|'}</i>`;
+}).join('');
+const livingAscii = `<div class="la-grid">${asciiCells}</div><small class="la-cap">STILL IMAGE → LIVING LOOP</small>`;
+
 export const scoutShapes = {
   'rpg-dialog': rpgDialog,
   'day-night': dayNight,
+  'flat-to-3d': flatTo3d,
+  'thread-type': threadType,
+  'living-ascii': livingAscii,
 };
