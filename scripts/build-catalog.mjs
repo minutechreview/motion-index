@@ -1,4 +1,9 @@
-import {writeFileSync} from 'node:fs';
+import {readFileSync, writeFileSync, existsSync} from 'node:fs';
+// Styles added after the launch collection show as New for NEW_WINDOW_DAYS. The first time the build sees a
+// style it records today's date in scripts/added-dates.json; commit that file with the new rows.
+const LAUNCH_DATE = '2026-11-08';
+const NEW_WINDOW_DAYS = 21;
+const DATES_FILE = 'scripts/added-dates.json';
 const sources = {
  shaan: {id:'shaan',author:'Shaan Johari',name:'Shaan Johari · Animation styles you can build with Claude (or Codex)',project:'Animation styles you can build with Claude (or Codex)',description:'The original collection of practical video animation recipes.',url:'https://ruby-cotija-fb5.notion.site/Animation-styles-you-can-build-with-Claude-or-Codex-3fa28691eca3814ebb34c73a7cc261bf',authorUrl:'https://www.instagram.com/viashaan/'},
  mndr: {id:'mndr',author:'Samer',name:'Samer · MNDR',project:'36 Motion Graphic Styles You Can Build with Claude',description:'A collection of code-built motion-graphics examples and prompts.',url:'https://mndr.ai/blog/motion-graphics-with-claude/',authorUrl:'https://mndr.ai/blog/author/samer/'},
@@ -75,10 +80,18 @@ const rows = [
 const directSources={kinetic:'https://mndr.ai/blog/motion-graphics-with-claude/#1-kinetic-typography',scramble:'https://mndr.ai/blog/motion-graphics-with-claude/#3-text-scramble','line-draw':'https://mndr.ai/blog/motion-graphics-with-claude/#6-logo-line-draw-reveal',liquid:'https://mndr.ai/blog/motion-graphics-with-claude/#7-liquid-shape-morph',bauhaus:'https://mndr.ai/blog/motion-graphics-with-claude/#8-bauhaus-geometric',magnifier:'https://aimotions.art/styles/fisheye-lens/',watercolor:'https://aimotions.art/styles/watercolor-bloom/',flow:'https://proceduralstudio.etienne.design/studio/flow-field-typography',accordion:'https://paperanimators.com/videos/accordion-photo/'};
 // Featured video demos are original renders; attribution remains attached to the reference.
 const featuredDemos = { turntable: 1, money: 2, flip: 3, receipt: 4, 'design-pack': 5 };
+const addedDates = existsSync(DATES_FILE) ? JSON.parse(readFileSync(DATES_FILE, 'utf8')) : {};
+const today = new Date().toISOString().slice(0, 10);
+for (const [id] of rows) if (!/^\d{4}-\d{2}-\d{2}$/.test(addedDates[id] ?? '')) addedDates[id] = today;
+const datesOut = Object.fromEntries(rows.map(([id]) => [id, addedDates[id]]));
+writeFileSync(DATES_FILE, JSON.stringify(datesOut, null, 1) + '\n');
 const entries=rows.map(([id,title,category,description,look,motion,use,source],index)=>{
  const reference={...sources[source],url:directSources[id]||sources[source].url};
  const prompt=`Create an original motion-graphics piece inspired by “${title}” for [YOUR TOPIC OR BRAND].\n\nVisual direction: ${look}\nMotion: ${motion}\nBest suited to: ${use}.\n\nReference credit: ${reference.name}\nOriginal reference: ${reference.url}\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets.`;
- return {id,index:index+1,title,category,description,look,motion,use,source:reference,prompt,...(featuredDemos[id] ? {demo:`/demos/${id}.mp4`,poster:`/demos/${id}.jpg`,featured:featuredDemos[id]} : {})};
+ return {id,index:index+1,added:datesOut[id],title,category,description,look,motion,use,source:reference,prompt,...(featuredDemos[id] ? {demo:`/demos/${id}.mp4`,poster:`/demos/${id}.jpg`,featured:featuredDemos[id]} : {})};
 });
-writeFileSync('public/catalog.json',JSON.stringify({version:1,sources:Object.values(sources),entries},null,2)+'\n');
+const catalog=JSON.stringify({version:1,launchDate:LAUNCH_DATE,newWindowDays:NEW_WINDOW_DAYS,sources:Object.values(sources),entries},null,2)+'\n';
+writeFileSync('public/catalog.json',catalog);
+// The Claude Skill bundles the same catalog; keep it in step (re-zip public/downloads/motion-index-skill.zip after).
+writeFileSync('skills/motion-index/catalog.json',catalog);
 console.log(`Built ${entries.length} animation entries.`);

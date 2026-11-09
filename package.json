@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-catalog.mjs && node scripts/build-schema.mjs",
-    "check": "node --check public/app.js && node --check public/scenes-ultra.js && node --check api/submit.js && node --check scripts/build-schema.mjs && node scripts/check-catalog.mjs && node scripts/check-schema.mjs && node --check api/mcp.js && node scripts/check-mcp.mjs && node scripts/check-skill.mjs"
+    "check": "node --check public/app.js && node --check public/scenes-ultra.js && node --check public/freshness.js && node --check api/submit.js && node --check scripts/build-schema.mjs && node scripts/check-catalog.mjs && node scripts/check-schema.mjs && node --check api/mcp.js && node scripts/check-mcp.mjs && node scripts/check-skill.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^2.3.0"

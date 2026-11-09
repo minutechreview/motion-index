@@ -18,6 +18,10 @@ The static preview does not run the serverless submission endpoint. On Vercel th
 
 Edit entries and their source links in `scripts/build-catalog.mjs`, then run `npm run build`. The script writes `public/catalog.json`, which both the site and the agent skill use. Add a corresponding preview in the `shapes` object in `public/app.js` and its styling in `public/styles.css`. The ten styles credited to Gian Angioletti live in their own module, `public/scenes-ultra.js` with `public/scenes-ultra.css`.
 
+### New styles
+
+The first time `npm run build` sees a style, it records the date in `scripts/added-dates.json`. Styles added after the launch collection (`LAUNCH_DATE` in `scripts/build-catalog.mjs`) count as **New** for `NEW_WINDOW_DAYS` (21) days: they get a New badge, lead the library in every view, and appear under the **New** filter, which hides itself when nothing is new. Anything that adds styles, including a scheduled job, should add the row to `scripts/build-catalog.mjs`, run `npm run build && npm run check`, and commit `scripts/added-dates.json` along with the catalog. If the dates file is not committed, each deploy stamps the style with that deploy's date. The build also copies the catalog into `skills/motion-index/catalog.json`; re-zip `public/downloads/motion-index-skill.zip` when you ship.
+
 Run `npm run check` to verify catalog entries, preview identifiers, attribution, structured data, and submission validation. Deploy the project to Vercel from this directory using the linked `motion-index-library` project.
 
 ## Search structured data

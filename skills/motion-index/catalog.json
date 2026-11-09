@@ -1,5 +1,7 @@
 {
   "version": 1,
+  "launchDate": "2026-11-08",
+  "newWindowDays": 21,
   "sources": [
     {
       "id": "shaan",
@@ -78,6 +80,7 @@
     {
       "id": "turntable",
       "index": 1,
+      "added": "2026-11-08",
       "title": "Product turntable",
       "category": "Product",
       "description": "A studio-lit product on a quiet rotating stage.",
@@ -101,6 +104,7 @@
     {
       "id": "money",
       "index": 2,
+      "added": "2026-11-08",
       "title": "Money stack",
       "category": "Data",
       "description": "A growing stack makes the numbers tangible.",
@@ -124,6 +128,7 @@
     {
       "id": "flip",
       "index": 3,
+      "added": "2026-11-08",
       "title": "Card flip",
       "category": "Product",
       "description": "A simple card turns to reveal the offer.",
@@ -147,6 +152,7 @@
     {
       "id": "receipt",
       "index": 4,
+      "added": "2026-11-08",
       "title": "Receipt",
       "category": "Editorial",
       "description": "A receipt rolls out to itemize the story.",
@@ -170,6 +176,7 @@
     {
       "id": "iceberg",
       "index": 5,
+      "added": "2026-11-08",
       "title": "Iceberg",
       "category": "Illustration",
       "description": "Show the small visible part and the depth below.",
@@ -190,6 +197,7 @@
     {
       "id": "thread",
       "index": 6,
+      "added": "2026-11-08",
       "title": "Text thread",
       "category": "Interface",
       "description": "Messages arrive as a miniature story.",
@@ -210,6 +218,7 @@
     {
       "id": "scale",
       "index": 7,
+      "added": "2026-11-08",
       "title": "Scale lineup",
       "category": "Data",
       "description": "Objects line up to communicate relative size.",
@@ -230,6 +239,7 @@
     {
       "id": "trophy",
       "index": 8,
+      "added": "2026-11-08",
       "title": "Milestone trophy",
       "category": "Product",
       "description": "A small trophy marks a meaningful milestone.",
@@ -250,6 +260,7 @@
     {
       "id": "donut",
       "index": 9,
+      "added": "2026-11-08",
       "title": "Donut breakdown",
       "category": "Data",
       "description": "A clean circular chart divides the whole.",
@@ -270,6 +281,7 @@
     {
       "id": "globe",
       "index": 10,
+      "added": "2026-11-08",
       "title": "Globe arcs",
       "category": "Data",
       "description": "Routes sweep around a simple global view.",
@@ -290,6 +302,7 @@
     {
       "id": "laptop",
       "index": 11,
+      "added": "2026-11-08",
       "title": "Laptop reveal",
       "category": "Product",
       "description": "A device opens onto a product launch.",
@@ -310,6 +323,7 @@
     {
       "id": "isometric",
       "index": 12,
+      "added": "2026-11-08",
       "title": "Isometric flow",
       "category": "Illustration",
       "description": "A process becomes a dimensional pathway.",
@@ -330,6 +344,7 @@
     {
       "id": "notifications",
       "index": 13,
+      "added": "2026-11-08",
       "title": "Notification stack",
       "category": "Interface",
       "description": "Proof points arrive as a tidy stack.",
@@ -350,6 +365,7 @@
     {
       "id": "before-after",
       "index": 14,
+      "added": "2026-11-08",
       "title": "Before and after",
       "category": "Interface",
       "description": "A dividing line reveals the transformation.",
@@ -370,6 +386,7 @@
     {
       "id": "ranking",
       "index": 15,
+      "added": "2026-11-08",
       "title": "Ranking bars",
       "category": "Data",
       "description": "Order and magnitude come into focus together.",
@@ -390,6 +407,7 @@
     {
       "id": "social",
       "index": 16,
+      "added": "2026-11-08",
       "title": "Social post receipt",
       "category": "Editorial",
       "description": "A social post becomes a piece of evidence.",
@@ -410,6 +428,7 @@
     {
       "id": "day",
       "index": 17,
+      "added": "2026-11-08",
       "title": "Day counter",
       "category": "Type",
       "description": "A counter makes progress feel concrete.",
@@ -430,6 +449,7 @@
     {
       "id": "versus",
       "index": 18,
+      "added": "2026-11-08",
       "title": "Versus",
       "category": "Type",
       "description": "A decisive split-screen comparison.",
@@ -450,6 +470,7 @@
     {
       "id": "route",
       "index": 19,
+      "added": "2026-11-08",
       "title": "3D map route",
       "category": "Data",
       "description": "A path travels across a miniature map.",
@@ -470,6 +491,7 @@
     {
       "id": "teardown",
       "index": 20,
+      "added": "2026-11-08",
       "title": "Exploded teardown",
       "category": "Product",
       "description": "A product separates into understandable layers.",
@@ -490,6 +512,7 @@
     {
       "id": "ink",
       "index": 21,
+      "added": "2026-11-08",
       "title": "Ink wash",
       "category": "Illustration",
       "description": "Pigment spreads to uncover the title.",
@@ -510,6 +533,7 @@
     {
       "id": "paper-desk",
       "index": 22,
+      "added": "2026-11-08",
       "title": "Paper desk",
       "category": "Editorial",
       "description": "Paper pieces organize an explainer.",
@@ -530,6 +554,7 @@
     {
       "id": "headline",
       "index": 23,
+      "added": "2026-11-08",
       "title": "Headline highlight",
       "category": "Editorial",
       "description": "A marker draws attention to the important line.",
@@ -550,6 +575,7 @@
     {
       "id": "chart",
       "index": 24,
+      "added": "2026-11-08",
       "title": "Stat chart",
       "category": "Data",
       "description": "A number and chart make the point together.",
@@ -570,6 +596,7 @@
     {
       "id": "app",
       "index": 25,
+      "added": "2026-11-08",
       "title": "App mockup",
       "category": "Interface",
       "description": "A clean phone frame introduces a product.",
@@ -590,6 +617,7 @@
     {
       "id": "zoom",
       "index": 26,
+      "added": "2026-11-08",
       "title": "Screen recording zoom",
       "category": "Interface",
       "description": "A guided camera move directs attention.",
@@ -610,6 +638,7 @@
     {
       "id": "timeline",
       "index": 27,
+      "added": "2026-11-08",
       "title": "Timeline",
       "category": "Data",
       "description": "A sequence unfolds along one clear line.",
@@ -630,6 +659,7 @@
     {
       "id": "orb",
       "index": 28,
+      "added": "2026-11-08",
       "title": "Glow orb",
       "category": "Abstract",
       "description": "One breathing light with a quiet orbit.",
@@ -650,6 +680,7 @@
     {
       "id": "glass",
       "index": 29,
+      "added": "2026-11-08",
       "title": "Frosted glass UI",
       "category": "Interface",
       "description": "Translucent layers float over color.",
@@ -670,6 +701,7 @@
     {
       "id": "one-take",
       "index": 30,
+      "added": "2026-11-08",
       "title": "Apple one-take",
       "category": "Product",
       "description": "A continuous product move with deliberate light.",
@@ -690,6 +722,7 @@
     {
       "id": "crt",
       "index": 31,
+      "added": "2026-11-08",
       "title": "Retro CRT glow",
       "category": "Abstract",
       "description": "An old-screen signal flickers into view.",
@@ -710,6 +743,7 @@
     {
       "id": "scope",
       "index": 32,
+      "added": "2026-11-08",
       "title": "Oscilloscope",
       "category": "Abstract",
       "description": "A luminous trace draws a living waveform.",
@@ -730,6 +764,7 @@
     {
       "id": "magazine",
       "index": 33,
+      "added": "2026-11-08",
       "title": "Magazine layout and note",
       "category": "Editorial",
       "description": "An editorial spread meets a personal note.",
@@ -750,6 +785,7 @@
     {
       "id": "blue",
       "index": 34,
+      "added": "2026-11-08",
       "title": "Blue editorial",
       "category": "Type",
       "description": "Bold editorial type moves across a blue field.",
@@ -770,6 +806,7 @@
     {
       "id": "riso",
       "index": 35,
+      "added": "2026-11-08",
       "title": "Risograph",
       "category": "Illustration",
       "description": "Overprinted color gives a tactile print feel.",
@@ -790,6 +827,7 @@
     {
       "id": "swiss",
       "index": 36,
+      "added": "2026-11-08",
       "title": "Swiss grid",
       "category": "Editorial",
       "description": "A disciplined grid makes motion feel precise.",
@@ -810,6 +848,7 @@
     {
       "id": "blueprint",
       "index": 37,
+      "added": "2026-11-08",
       "title": "Pencil to blueprint",
       "category": "Illustration",
       "description": "A sketch resolves into a technical drawing.",
@@ -830,6 +869,7 @@
     {
       "id": "kinetic",
       "index": 38,
+      "added": "2026-11-08",
       "title": "Kinetic type",
       "category": "Type",
       "description": "Words land with rhythm and purpose.",
@@ -850,6 +890,7 @@
     {
       "id": "scramble",
       "index": 39,
+      "added": "2026-11-08",
       "title": "Text scramble",
       "category": "Type",
       "description": "A headline decodes out of noise.",
@@ -870,6 +911,7 @@
     {
       "id": "line-draw",
       "index": 40,
+      "added": "2026-11-08",
       "title": "Line-draw logo",
       "category": "Illustration",
       "description": "A mark draws itself stroke by stroke.",
@@ -890,6 +932,7 @@
     {
       "id": "liquid",
       "index": 41,
+      "added": "2026-11-08",
       "title": "Liquid shape morph",
       "category": "Abstract",
       "description": "A soft form changes character.",
@@ -910,6 +953,7 @@
     {
       "id": "bauhaus",
       "index": 42,
+      "added": "2026-11-08",
       "title": "Bauhaus geometry",
       "category": "Illustration",
       "description": "Flat shapes assemble into a moving poster.",
@@ -930,6 +974,7 @@
     {
       "id": "splitflap",
       "index": 43,
+      "added": "2026-11-08",
       "title": "Split-flap board",
       "category": "Type",
       "description": "A mechanical board clicks into place.",
@@ -950,6 +995,7 @@
     {
       "id": "marquee",
       "index": 44,
+      "added": "2026-11-08",
       "title": "Crossing marquees",
       "category": "Type",
       "description": "Two bands carry type through the frame.",
@@ -970,6 +1016,7 @@
     {
       "id": "particles",
       "index": 45,
+      "added": "2026-11-08",
       "title": "Particle logo assembly",
       "category": "Abstract",
       "description": "Points gather into a recognizable mark.",
@@ -990,6 +1037,7 @@
     {
       "id": "accordion",
       "index": 46,
+      "added": "2026-11-08",
       "title": "Accordion print",
       "category": "Editorial",
       "description": "A folded page catches light as it opens.",
@@ -1010,6 +1058,7 @@
     {
       "id": "magnifier",
       "index": 47,
+      "added": "2026-11-08",
       "title": "Fisheye magnifier",
       "category": "Type",
       "description": "A lens enlarges the letters beneath it.",
@@ -1030,6 +1079,7 @@
     {
       "id": "flow",
       "index": 48,
+      "added": "2026-11-08",
       "title": "Flow field typography",
       "category": "Abstract",
       "description": "Fine lines sweep around a central message.",
@@ -1050,6 +1100,7 @@
     {
       "id": "watercolor",
       "index": 49,
+      "added": "2026-11-08",
       "title": "Watercolor bloom",
       "category": "Illustration",
       "description": "Soft pigment blooms into a title.",
@@ -1070,6 +1121,7 @@
     {
       "id": "git-city",
       "index": 50,
+      "added": "2026-11-09",
       "title": "Git city",
       "category": "Data",
       "description": "Activity data rises into a glowing skyline.",
@@ -1090,6 +1142,7 @@
     {
       "id": "agent-swarm",
       "index": 51,
+      "added": "2026-11-09",
       "title": "Agent swarm",
       "category": "Interface",
       "description": "Many small workers converge into one result.",
@@ -1110,6 +1163,7 @@
     {
       "id": "type-slam",
       "index": 52,
+      "added": "2026-11-09",
       "title": "Type slam",
       "category": "Type",
       "description": "A short build-up, then one word hits the whole frame.",
@@ -1130,6 +1184,7 @@
     {
       "id": "hologram",
       "index": 53,
+      "added": "2026-11-09",
       "title": "Hologram projector",
       "category": "Product",
       "description": "A wireframe object floats in a beam of light.",
@@ -1150,6 +1205,7 @@
     {
       "id": "ink-doodle",
       "index": 54,
+      "added": "2026-11-09",
       "title": "Ink doodle story",
       "category": "Illustration",
       "description": "A hand-drawn stick-figure gag on a sky-blue page.",
@@ -1170,6 +1226,7 @@
     {
       "id": "deep-time",
       "index": 55,
+      "added": "2026-11-09",
       "title": "Deep time",
       "category": "Abstract",
       "description": "A black hole makes a huge number feel vast.",
@@ -1190,6 +1247,7 @@
     {
       "id": "contour",
       "index": 56,
+      "added": "2026-11-09",
       "title": "Contour climb",
       "category": "Data",
       "description": "A flat topographic map rises into a summit.",
@@ -1210,6 +1268,7 @@
     {
       "id": "neon-silhouette",
       "index": 57,
+      "added": "2026-11-09",
       "title": "Neon silhouette",
       "category": "Illustration",
       "description": "A late-night scene with a flip-clock deadline.",
@@ -1230,6 +1289,7 @@
     {
       "id": "pov-doodle",
       "index": 58,
+      "added": "2026-11-09",
       "title": "POV doodle",
       "category": "Illustration",
       "description": "A sketchbook POV where the week piles up.",
@@ -1250,6 +1310,7 @@
     {
       "id": "terminal-bloom",
       "index": 59,
+      "added": "2026-11-09",
       "title": "Terminal bloom",
       "category": "Interface",
       "description": "Scattered characters assemble into a finished landing page.",
@@ -1270,6 +1331,7 @@
     {
       "id": "design-pack",
       "index": 60,
+      "added": "2026-11-08",
       "title": "Design-pack edit",
       "category": "Editorial",
       "description": "A fast kinetic edit built from design-tool moments.",

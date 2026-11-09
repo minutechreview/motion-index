@@ -8,7 +8,7 @@
 .scene .gc-svg{width:88%;height:92%;filter:drop-shadow(0 0 3px rgba(95,242,208,.35));animation:u-gc-drift 6s ease-in-out infinite}
 .gc-ground{fill:#0c2140;stroke:#1f4d73;stroke-width:.4}
 .gc-l{fill:#0d5865}.gc-r{fill:#12877f}.gc-t{fill:#72f7d8}
-.gc-bar{transform-box:fill-box;transform-origin:50% 100%;animation:u-gc-rise 6s cubic-bezier(.2,.8,.2,1) var(--d) infinite}
+.gc-bar{transform-box:fill-box;transform-origin:50% 100%;animation:u-gc-rise 6s cubic-bezier(.2,.8,.2,1) var(--d) infinite backwards}
 .gc-label{color:#8fb7d6}.gc-total{color:#72f7d8}
 @keyframes u-gc-rise{0%{transform:scaleY(.03);opacity:0}5%{opacity:1}34%{transform:scaleY(1)}86%{transform:scaleY(1);opacity:1}100%{transform:scaleY(.03);opacity:0}}
 @keyframes u-gc-drift{0%,100%{transform:translateY(2%) scale(.97)}50%{transform:translateY(-1%) scale(1.03)}}
