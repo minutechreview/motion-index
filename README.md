@@ -24,6 +24,16 @@ The first time `npm run build` sees a style, it records the date in `scripts/add
 
 Run `npm run check` to verify catalog entries, preview identifiers, attribution, structured data, and submission validation. Deploy the project to Vercel from this directory using the linked `motion-index-library` project.
 
+## Likes, copies and trending
+
+Visitors can like a style (one like per browser and per network, and they can take it back), and every prompt copy is counted once per visitor per style per day. `/api/stats` serves the totals plus a 7-day trending score (likes count three times a copy, today counts most). The default **Recommended** order is New styles first, then this week's trending, then the featured demos and the rest; the Sort menu also offers Most liked, Most copied, Newest and A-Z.
+
+Counts live in Upstash Redis, connected to the Vercel project from the Storage tab; `api/_store.js` reads the integration's `*_KV_REST_API_URL` / `*_KV_REST_API_TOKEN` variables whatever their prefix. Writes are atomic Lua scripts, writes must come from the site's own origin, and each IP is limited to 40 actions a minute. The public totals are cached at the edge for 60 seconds. Without the store configured, the site works as before and simply hides counts.
+
+To try it locally with an in-memory store: `node scripts/dev-server.mjs` and open http://localhost:53180 (counts reset when it stops). `npm run check` includes `scripts/check-stats.mjs`.
+
+**Community credit:** a catalog row may take an optional ninth field, `{ name: '@handle', url: 'https://...' }`, for an approved submission. Those tiles read "BY @handle" and a Community filter appears.
+
 ## Search structured data
 
 `npm run build` regenerates the catalog and embeds a Schema.org JSON-LD graph in the HTML head. The graph describes the website, collection, animation previews, cited reference collections and credited creators. Each preview uses a `#style-...` anchor on the page; source creators are attached to the cited references rather than presented as creators of the local previews. The Fontzz and Halden credits are represented separately.

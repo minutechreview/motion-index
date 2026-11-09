@@ -85,10 +85,11 @@ const today = new Date().toISOString().slice(0, 10);
 for (const [id] of rows) if (!/^\d{4}-\d{2}-\d{2}$/.test(addedDates[id] ?? '')) addedDates[id] = today;
 const datesOut = Object.fromEntries(rows.map(([id]) => [id, addedDates[id]]));
 writeFileSync(DATES_FILE, JSON.stringify(datesOut, null, 1) + '\n');
-const entries=rows.map(([id,title,category,description,look,motion,use,source],index)=>{
+// Optional 9th field on a row: { name: '@handle', url: 'https://...' } credits the community member who submitted it.
+const entries=rows.map(([id,title,category,description,look,motion,use,source,community],index)=>{
  const reference={...sources[source],url:directSources[id]||sources[source].url};
  const prompt=`Create an original motion-graphics piece inspired by “${title}” for [YOUR TOPIC OR BRAND].\n\nVisual direction: ${look}\nMotion: ${motion}\nBest suited to: ${use}.\n\nReference credit: ${reference.name}\nOriginal reference: ${reference.url}\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets.`;
- return {id,index:index+1,added:datesOut[id],title,category,description,look,motion,use,source:reference,prompt,...(featuredDemos[id] ? {demo:`/demos/${id}.mp4`,poster:`/demos/${id}.jpg`,featured:featuredDemos[id]} : {})};
+ return {id,index:index+1,added:datesOut[id],...(community ? {community} : {}),title,category,description,look,motion,use,source:reference,prompt,...(featuredDemos[id] ? {demo:`/demos/${id}.mp4`,poster:`/demos/${id}.jpg`,featured:featuredDemos[id]} : {})};
 });
 const catalog=JSON.stringify({version:1,launchDate:LAUNCH_DATE,newWindowDays:NEW_WINDOW_DAYS,sources:Object.values(sources),entries},null,2)+'\n';
 writeFileSync('public/catalog.json',catalog);

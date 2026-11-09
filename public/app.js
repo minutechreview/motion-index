@@ -1,5 +1,6 @@
 import { ultraShapes } from './scenes-ultra.js';
-import { newChecker, libraryOrder } from './freshness.js';
+import { newChecker, sorter, SORTS } from './freshness.js';
+import { createCommunity, compact } from './community.js';
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const html = (strings, ...values) => strings.reduce((out, part, i) => out + part + (values[i] ?? ''), '');
@@ -56,7 +57,11 @@ const shapes = {
  watercolor: '<div class="wash w1"></div><div class="wash w2"></div><div class="wash w3"></div><b class="wash-type">a softer<br>kind of story.</b>',
  ...ultraShapes
 };
-let isNew = () => false;
+let isNew = () => false, sortMode = 'recommended';
+const community = createCommunity({ onChange: id => refreshCounts(id), onNotice: message => showToast(message) });
+const likeCount = id => community.state.likes[id] ?? 0;
+const copiesLabel = id => { const n = community.state.copies[id] ?? 0; return n ? ` · ${compact(n)} ${n === 1 ? 'copy' : 'copies'}` : ''; };
+const likeButton = e => `<button class="like-btn" data-like="${e.id}" aria-pressed="${community.state.liked.has(e.id)}" aria-label="Like ${escapeText(e.title)}"><span class="heart" aria-hidden="true">♥</span><span class="like-count">${compact(likeCount(e.id))}</span></button>`;
 let entries = [], category = 'All', query = '', paused = false, selected = null, observer = null;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const grid = $('#grid'), detailDialog = $('#detail-dialog'), skillDialog = $('#skill-dialog'), submitDialog = $('#submit-dialog');
@@ -66,15 +71,16 @@ const scene = entry => entry.demo
 const escapeText = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function updateFilters() {
  const newCount=entries.filter(isNew).length;
- const names=['All',...(newCount?['New']:[]),'Product','Type','Data','Editorial','Illustration','Interface','Abstract'];
- $('#filters').innerHTML=names.map(name=>{const count=name==='All'?entries.length:name==='New'?newCount:entries.filter(e=>e.category===name).length; return `<button class="filter ${category===name?'active':''}" data-category="${name}" aria-pressed="${category===name}">${name}<span>${count}</span></button>`}).join('');
+ const communityCount=entries.filter(e=>e.community).length;
+ const names=['All',...(newCount?['New']:[]),...(communityCount?['Community']:[]),'Product','Type','Data','Editorial','Illustration','Interface','Abstract'];
+ $('#filters').innerHTML=names.map(name=>{const count=name==='All'?entries.length:name==='New'?newCount:name==='Community'?communityCount:entries.filter(e=>e.category===name).length; return `<button class="filter ${category===name?'active':''}" data-category="${name}" aria-pressed="${category===name}">${name}<span>${count}</span></button>`}).join('');
 }
 function render() {
- if(category==='New'&&!entries.some(isNew))category='All';
- const filtered=entries.filter(e=>(category==='All'||(category==='New'?isNew(e):e.category===category))&&`${e.title} ${e.category} ${e.description} ${e.use} ${e.look} ${e.source.author} ${e.source.project}`.toLowerCase().includes(query));
- filtered.sort(libraryOrder(isNew));
+ if((category==='New'&&!entries.some(isNew))||(category==='Community'&&!entries.some(e=>e.community)))category='All';
+ const filtered=entries.filter(e=>(category==='All'||(category==='New'?isNew(e):category==='Community'?Boolean(e.community):e.category===category))&&`${e.title} ${e.category} ${e.description} ${e.use} ${e.look} ${e.source.author} ${e.source.project}`.toLowerCase().includes(query));
+ filtered.sort(sorter(sortMode, isNew, community.state));
  $$('.tile video',grid).forEach(video=>video.pause());
- grid.innerHTML=filtered.map(e=>`<button class="tile" id="style-${escapeText(e.id)}" data-id="${e.id}" aria-label="Open ${escapeText(e.title)} and copy its prompt, reference by ${escapeText(e.source.author)}">${isNew(e)?'<span class="new-badge">New</span>':''}${scene(e)}<div class="tile-info"><div><span class="tile-index">${String(e.index).padStart(2,'0')} / ${escapeText(e.category.toUpperCase())}</span><h3>${escapeText(e.title)}</h3><p>${escapeText(e.description)}</p><div class="tile-credit">REFERENCE · ${escapeText(e.source.author)}</div></div><span class="tile-arrow" aria-hidden="true">↗</span></div></button>`).join('');
+ grid.innerHTML=filtered.map(e=>`<article class="tile" id="style-${escapeText(e.id)}"><button class="tile-open" data-id="${e.id}" aria-label="Open ${escapeText(e.title)} and copy its prompt, reference by ${escapeText(e.source.author)}"></button>${isNew(e)?'<span class="new-badge">New</span>':''}${scene(e)}<div class="tile-info"><div><span class="tile-index">${String(e.index).padStart(2,'0')} / ${escapeText(e.category.toUpperCase())}</span><h3>${escapeText(e.title)}</h3><p>${escapeText(e.description)}</p><div class="tile-credit">${creditLine(e)}<span class="tile-copies" data-copies="${e.id}">${copiesLabel(e.id)}</span></div></div><span class="tile-arrow" aria-hidden="true">↗</span></div>${likeButton(e)}</article>`).join('');
  $('#result-count').textContent=`${filtered.length} ${filtered.length===1?'STYLE':'STYLES'} ${category==='All'?'IN THE COLLECTION':'IN '+category.toUpperCase()}`;
  $('#empty').hidden=filtered.length!==0;
  updateFilters();
@@ -117,11 +123,12 @@ async function openEntry(entry) {
  $('#detail-source').textContent=entry.source.name;
  $('#detail-source').href=entry.source.url;
  $('#detail-preview').innerHTML=scene(entry);
+ refreshDetail();
  openDialog(detailDialog);
  syncVideos();
  const copied=await copyText(entry.prompt);
  $('#copy-status').textContent=copied?'Prompt copied to your clipboard.':'Copy the prompt below or use the copy button.';
- if(copied) showToast('Prompt copied to clipboard');
+ if(copied){showToast('Prompt copied to clipboard');void community.recordCopy(entry.id);}
 }
 function skillText() {
  const base=location.origin;
@@ -130,9 +137,9 @@ function skillText() {
 $('#filters').addEventListener('click', event=>{const button=event.target.closest('[data-category]');if(!button)return;category=button.dataset.category;render();document.querySelector(`[data-category="${category}"]`)?.focus({preventScroll:true});});
 $('#search').addEventListener('input',event=>{query=event.target.value.trim().toLowerCase();render();});
 $('#clear-filters').addEventListener('click',()=>{category='All';query='';$('#search').value='';render();});
-grid.addEventListener('click',event=>{const button=event.target.closest('[data-id]');if(button){const entry=entries.find(e=>e.id===button.dataset.id);if(entry)void openEntry(entry);}});
+grid.addEventListener('click',event=>{const like=event.target.closest('[data-like]');if(like){void community.toggleLike(like.dataset.like);return;}const button=event.target.closest('[data-id]');if(button){const entry=entries.find(e=>e.id===button.dataset.id);if(entry)void openEntry(entry);}});
 $('#detail-link').addEventListener('click',async()=>{if(!selected)return;const ok=await copyText(`${location.origin}/#style-${selected.id}`);if(ok)showToast('Link copied');});
-$('#detail-copy').addEventListener('click',async()=>{if(!selected)return;const ok=await copyText(selected.prompt);$('#copy-status').textContent=ok?'Prompt copied to your clipboard.':'Could not copy automatically; select the prompt text.';if(ok)showToast('Prompt copied to clipboard');});
+$('#detail-copy').addEventListener('click',async()=>{if(!selected)return;const ok=await copyText(selected.prompt);$('#copy-status').textContent=ok?'Prompt copied to your clipboard.':'Could not copy automatically; select the prompt text.';if(ok){showToast('Prompt copied to clipboard');void community.recordCopy(selected.id);}});
 $('#pause').addEventListener('click',()=>{paused=!paused;document.body.classList.toggle('paused',paused);$('#pause').setAttribute('aria-pressed',String(paused));$('#pause').title=paused?'Play previews':'Pause previews';$('#pause-icon').textContent=paused?'▶':'Ⅱ';$('#pause .sr-only').textContent=paused?'Play previews':'Pause previews';syncVideos();});
 detailDialog.addEventListener('close',syncVideos);
 document.addEventListener('visibilitychange',syncVideos);
@@ -145,4 +152,38 @@ $$('dialog .close').forEach(button=>button.addEventListener('click',()=>button.c
 $$('dialog').forEach(dialog=>dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();}));
 $('#submit-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget;const status=$('#form-status');const button=$('#send-submission');button.disabled=true;status.textContent='Sending your suggestion…';try{const data=Object.fromEntries(new FormData(form));const response=await fetch('/api/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const result=await response.json();if(!response.ok)throw new Error(result.error||'Could not send. Please try again.');status.textContent='Thank you! Your suggestion was received for review.';form.reset();}catch(error){status.textContent=error.message||'Could not send. Please try again.';}finally{button.disabled=false;}});
 document.addEventListener('keydown',event=>{if(event.key==='/'&&!event.metaKey&&!event.ctrlKey&&!event.altKey&&!document.querySelector('dialog[open]')&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){event.preventDefault();$('#search').focus();}});
-try {const response=await fetch('/catalog.json');if(!response.ok)throw new Error('Catalog unavailable');const data=await response.json();entries=data.entries;isNew=newChecker(data);renderCredits(data.sources);render();const anchor=location.hash.slice(1);if(anchor==='credits'||/^style-[a-z0-9-]+$/.test(anchor))requestAnimationFrame(()=>document.getElementById(anchor)?.scrollIntoView({behavior:'instant'}));}catch{$('#result-count').textContent='The collection could not load. Please refresh.';}
+try {const response=await fetch('/catalog.json');if(!response.ok)throw new Error('Catalog unavailable');const data=await response.json();entries=data.entries;isNew=newChecker(data);renderCredits(data.sources);render();void community.load();const anchor=location.hash.slice(1);if(anchor==='credits'||/^style-[a-z0-9-]+$/.test(anchor))requestAnimationFrame(()=>document.getElementById(anchor)?.scrollIntoView({behavior:'instant'}));}catch{$('#result-count').textContent='The collection could not load. Please refresh.';}
+
+function creditLine(e) {
+  return e.community ? `BY ${escapeText(e.community.name)}` : `REFERENCE · ${escapeText(e.source.author)}`;
+}
+function refreshDetail() {
+  const box = $('#detail-stats');
+  if (!box || !selected) return;
+  box.hidden = !community.state.available;
+  const like = $('#detail-like');
+  like.dataset.like = selected.id;
+  like.setAttribute('aria-pressed', String(community.state.liked.has(selected.id)));
+  like.setAttribute('aria-label', `Like ${selected.title}`);
+  $('.like-count', like).textContent = compact(likeCount(selected.id));
+  const copies = community.state.copies[selected.id] ?? 0;
+  $('#detail-copies').textContent = copies ? `${compact(copies)} ${copies === 1 ? 'copy' : 'copies'}` : 'Be the first to use it';
+}
+// Update counts in place; the grid only reorders when the person changes the view.
+function refreshCounts(id) {
+  document.body.classList.toggle('has-stats', community.state.available);
+  for (const option of $$('#sort [data-needs-stats]')) option.disabled = !community.state.available;
+  const ids = id ? [id] : entries.map(e => e.id);
+  for (const styleId of ids) {
+    for (const btn of $$(`[data-like="${styleId}"]`, grid)) {
+      btn.setAttribute('aria-pressed', String(community.state.liked.has(styleId)));
+      $('.like-count', btn).textContent = compact(likeCount(styleId));
+    }
+    const copies = $(`[data-copies="${styleId}"]`, grid);
+    if (copies) copies.textContent = copiesLabel(styleId);
+  }
+  refreshDetail();
+  if (!id && sortMode !== 'az' && sortMode !== 'newest') render();
+}
+$('#detail-like')?.addEventListener('click', () => { if (selected) void community.toggleLike(selected.id); });
+$('#sort')?.addEventListener('change', event => { sortMode = SORTS.includes(event.target.value) ? event.target.value : 'recommended'; render(); });

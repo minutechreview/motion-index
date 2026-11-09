@@ -13,6 +13,7 @@
   <link rel="preload" href="/fonts/halden.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/scenes-ultra.css">
+  <link rel="stylesheet" href="/community.css">
   <script type="module" src="/app.js"></script>
 </head>
 <body>
@@ -33,7 +34,7 @@
       <div class="controls">
         <div class="filters" id="filters" aria-label="Filter styles"></div>
         <div class="control-right">
-          <label class="search"><span aria-hidden="true">⌕</span><span class="sr-only">Search styles</span><input id="search" type="search" placeholder="Search styles..." autocomplete="off"><kbd>/</kbd></label>
+          <label class="sort"><span class="sr-only">Sort styles</span><select id="sort"><option value="recommended">Recommended</option><option value="liked" data-needs-stats disabled>Most liked</option><option value="copied" data-needs-stats disabled>Most copied</option><option value="newest">Newest</option><option value="az">A–Z</option></select></label><label class="search"><span aria-hidden="true">⌕</span><span class="sr-only">Search styles</span><input id="search" type="search" placeholder="Search styles..." autocomplete="off"><kbd>/</kbd></label>
           <button class="pause-button" id="pause" aria-pressed="false" title="Pause previews"><span id="pause-icon" aria-hidden="true">Ⅱ</span><span class="sr-only">Pause previews</span></button>
         </div>
       </div>
@@ -51,7 +52,7 @@
   <dialog id="detail-dialog" class="detail-dialog" aria-labelledby="detail-title">
     <div class="modal-top"><span id="detail-kicker">STYLE / 01</span><button class="icon-button close" aria-label="Close details">×</button></div>
     <div class="detail-body"><div class="detail-preview" id="detail-preview" aria-hidden="true"></div>
-      <div class="detail-copy"><span class="eyebrow" id="detail-category"></span><h2 id="detail-title"></h2><p id="detail-description"></p><div class="detail-meta"><span>BEST FOR</span><strong id="detail-use"></strong></div>
+      <div class="detail-copy"><span class="eyebrow" id="detail-category"></span><h2 id="detail-title"></h2><p id="detail-description"></p><div class="detail-meta"><span>BEST FOR</span><strong id="detail-use"></strong></div><div class="detail-stats" id="detail-stats" hidden><button class="like-btn" id="detail-like" data-like="" aria-pressed="false" aria-label="Like this style"><span class="heart" aria-hidden="true">♥</span><span class="like-count">0</span></button><span id="detail-copies"></span></div>
       <div class="prompt-head"><span>YOUR STARTING PROMPT</span><span class="prompt-actions"><button id="detail-link" class="copy-small">Copy link</button><button id="detail-copy" class="copy-small">Copy prompt ↗</button></span></div><pre id="detail-prompt" tabindex="0"></pre><p class="source-line">Inspired by <a id="detail-source" target="_blank" rel="noopener noreferrer"></a> ↗</p><p class="copy-status" id="copy-status" role="status"></p></div>
     </div>
   </dialog>

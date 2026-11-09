@@ -34,6 +34,10 @@ for (const entry of entries) {
 const dates = JSON.parse(readFileSync('scripts/added-dates.json', 'utf8'));
 assert.deepEqual(Object.keys(dates).sort(), entries.map(e=>e.id).sort(), 'scripts/added-dates.json must list exactly the catalog ids');
 for (const entry of entries) assert.match(entry.added ?? '', /^\d{4}-\d{2}-\d{2}$/, `Missing added date: ${entry.id}`);
+for (const entry of entries.filter(e => e.community)) {
+  assert.ok(typeof entry.community.name === 'string' && entry.community.name.trim().length > 1, `Community credit needs a name: ${entry.id}`);
+  if (entry.community.url) assert.ok(entry.community.url.startsWith('https://'), `Community link must be https: ${entry.id}`);
+}
 assert.match(catalog.launchDate, /^\d{4}-\d{2}-\d{2}$/);
 assert.ok(catalog.newWindowDays > 0);
 const at = day => newChecker(catalog, Date.parse(day));
