@@ -52,6 +52,11 @@ if (freshIds.length) {
   const newCount = entries.filter(at(lastAdded)).length;
   assert.ok(ordered.slice(0, newCount).every(at(lastAdded)), 'New styles must lead the library');
   assert.equal(ordered[newCount].featured, 1, 'Featured demos follow the new styles');
+  const newOnes = ordered.slice(0, newCount);
+  newOnes.slice(1).forEach((e, i) => {
+    const prev = newOnes[i];
+    assert.ok(prev.added > e.added || (prev.added === e.added && prev.index > e.index), `New styles must run newest first: ${prev.id} before ${e.id}`);
+  });
 }
 assert.equal(validateSubmission({title:'Paper',url:'https://example.com/demo'}).title, 'Paper');
 assert.ok(validateSubmission({title:'Paper',url:'javascript:alert(1)'}).error);
