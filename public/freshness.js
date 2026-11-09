@@ -17,7 +17,11 @@ export function libraryOrder(isNew) {
   return (a, b) => {
     const an = isNew(a), bn = isNew(b);
     if (an !== bn) return an ? -1 : 1;
-    if (an && bn && a.added !== b.added) return a.added < b.added ? 1 : -1;
+    if (an && bn) {
+      // Newest date first; on the same day, the later catalog row (added last) leads.
+      if (a.added !== b.added) return a.added < b.added ? 1 : -1;
+      return b.index - a.index;
+    }
     const af = a.featured ?? Infinity, bf = b.featured ?? Infinity;
     if (af !== bf) return af - bf;
     return a.index - b.index;
