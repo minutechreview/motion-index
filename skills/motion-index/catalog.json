@@ -74,6 +74,24 @@
       "description": "Paper, print and editorial animation references.",
       "url": "https://paperanimators.com/videos/",
       "authorUrl": "https://paperanimators.com/about/"
+    },
+    {
+      "id": "vibeknowledge",
+      "author": "andyhuo520",
+      "name": "andyhuo520 · vibe-knowledge",
+      "project": "vibe-knowledge (44 styles for narrated knowledge shorts)",
+      "description": "An MIT-licensed Claude Code skill with 44 code-built visual styles for short knowledge videos.",
+      "url": "https://github.com/andyhuo520/vibe-knowledge",
+      "authorUrl": "https://github.com/andyhuo520"
+    },
+    {
+      "id": "open3d",
+      "author": "Moh4696",
+      "name": "Moh4696 · Open 3D Skills",
+      "project": "Open 3D Skills",
+      "description": "MIT-licensed agent skills for code-built three.js scenes, scroll films and exploded views.",
+      "url": "https://github.com/Moh4696/open-3d-skills",
+      "authorUrl": "https://github.com/Moh4696"
     }
   ],
   "entries": [
@@ -1351,6 +1369,48 @@
       "demo": "/demos/design-pack.mp4",
       "poster": "/demos/design-pack.jpg",
       "featured": 5
+    },
+    {
+      "id": "rpg-dialog",
+      "index": 61,
+      "added": "2026-11-09",
+      "title": "RPG dialogue box",
+      "category": "Interface",
+      "description": "A retro game text box delivers the line.",
+      "look": "A bright pixel-art landscape with a small pixel hero, and a classic blue-gradient dialogue window with a white double border, a square pixel portrait, a speaker name in yellow and chunky monospace text.",
+      "motion": "Slide the window up in hard steps, type the line one character at a time with a blip per letter, bob the hero on two frames and bounce a small advance arrow until the next line.",
+      "use": "Explainers, story hooks, tips and announcements with a playful tone",
+      "source": {
+        "id": "vibeknowledge",
+        "author": "andyhuo520",
+        "name": "andyhuo520 · vibe-knowledge",
+        "project": "vibe-knowledge (44 styles for narrated knowledge shorts)",
+        "description": "An MIT-licensed Claude Code skill with 44 code-built visual styles for short knowledge videos.",
+        "url": "https://github.com/andyhuo520/vibe-knowledge",
+        "authorUrl": "https://github.com/andyhuo520"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “RPG dialogue box” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A bright pixel-art landscape with a small pixel hero, and a classic blue-gradient dialogue window with a white double border, a square pixel portrait, a speaker name in yellow and chunky monospace text.\nMotion: Slide the window up in hard steps, type the line one character at a time with a blip per letter, bob the hero on two frames and bounce a small advance arrow until the next line.\nBest suited to: Explainers, story hooks, tips and announcements with a playful tone.\n\nReference credit: andyhuo520 · vibe-knowledge\nOriginal reference: https://github.com/andyhuo520/vibe-knowledge\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "day-night",
+      "index": 62,
+      "added": "2026-11-09",
+      "title": "Golden hour to night",
+      "category": "Illustration",
+      "description": "One place, relit from sunset to night.",
+      "look": "A small round pavilion with a dome and columns on a lawn with a path and lamp posts, under a warm golden-hour sky with a low sun and long soft shadows; built from simple shapes, no photos.",
+      "motion": "Sink the sun and slide the sky from gold to deep navy, let the shadows stretch then fade, bring out the stars, then light the lantern inside and the path lamps one after another while a small clock advances.",
+      "use": "Time-lapse moments, before/after, launches at night and mood openers",
+      "source": {
+        "id": "open3d",
+        "author": "Moh4696",
+        "name": "Moh4696 · Open 3D Skills",
+        "project": "Open 3D Skills",
+        "description": "MIT-licensed agent skills for code-built three.js scenes, scroll films and exploded views.",
+        "url": "https://github.com/Moh4696/open-3d-skills",
+        "authorUrl": "https://github.com/Moh4696"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Golden hour to night” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A small round pavilion with a dome and columns on a lawn with a path and lamp posts, under a warm golden-hour sky with a low sun and long soft shadows; built from simple shapes, no photos.\nMotion: Sink the sun and slide the sky from gold to deep navy, let the shadows stretch then fade, bring out the stars, then light the lantern inside and the path lamps one after another while a small clock advances.\nBest suited to: Time-lapse moments, before/after, launches at night and mood openers.\n\nReference credit: Moh4696 · Open 3D Skills\nOriginal reference: https://github.com/Moh4696/open-3d-skills\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
     }
   ]
 }
