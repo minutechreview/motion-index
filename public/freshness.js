@@ -23,3 +23,24 @@ export function libraryOrder(isNew) {
     return a.index - b.index;
   };
 }
+
+// Library order for each sort mode. `stats` holds { likes, copies, trending } maps keyed by style id.
+export const SORTS = ['recommended', 'liked', 'copied', 'newest', 'az'];
+export function sorter(mode, isNew, stats = { likes: {}, copies: {}, trending: {} }) {
+  const base = libraryOrder(isNew);
+  const n = (map, e) => map?.[e.id] ?? 0;
+  const by = (map) => (a, b) => n(map, b) - n(map, a) || base(a, b);
+  switch (mode) {
+    case 'liked': return by(stats.likes);
+    case 'copied': return by(stats.copies);
+    case 'newest': return (a, b) => (a.added === b.added ? b.index - a.index : a.added < b.added ? 1 : -1);
+    case 'az': return (a, b) => a.title.localeCompare(b.title);
+    default: return (a, b) => {
+      // New first, then this week's trending, then the featured demos and the rest.
+      const an = isNew(a), bn = isNew(b);
+      if (an !== bn) return an ? -1 : 1;
+      if (an && bn) return base(a, b);
+      return n(stats.trending, b) - n(stats.trending, a) || base(a, b);
+    };
+  }
+}

@@ -30,6 +30,10 @@
     "api/mcp.js": {
       "includeFiles": "public/catalog.json",
       "maxDuration": 20
+    },
+    "api/stats.js": {
+      "includeFiles": "public/catalog.json",
+      "maxDuration": 10
     }
   }
 }
