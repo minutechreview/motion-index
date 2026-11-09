@@ -1,4 +1,5 @@
 import { ultraShapes } from './scenes-ultra.js';
+import { scoutShapes } from './scenes-scout.js';
 import { newChecker, sorter, SORTS } from './freshness.js';
 import { createCommunity, compact } from './community.js';
 const $ = (selector, root = document) => root.querySelector(selector);
@@ -55,7 +56,8 @@ const shapes = {
  magnifier: '<div class="mag-word">IDEAS</div><div class="lens"><span>IDEAS</span></div><span class="micro bottom-right">LOOK CLOSER ↗</span>',
  flow: '<div class="flow-lines"></div><b class="flow-type">FLOW</b><span class="micro bottom-left">GENERATIVE / 01</span>',
  watercolor: '<div class="wash w1"></div><div class="wash w2"></div><div class="wash w3"></div><b class="wash-type">a softer<br>kind of story.</b>',
- ...ultraShapes
+ ...ultraShapes,
+ ...scoutShapes
 };
 let isNew = () => false, sortMode = 'recommended';
 const community = createCommunity({ onChange: id => refreshCounts(id), onNotice: message => showToast(message) });
