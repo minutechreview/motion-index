@@ -1,0 +1,114 @@
+/* Chrome polish (Nov 2026): one control language for the header and the library bar.
+   Dark translucent surfaces, hairline borders, one height, coral as the only accent. Loaded last. */
+:root{
+  --chrome-bg:rgba(16,16,15,.78);
+  --ctl-bg:rgba(255,255,255,.035);
+  --ctl-bg-hover:rgba(255,255,255,.07);
+  --ctl-line:rgba(255,255,255,.09);
+  --ctl-line-hover:rgba(255,255,255,.18);
+  --ctl-ink:#e9e6df;
+  --ctl-muted:#8f8d87;
+  --ctl-h:36px;
+  --coral:#f38b74;
+  --coral-soft:rgba(243,139,116,.14);
+  --ease-out:cubic-bezier(.22,1,.36,1);
+}
+
+/* Header: taller so nothing grazes its edge, glass behind, a hairline that fades out at both ends. */
+.topbar{height:64px;padding:0 28px;gap:22px;border-bottom:0;background:var(--chrome-bg);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2)}
+.topbar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08) 18%,rgba(255,255,255,.08) 82%,transparent)}
+.top-note{font-size:12px;color:#77756f;letter-spacing:0;padding-left:20px;border-left:1px solid rgba(255,255,255,.08)}
+.top-actions{gap:6px}
+.top-actions .text-button{display:inline-flex;align-items:center;gap:6px;height:var(--ctl-h);padding:0 12px;border-radius:999px;font-size:13px;color:#b8b5ae;transition:color 160ms ease,background-color 160ms ease}
+.top-actions .text-button span{margin-left:0;color:#7f7d77;transition:color 160ms ease}
+.text-button .new-dot{background:var(--coral-soft);color:#f6a690;font-size:9px;font-weight:650;letter-spacing:.08em;padding:3px 6px;border-radius:999px;vertical-align:0}
+
+/* Give to your agent: a dark pill in the site's own material; the icons still fan out. */
+#skill-open.pill-button{height:40px;margin-left:10px;padding:0 5px 0 10px;gap:10px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));color:var(--ctl-ink);font-size:13px;font-weight:600;letter-spacing:-.005em;box-shadow:inset 0 1px 0 rgba(255,255,255,.06);transition:border-color 200ms ease,background-color 200ms ease,box-shadow 220ms var(--ease-out)}
+#skill-open .agent-icons img{border-color:#1d1c1a;background:#1d1c1a;box-shadow:0 1px 2px rgba(0,0,0,.4)}
+#skill-open .arrow{display:grid;place-items:center;width:30px;height:30px;padding:0;border:0;border-radius:999px;background:var(--coral);color:#1b0f0b;font-size:13px;font-weight:700;transition:transform 220ms var(--ease-out),background-color 200ms ease}
+
+/* Library bar: same glass, same hairline, one control height. */
+.controls{top:64px;min-height:60px;padding:0 24px;border-bottom:0;background:var(--chrome-bg);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);position:sticky}
+.controls::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06) 18%,rgba(255,255,255,.06) 82%,transparent)}
+.filters{gap:2px}
+.filter{height:32px;display:inline-flex;align-items:center;gap:6px;padding:0 12px;border:1px solid transparent;border-radius:999px;font-size:13px;color:#a19f99;transition:color 160ms ease,background-color 160ms ease,border-color 160ms ease}
+.filter span{margin-left:0;font-size:10px;font-variant-numeric:tabular-nums;color:#67665f}
+.filter.active{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);color:#f6f3ec}
+.filter.active span{color:var(--coral)}
+.filter[data-category="New"] span,.filter[data-category="New"].active span{color:var(--coral)}
+.control-right{gap:8px}
+.search,.sort select,.pause-button{height:var(--ctl-h);border:1px solid var(--ctl-line);background:var(--ctl-bg);border-radius:999px;transition:border-color 160ms ease,background-color 160ms ease}
+.search{gap:8px;padding:0 6px 0 12px;color:var(--ctl-muted)}
+.search svg{width:15px;height:15px;flex:none}
+.search input{font-size:13px;color:var(--ctl-ink);width:170px}
+.search input::placeholder{color:#7c7a74}
+.search kbd{display:grid;place-items:center;min-width:22px;height:22px;padding:0 5px;border:1px solid rgba(255,255,255,.1);border-radius:6px;background:rgba(255,255,255,.04);color:#8f8d87;font-size:11px;line-height:1}
+.search:focus-within{border-color:rgba(243,139,116,.55);background:rgba(255,255,255,.05)}
+.search:focus-within kbd{opacity:0}
+.sort select{color:#cfccc5;font-size:13px;padding:0 30px 0 14px}
+.sort::after{content:"";right:14px;width:6px;height:6px;border-right:1.5px solid #8f8d87;border-bottom:1.5px solid #8f8d87;transform:translateY(-70%) rotate(45deg)}
+.pause-button{width:var(--ctl-h);display:grid;place-items:center;color:var(--ctl-ink)}
+#pause-icon{position:relative;display:block;width:10px;height:11px;font-size:0}
+#pause-icon::before,#pause-icon::after{content:"";position:absolute;top:0;width:3px;height:11px;border-radius:1px;background:currentColor}
+#pause-icon::before{left:1px}#pause-icon::after{right:1px}
+.pause-button[aria-pressed="true"] #pause-icon::before{left:2px;width:0;height:0;border-radius:0;background:none;border-style:solid;border-width:5.5px 0 5.5px 9px;border-color:transparent transparent transparent currentColor}
+.pause-button[aria-pressed="true"] #pause-icon::after{display:none}
+.results-line{font-size:10px;letter-spacing:.06em;color:#66655f;padding:16px 24px 6px}
+
+/* Tile footer: the like control reads as a quiet inline action next to the credit, not a second pill. */
+.like-btn{right:0;bottom:-2px;border-color:transparent;background:transparent;padding:4px 6px;color:#8f8d87;font-size:12px;gap:5px}
+.like-btn .heart{font-size:13px}
+.like-btn[aria-pressed="true"]{background:transparent;border-color:transparent;color:#f6c9bc}
+.has-stats .tile-info{padding-bottom:22px}
+
+/* Focus: one ring everywhere. */
+.top-actions .text-button:focus-visible,#skill-open:focus-visible,.filter:focus-visible,.pause-button:focus-visible,.sort select:focus-visible,.like-btn:focus-visible{outline:2px solid var(--coral);outline-offset:2px}
+
+@media (hover:hover){
+  .top-actions .text-button:hover{color:#fff;background:rgba(255,255,255,.05)}
+  .top-actions .text-button:hover span{color:#d9d6cf}
+  #skill-open.pill-button:hover{background:linear-gradient(180deg,rgba(243,139,116,.14),rgba(243,139,116,.05));border-color:rgba(243,139,116,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 0 0 4px rgba(243,139,116,.08)}
+  .filter:not(.active):hover{color:#f6f3ec;background:rgba(255,255,255,.04)}
+  .search:hover,.sort select:hover,.pause-button:hover{border-color:var(--ctl-line-hover);background:var(--ctl-bg-hover)}
+  .like-btn:hover{color:#f6f3ec;background:rgba(255,255,255,.05)}
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  #skill-open:hover .arrow{transform:translate(1px,-1px) rotate(0deg) scale(1.04)}
+}
+#skill-open:focus-visible{border-color:rgba(243,139,116,.6)}
+
+@media (max-width:1050px){
+  .controls{padding:12px 20px}
+  .search input{width:100%}
+}
+@media (max-width:700px){
+  .topbar{height:56px;padding:0 14px;gap:10px}
+  .controls{top:56px;padding:10px 14px}
+  .top-actions{gap:2px}
+  .top-actions .text-button{padding:0 8px}
+  #skill-open.pill-button{height:36px;margin-left:4px;padding:0 4px 0 8px;font-size:12px;gap:8px}
+  #skill-open .arrow{display:grid;width:26px;height:26px;font-size:12px}
+  .results-line{padding:10px 14px 2px}
+  .filter{height:30px;padding:0 10px;font-size:12px}
+  .like-btn{right:0;bottom:-2px;padding:3px 5px;font-size:11px}
+}
+@media (max-width:420px){
+  #skill-open .agent-label{display:none}
+}
+
+/* Compact labels: long on desktop, short on phones. */
+.top-actions .text-button .lbl-short{display:none}
+.top-actions .text-button .lbl-long,.top-actions .text-button .lbl-short{color:inherit;font-size:inherit}
+.top-actions .text-button .nav-arrow{font-size:12px}
+@media (max-width:700px){
+  .top-actions .text-button{font-size:12px;padding:0 7px;height:32px}
+  .top-actions .text-button .lbl-long{display:none}
+  .top-actions .text-button .lbl-short{display:inline}
+  .top-actions .text-button .nav-arrow{display:none}
+  .top-actions .credits-nav{display:none}
+  .text-button .new-dot{font-size:8px;padding:2px 5px}
+}
+@media (prefers-reduced-motion:reduce){
+  .topbar *,.controls *{transition:none!important}
+}
