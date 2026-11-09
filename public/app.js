@@ -1,3 +1,5 @@
+import { ultraShapes } from './scenes-ultra.js';
+import { newChecker, libraryOrder } from './freshness.js';
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const html = (strings, ...values) => strings.reduce((out, part, i) => out + part + (values[i] ?? ''), '');
@@ -51,8 +53,10 @@ const shapes = {
  accordion: '<div class="accordion"><i>F</i><i>O</i><i>R</i><i>M</i></div><span class="micro bottom-left">PAPER STUDY / 01</span>',
  magnifier: '<div class="mag-word">IDEAS</div><div class="lens"><span>IDEAS</span></div><span class="micro bottom-right">LOOK CLOSER ↗</span>',
  flow: '<div class="flow-lines"></div><b class="flow-type">FLOW</b><span class="micro bottom-left">GENERATIVE / 01</span>',
- watercolor: '<div class="wash w1"></div><div class="wash w2"></div><div class="wash w3"></div><b class="wash-type">a softer<br>kind of story.</b>'
+ watercolor: '<div class="wash w1"></div><div class="wash w2"></div><div class="wash w3"></div><b class="wash-type">a softer<br>kind of story.</b>',
+ ...ultraShapes
 };
+let isNew = () => false;
 let entries = [], category = 'All', query = '', paused = false, selected = null, observer = null;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const grid = $('#grid'), detailDialog = $('#detail-dialog'), skillDialog = $('#skill-dialog'), submitDialog = $('#submit-dialog');
@@ -61,14 +65,16 @@ const scene = entry => entry.demo
  : `<div class="scene scene-${entry.id}" aria-hidden="true">${shapes[entry.id] ?? ''}</div>`;
 const escapeText = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function updateFilters() {
- const names=['All','Product','Type','Data','Editorial','Illustration','Interface','Abstract'];
- $('#filters').innerHTML=names.map(name=>{const count=name==='All'?entries.length:entries.filter(e=>e.category===name).length; return `<button class="filter ${category===name?'active':''}" data-category="${name}" aria-pressed="${category===name}">${name}<span>${count}</span></button>`}).join('');
+ const newCount=entries.filter(isNew).length;
+ const names=['All',...(newCount?['New']:[]),'Product','Type','Data','Editorial','Illustration','Interface','Abstract'];
+ $('#filters').innerHTML=names.map(name=>{const count=name==='All'?entries.length:name==='New'?newCount:entries.filter(e=>e.category===name).length; return `<button class="filter ${category===name?'active':''}" data-category="${name}" aria-pressed="${category===name}">${name}<span>${count}</span></button>`}).join('');
 }
 function render() {
- const filtered=entries.filter(e=>(category==='All'||e.category===category)&&`${e.title} ${e.category} ${e.description} ${e.use} ${e.look} ${e.source.author} ${e.source.project}`.toLowerCase().includes(query));
- if(category==='All')filtered.sort((a,b)=>(a.featured ?? Infinity)-(b.featured ?? Infinity));
+ if(category==='New'&&!entries.some(isNew))category='All';
+ const filtered=entries.filter(e=>(category==='All'||(category==='New'?isNew(e):e.category===category))&&`${e.title} ${e.category} ${e.description} ${e.use} ${e.look} ${e.source.author} ${e.source.project}`.toLowerCase().includes(query));
+ filtered.sort(libraryOrder(isNew));
  $$('.tile video',grid).forEach(video=>video.pause());
- grid.innerHTML=filtered.map(e=>`<button class="tile" id="style-${escapeText(e.id)}" data-id="${e.id}" aria-label="Open ${escapeText(e.title)} and copy its prompt, reference by ${escapeText(e.source.author)}">${scene(e)}<div class="tile-info"><div><span class="tile-index">${String(e.index).padStart(2,'0')} / ${escapeText(e.category.toUpperCase())}</span><h3>${escapeText(e.title)}</h3><p>${escapeText(e.description)}</p><div class="tile-credit">REFERENCE · ${escapeText(e.source.author)}</div></div><span class="tile-arrow" aria-hidden="true">↗</span></div></button>`).join('');
+ grid.innerHTML=filtered.map(e=>`<button class="tile" id="style-${escapeText(e.id)}" data-id="${e.id}" aria-label="Open ${escapeText(e.title)} and copy its prompt, reference by ${escapeText(e.source.author)}">${isNew(e)?'<span class="new-badge">New</span>':''}${scene(e)}<div class="tile-info"><div><span class="tile-index">${String(e.index).padStart(2,'0')} / ${escapeText(e.category.toUpperCase())}</span><h3>${escapeText(e.title)}</h3><p>${escapeText(e.description)}</p><div class="tile-credit">REFERENCE · ${escapeText(e.source.author)}</div></div><span class="tile-arrow" aria-hidden="true">↗</span></div></button>`).join('');
  $('#result-count').textContent=`${filtered.length} ${filtered.length===1?'STYLE':'STYLES'} ${category==='All'?'IN THE COLLECTION':'IN '+category.toUpperCase()}`;
  $('#empty').hidden=filtered.length!==0;
  updateFilters();
@@ -139,4 +145,4 @@ $$('dialog .close').forEach(button=>button.addEventListener('click',()=>button.c
 $$('dialog').forEach(dialog=>dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();}));
 $('#submit-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget;const status=$('#form-status');const button=$('#send-submission');button.disabled=true;status.textContent='Sending your suggestion…';try{const data=Object.fromEntries(new FormData(form));const response=await fetch('/api/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});const result=await response.json();if(!response.ok)throw new Error(result.error||'Could not send. Please try again.');status.textContent='Thank you! Your suggestion was received for review.';form.reset();}catch(error){status.textContent=error.message||'Could not send. Please try again.';}finally{button.disabled=false;}});
 document.addEventListener('keydown',event=>{if(event.key==='/'&&!event.metaKey&&!event.ctrlKey&&!event.altKey&&!document.querySelector('dialog[open]')&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){event.preventDefault();$('#search').focus();}});
-try {const response=await fetch('/catalog.json');if(!response.ok)throw new Error('Catalog unavailable');const data=await response.json();entries=data.entries;renderCredits(data.sources);render();const anchor=location.hash.slice(1);if(anchor==='credits'||/^style-[a-z0-9-]+$/.test(anchor))requestAnimationFrame(()=>document.getElementById(anchor)?.scrollIntoView({behavior:'instant'}));}catch{$('#result-count').textContent='The collection could not load. Please refresh.';}
+try {const response=await fetch('/catalog.json');if(!response.ok)throw new Error('Catalog unavailable');const data=await response.json();entries=data.entries;isNew=newChecker(data);renderCredits(data.sources);render();const anchor=location.hash.slice(1);if(anchor==='credits'||/^style-[a-z0-9-]+$/.test(anchor))requestAnimationFrame(()=>document.getElementById(anchor)?.scrollIntoView({behavior:'instant'}));}catch{$('#result-count').textContent='The collection could not load. Please refresh.';}

@@ -1,6 +1,6 @@
 # Motion Index
 
-A visual library of 50 motion-graphics interpretations, with source links, prompt copying, search, category filters, a downloadable agent skill, and a suggestion form.
+A visual library of 60 motion-graphics interpretations, with source links, prompt copying, search, category filters, a downloadable agent skill, and a suggestion form.
 
 Production: https://motion-index-library.vercel.app/
 
@@ -16,7 +16,11 @@ The static preview does not run the serverless submission endpoint. On Vercel th
 
 ## Editing the library
 
-Edit entries and their source links in `scripts/build-catalog.mjs`, then run `npm run build`. The script writes `public/catalog.json`, which both the site and the agent skill use. Add a corresponding preview in the `shapes` object in `public/app.js` and its styling in `public/styles.css`.
+Edit entries and their source links in `scripts/build-catalog.mjs`, then run `npm run build`. The script writes `public/catalog.json`, which both the site and the agent skill use. Add a corresponding preview in the `shapes` object in `public/app.js` and its styling in `public/styles.css`. The ten styles credited to Gian Angioletti live in their own module, `public/scenes-ultra.js` with `public/scenes-ultra.css`.
+
+### New styles
+
+The first time `npm run build` sees a style, it records the date in `scripts/added-dates.json`. Styles added after the launch collection (`LAUNCH_DATE` in `scripts/build-catalog.mjs`) count as **New** for `NEW_WINDOW_DAYS` (21) days: they get a New badge, lead the library in every view, and appear under the **New** filter, which hides itself when nothing is new. Anything that adds styles, including a scheduled job, should add the row to `scripts/build-catalog.mjs`, run `npm run build && npm run check`, and commit `scripts/added-dates.json` along with the catalog. If the dates file is not committed, each deploy stamps the style with that deploy's date. The build also copies the catalog into `skills/motion-index/catalog.json`; re-zip `public/downloads/motion-index-skill.zip` when you ship.
 
 Run `npm run check` to verify catalog entries, preview identifiers, attribution, structured data, and submission validation. Deploy the project to Vercel from this directory using the linked `motion-index-library` project.
 
@@ -49,6 +53,7 @@ The previews are independently built interpretations; each card and copied promp
 - [AnimaGuru / Docyrus, Inc.](https://animaguru.com/about) — [AnimaGuru Motion Library](https://animaguru.com/motion-library).
 - [Étienne Mineur and Floot](https://proceduralstudio.etienne.design/studio/flow-field-typography) — Procedural Studio.
 - [EA DESIGN (@eadesignofficial)](https://www.instagram.com/eadesignofficial/) — [Brand-consistent social design pack reel](https://www.instagram.com/reel/DcGaekAMU90/).
+- [Gian Angioletti (@ultra.skills)](https://www.instagram.com/ultra.skills/) — [30 Claude animations reel](https://www.instagram.com/reel/DfcxCxTBVsw/). Ten styles from the reel that the library did not already cover; the previews are original CSS interpretations and use none of the reel's frames.
 - [Paper Animators](https://paperanimators.com/about/) — [Paper Animators Motion Library](https://paperanimators.com/videos/). The source does not publicly identify an individual creator.
 
 [Fontzz](https://fontzz.vercel.app/), built by Hassan and Youssef, inspired the interface. The Halden typeface is copyright 2026 The fontzz Project Authors and is distributed under the SIL Open Font License 1.1; see `public/fonts/OFL.txt`.

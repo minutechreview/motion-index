@@ -1,6 +1,6 @@
 ---
 name: motion-index
-description: Pick a motion-graphics style from Motion Index (50 credited styles - product turntables, kinetic type, data charts, editorial layouts, interface demos and more) and turn it into a build-ready brief for the user's topic. Use when the user wants an animated video, reel, title sequence, explainer, ad or motion graphic and needs a visual style or motion ideas, or mentions Motion Index.
+description: Pick a motion-graphics style from Motion Index (60 credited styles - product turntables, kinetic type, data charts, editorial layouts, interface demos and more) and turn it into a build-ready brief for the user's topic. Use when the user wants an animated video, reel, title sequence, explainer, ad or motion graphic and needs a visual style or motion ideas, or mentions Motion Index.
 ---
 
 # Motion Index
