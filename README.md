@@ -26,6 +26,19 @@ Run `npm run check` to verify catalog entries, preview identifiers, attribution,
 
 When adding a new reference collection, add its creator type to `scripts/build-schema.mjs`. The build fails if a source lacks a mapping, and `npm run check` checks that the graph matches the catalog. The canonical URL is defined in `public/index.html` and `scripts/build-schema.mjs`; update both if the public domain changes. Validate the deployed page with the Schema Markup Validator. General collection markup does not itself guarantee a Google rich result or indexing.
 
+## Use it in Claude, ChatGPT and other AI apps
+
+**Connector (MCP):** `https://motion.minutechbuilds.com/mcp` gives any MCP client four tools: `motion_search`,
+`motion_style`, `motion_brief` and `motion_suggest`.
+- Claude (web, desktop): Settings → Connectors → Add custom connector → paste the URL.
+- Claude Code: `claude mcp add --transport http motion-index https://motion.minutechbuilds.com/mcp`
+- ChatGPT: create a custom MCP app/connector in Settings (Apps or Plugins; some plans first need Developer mode),
+  paste the URL and choose no authentication.
+
+**Claude Skill:** download [`motion-index-skill.zip`](https://motion.minutechbuilds.com/downloads/motion-index-skill.zip)
+and upload it in Claude → Settings → Capabilities → Skills. The source is in `skills/motion-index/`. After editing the
+library, copy `public/catalog.json` into `skills/motion-index/` and re-zip (`npm run check` catches a stale copy).
+
 ## Credits
 
 The previews are independently built interpretations; each card and copied prompt includes a linked credit to its reference. The reference collections are:
