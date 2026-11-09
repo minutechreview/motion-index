@@ -56,6 +56,15 @@
       "authorUrl": "https://www.instagram.com/eadesignofficial/"
     },
     {
+      "id": "ultra",
+      "author": "Gian Angioletti",
+      "name": "Gian Angioletti · @ultra.skills",
+      "project": "30 Claude animations reel",
+      "description": "A reel of thirty code-built animation styles, previewed one after another in a terminal-style player.",
+      "url": "https://www.instagram.com/reel/DfcxCxTBVsw/",
+      "authorUrl": "https://www.instagram.com/ultra.skills/"
+    },
+    {
       "id": "paper",
       "author": "Paper Animators",
       "name": "Paper Animators · Motion Library",
@@ -1059,8 +1068,208 @@
       "prompt": "Create an original motion-graphics piece inspired by “Watercolor bloom” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Translucent overlapping watercolor patches on warm paper, with a small dark headline and irregular edges.\nMotion: Expand each pigment wash at a different pace and let the colors overlap before the title appears.\nBest suited to: Handmade explainers and intros.\n\nReference credit: Alejandro López Martínez (develatter) · aimotions\nOriginal reference: https://aimotions.art/styles/watercolor-bloom/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
     },
     {
-      "id": "design-pack",
+      "id": "git-city",
       "index": 50,
+      "title": "Git city",
+      "category": "Data",
+      "description": "Activity data rises into a glowing skyline.",
+      "look": "An isometric grid of slim prisms on a deep navy plane, each prism a day of activity. Teal side faces, mint-glow tops and a single small caption that says what the heights mean; mark demo data clearly.",
+      "motion": "Grow the prisms from the ground in a diagonal wave from the back corner, with the tallest cluster near the middle. Drift the camera gently, hold, then sink the city back down.",
+      "use": "Developer stats, year-in-review and activity recaps",
+      "source": {
+        "id": "ultra",
+        "author": "Gian Angioletti",
+        "name": "Gian Angioletti · @ultra.skills",
+        "project": "30 Claude animations reel",
+        "description": "A reel of thirty code-built animation styles, previewed one after another in a terminal-style player.",
+        "url": "https://www.instagram.com/reel/DfcxCxTBVsw/",
+        "authorUrl": "https://www.instagram.com/ultra.skills/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Git city” for [YOUR TOPIC OR BRAND].\n\nVisual direction: An isometric grid of slim prisms on a deep navy plane, each prism a day of activity. Teal side faces, mint-glow tops and a single small caption that says what the heights mean; mark demo data clearly.\nMotion: Grow the prisms from the ground in a diagonal wave from the back corner, with the tallest cluster near the middle. Drift the camera gently, hold, then sink the city back down.\nBest suited to: Developer stats, year-in-review and activity recaps.\n\nReference credit: Gian Angioletti · @ultra.skills\nOriginal reference: https://www.instagram.com/reel/DfcxCxTBVsw/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "agent-swarm",
+      "index": 51,
+      "title": "Agent swarm",
+      "category": "Interface",
+      "description": "Many small workers converge into one result.",
+      "look": "A dark field with a loose grid of twenty labelled nodes (research, code, design, copy) joined to a centre point by thin curved lines. Nodes start white, then turn green with a check mark. The result is a compact browser-window card with a two-line caption.",
+      "motion": "Draw the lines out from the centre, flip the nodes to done in a scattered order, then pull every node into the centre and let the finished window card scale up from that point.",
+      "use": "Agent, automation and multi-step workflow explainers",
+      "source": {
+        "id": "ultra",
+        "author": "Gian Angioletti",
+        "name": "Gian Angioletti · @ultra.skills",
+        "project": "30 Claude animations reel",
+        "description": "A reel of thirty code-built animation styles, previewed one after another in a terminal-style player.",
+        "url": "https://www.instagram.com/reel/DfcxCxTBVsw/",
+        "authorUrl": "https://www.instagram.com/ultra.skills/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Agent swarm” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A dark field with a loose grid of twenty labelled nodes (research, code, design, copy) joined to a centre point by thin curved lines. Nodes start white, then turn green with a check mark. The result is a compact browser-window card with a two-line caption.\nMotion: Draw the lines out from the centre, flip the nodes to done in a scattered order, then pull every node into the centre and let the finished window card scale up from that point.\nBest suited to: Agent, automation and multi-step workflow explainers.\n\nReference credit: Gian Angioletti · @ultra.skills\nOriginal reference: https://www.instagram.com/reel/DfcxCxTBVsw/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "type-slam",
+      "index": 52,
+      "title": "Type slam",
+      "category": "Type",
+      "description": "A short build-up, then one word hits the whole frame.",
+      "look": "A pale ground with a faint oversized word drifting behind a small two-word setup line. The payoff word is set in an ultra-heavy face, stretched tall enough to fill the frame edge to edge, followed by a full-bleed colour flood.",
+      "motion": "Hold the setup line for a beat, then slam the payoff word in from a large scale with a tiny overshoot. Wipe a saturated colour up from the bottom and flip the type to white.",
+      "use": "Hooks, punchlines and bold calls to action",
+      "source": {
+        "id": "ultra",
+        "author": "Gian Angioletti",
+        "name": "Gian Angioletti · @ultra.skills",
+        "project": "30 Claude animations reel",
+        "description": "A reel of thirty code-built animation styles, previewed one after another in a terminal-style player.",
+        "url": "https://www.instagram.com/reel/DfcxCxTBVsw/",
+        "authorUrl": "https://www.instagram.com/ultra.skills/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Type slam” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A pale ground with a faint oversized word drifting behind a small two-word setup line. The payoff word is set in an ultra-heavy face, stretched tall enough to fill the frame edge to edge, followed by a full-bleed colour flood.\nMotion: Hold the setup line for a beat, then slam the payoff word in from a large scale with a tiny overshoot. Wipe a saturated colour up from the bottom and flip the type to white.\nBest suited to: Hooks, punchlines and bold calls to action.\n\nReference credit: Gian Angioletti · @ultra.skills\nOriginal reference: https://www.instagram.com/reel/DfcxCxTBVsw/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "hologram",
+      "index": 53,
+      "title": "Hologram projector",
+      "category": "Product",
+      "description": "A wireframe object floats in a beam of light.",
+      "look": "A glowing projector pad on a dark blue floor, a soft cyan light cone and a cyan line-drawn product floating above it. Add two small data tags with thin borders, and keep every line thin and luminous.",
+      "motion": "Draw the wireframe in along its strokes, let it hover with a slow bob while parts spin, sweep a scan line through it and flicker the beam once before the tags fade in.",
+      "use": "Hardware, product specs and futuristic reveals",
+      "source": {
+        "id": "ultra",
+        "author": "Gian Angioletti",
+        "name": "Gian Angioletti · @ultra.skills",
+        "project": "30 Claude animations reel",
+        "description": "A reel of thirty code-built animation styles, previewed one after another in a terminal-style player.",
+        "url": "https://www.instagram.com/reel/DfcxCxTBVsw/",
+        "authorUrl": "https://www.instagram.com/ultra.skills/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Hologram projector” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A glowing projector pad on a dark blue floor, a soft cyan light cone and a cyan line-drawn product floating above it. Add two small data tags with thin borders, and keep every line thin and luminous.\nMotion: Draw the wireframe in along its strokes, let it hover with a slow bob while parts spin, sweep a scan line through it and flicker the beam once before the tags fade in.\nBest suited to: Hardware, product specs and futuristic reveals.\n\nReference credit: Gian Angioletti · @ultra.skills\nOriginal reference: https://www.instagram.com/reel/DfcxCxTBVsw/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "ink-doodle",
+      "index": 54,
+      "title": "Ink doodle story",
+      "category": "Illustration",
+      "description": "A hand-drawn stick-figure gag on a sky-blue page.",
+      "look": "A sky gradient with outlined clouds, a hanging sign with a short title and a marker underline, a stick figure at a typewriter and a word card. Apply a subtle wobble filter so every line looks hand drawn.",
+      "motion": "Feed paper from the typewriter, fling crumpled paper balls in arcs, strike through the misspelt word in red, then let the figure throw both arms up in a small victory jump.",
+      "use": "Relatable stories, before-and-after jokes and tips",
+      "source": {
+        "id": "ultra",
+        "author": "Gian Angioletti",
+        "name": "Gian Angioletti · @ultra.skills",
+        "project": "30 Claude animations reel",
+        "description": "A reel of thirty code-built animation styles, previewed one after another in a terminal-style player.",
+        "url": "https://www.instagram.com/reel/DfcxCxTBVsw/",
+        "authorUrl": "https://www.instagram.com/ultra.skills/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Ink doodle story” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A sky gradient with outlined clouds, a hanging sign with a short title and a marker underline, a stick figure at a typewriter and a word card. Apply a subtle wobble filter so every line looks hand drawn.\nMotion: Feed paper from the typewriter, fling crumpled paper balls in arcs, strike through the misspelt word in red, then let the figure throw both arms up in a small victory jump.\nBest suited to: Relatable stories, before-and-after jokes and tips.\n\nReference credit: Gian Angioletti · @ultra.skills\nOriginal reference: https://www.instagram.com/reel/DfcxCxTBVsw/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "deep-time",
+      "index": 55,
+      "title": "Deep time",
+      "category": "Abstract",
+      "description": "A black hole makes a huge number feel vast.",
+      "look": "A black hole with a tilted, glowing orange accretion disk whose light bends over the top of the shadow, set in a sparse star field. A small counter and unit label sit in the top-left corner.",
+      "motion": "Spin the disk continuously while the star field slowly pushes in. Count the number up from one to the final value, then let the lensed ring brighten slightly.",
+      "use": "Big numbers, timelines and science explainers",
+      "source": {
+        "id": "ultra",
+        "author": "Gian Angioletti",
+        "name": "Gian Angioletti · @ultra.skills",
+        "project": "30 Claude animations reel",
+        "description": "A reel of thirty code-built animation styles, previewed one after another in a terminal-style player.",
+        "url": "https://www.instagram.com/reel/DfcxCxTBVsw/",
+        "authorUrl": "https://www.instagram.com/ultra.skills/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Deep time” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A black hole with a tilted, glowing orange accretion disk whose light bends over the top of the shadow, set in a sparse star field. A small counter and unit label sit in the top-left corner.\nMotion: Spin the disk continuously while the star field slowly pushes in. Count the number up from one to the final value, then let the lensed ring brighten slightly.\nBest suited to: Big numbers, timelines and science explainers.\n\nReference credit: Gian Angioletti · @ultra.skills\nOriginal reference: https://www.instagram.com/reel/DfcxCxTBVsw/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "contour",
+      "index": 56,
+      "title": "Contour climb",
+      "category": "Data",
+      "description": "A flat topographic map rises into a summit.",
+      "look": "A sand-coloured topographic map with fine contour lines, lit like paper. A vertical ruler on the right holds a white value tag with a red pointer; a small red flag waits for the peak.",
+      "motion": "Start flat and top-down, then tilt into perspective as each contour layer rises to its height. Move the tag up the ruler while the value counts up, and plant the flag when it lands.",
+      "use": "Growth milestones, audience goals and progress stories",
+      "source": {
+        "id": "ultra",
+        "author": "Gian Angioletti",
+        "name": "Gian Angioletti · @ultra.skills",
+        "project": "30 Claude animations reel",
+        "description": "A reel of thirty code-built animation styles, previewed one after another in a terminal-style player.",
+        "url": "https://www.instagram.com/reel/DfcxCxTBVsw/",
+        "authorUrl": "https://www.instagram.com/ultra.skills/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Contour climb” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A sand-coloured topographic map with fine contour lines, lit like paper. A vertical ruler on the right holds a white value tag with a red pointer; a small red flag waits for the peak.\nMotion: Start flat and top-down, then tilt into perspective as each contour layer rises to its height. Move the tag up the ruler while the value counts up, and plant the flag when it lands.\nBest suited to: Growth milestones, audience goals and progress stories.\n\nReference credit: Gian Angioletti · @ultra.skills\nOriginal reference: https://www.instagram.com/reel/DfcxCxTBVsw/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "neon-silhouette",
+      "index": 57,
+      "title": "Neon silhouette",
+      "category": "Illustration",
+      "description": "A late-night scene with a flip-clock deadline.",
+      "look": "A dark room in front of a window of violet-to-pink dusk sky and a city skyline with lit windows. A hooded silhouette with two glowing eyes sits behind a desk with a warm lamp beam and a flip clock labelled DEADLINE.",
+      "motion": "Blink the eyes and twinkle the city windows, flip the clock from 23:59 to 00:00 digit by digit, and flash the room and lamp at the moment the clock rolls over.",
+      "use": "Deadlines, launches, night-owl and countdown posts",
+      "source": {
+        "id": "ultra",
+        "author": "Gian Angioletti",
+        "name": "Gian Angioletti · @ultra.skills",
+        "project": "30 Claude animations reel",
+        "description": "A reel of thirty code-built animation styles, previewed one after another in a terminal-style player.",
+        "url": "https://www.instagram.com/reel/DfcxCxTBVsw/",
+        "authorUrl": "https://www.instagram.com/ultra.skills/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Neon silhouette” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A dark room in front of a window of violet-to-pink dusk sky and a city skyline with lit windows. A hooded silhouette with two glowing eyes sits behind a desk with a warm lamp beam and a flip clock labelled DEADLINE.\nMotion: Blink the eyes and twinkle the city windows, flip the clock from 23:59 to 00:00 digit by digit, and flash the room and lamp at the moment the clock rolls over.\nBest suited to: Deadlines, launches, night-owl and countdown posts.\n\nReference credit: Gian Angioletti · @ultra.skills\nOriginal reference: https://www.instagram.com/reel/DfcxCxTBVsw/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "pov-doodle",
+      "index": 58,
+      "title": "POV doodle",
+      "category": "Illustration",
+      "description": "A sketchbook POV where the week piles up.",
+      "look": "A warm paper ground, a scribbled handwritten title with a red underline and a stick figure at a desk with a laptop. Day-of-the-week cards with a blue header are stacked on both sides, all drawn with a slight wobble.",
+      "motion": "Drop the day cards one by one onto two growing stacks with a small bounce, hold, then topple both stacks outward and clear the desk to loop.",
+      "use": "Creator life, relatable POV posts and workload stories",
+      "source": {
+        "id": "ultra",
+        "author": "Gian Angioletti",
+        "name": "Gian Angioletti · @ultra.skills",
+        "project": "30 Claude animations reel",
+        "description": "A reel of thirty code-built animation styles, previewed one after another in a terminal-style player.",
+        "url": "https://www.instagram.com/reel/DfcxCxTBVsw/",
+        "authorUrl": "https://www.instagram.com/ultra.skills/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “POV doodle” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A warm paper ground, a scribbled handwritten title with a red underline and a stick figure at a desk with a laptop. Day-of-the-week cards with a blue header are stacked on both sides, all drawn with a slight wobble.\nMotion: Drop the day cards one by one onto two growing stacks with a small bounce, hold, then topple both stacks outward and clear the desk to loop.\nBest suited to: Creator life, relatable POV posts and workload stories.\n\nReference credit: Gian Angioletti · @ultra.skills\nOriginal reference: https://www.instagram.com/reel/DfcxCxTBVsw/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "terminal-bloom",
+      "index": 59,
+      "title": "Terminal bloom",
+      "category": "Interface",
+      "description": "Scattered characters assemble into a finished landing page.",
+      "look": "A dark violet product page: a small nav bar, a hero card with a large headline, a subline, one glowing primary button, one outline button and a row of feature cards, with a soft purple bloom rising from the bottom.",
+      "motion": "Start from the empty page skeleton. Fly each headline character in from a random position and rotation, fade in the supporting copy and buttons, and let the bloom swell once the page is complete.",
+      "use": "Product launches, AI builders and website reveals",
+      "source": {
+        "id": "ultra",
+        "author": "Gian Angioletti",
+        "name": "Gian Angioletti · @ultra.skills",
+        "project": "30 Claude animations reel",
+        "description": "A reel of thirty code-built animation styles, previewed one after another in a terminal-style player.",
+        "url": "https://www.instagram.com/reel/DfcxCxTBVsw/",
+        "authorUrl": "https://www.instagram.com/ultra.skills/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Terminal bloom” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A dark violet product page: a small nav bar, a hero card with a large headline, a subline, one glowing primary button, one outline button and a row of feature cards, with a soft purple bloom rising from the bottom.\nMotion: Start from the empty page skeleton. Fly each headline character in from a random position and rotation, fade in the supporting copy and buttons, and let the bloom swell once the page is complete.\nBest suited to: Product launches, AI builders and website reveals.\n\nReference credit: Gian Angioletti · @ultra.skills\nOriginal reference: https://www.instagram.com/reel/DfcxCxTBVsw/\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "design-pack",
+      "index": 60,
       "title": "Design-pack edit",
       "category": "Editorial",
       "description": "A fast kinetic edit built from design-tool moments.",

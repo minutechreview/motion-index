@@ -1,3 +1,4 @@
+import { ultraShapes } from './scenes-ultra.js';
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const html = (strings, ...values) => strings.reduce((out, part, i) => out + part + (values[i] ?? ''), '');
@@ -51,7 +52,8 @@ const shapes = {
  accordion: '<div class="accordion"><i>F</i><i>O</i><i>R</i><i>M</i></div><span class="micro bottom-left">PAPER STUDY / 01</span>',
  magnifier: '<div class="mag-word">IDEAS</div><div class="lens"><span>IDEAS</span></div><span class="micro bottom-right">LOOK CLOSER ↗</span>',
  flow: '<div class="flow-lines"></div><b class="flow-type">FLOW</b><span class="micro bottom-left">GENERATIVE / 01</span>',
- watercolor: '<div class="wash w1"></div><div class="wash w2"></div><div class="wash w3"></div><b class="wash-type">a softer<br>kind of story.</b>'
+ watercolor: '<div class="wash w1"></div><div class="wash w2"></div><div class="wash w3"></div><b class="wash-type">a softer<br>kind of story.</b>',
+ ...ultraShapes
 };
 let entries = [], category = 'All', query = '', paused = false, selected = null, observer = null;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
