@@ -112,6 +112,15 @@
       "authorUrl": "https://github.com/kubai087"
     },
     {
+      "id": "splashmotion",
+      "author": "Seyed Mostafa Hasani",
+      "name": "Seyed Mostafa Hasani · react-native-splash-motion",
+      "project": "react-native-splash-motion",
+      "description": "An MIT-licensed React Native library that plays a Lottie or dotLottie splash animation natively, before the JavaScript loads, then hands off with an outro.",
+      "url": "https://github.com/seyedmostafahasani/react-native-splash-motion",
+      "authorUrl": "https://github.com/seyedmostafahasani"
+    },
+    {
       "id": "livingascii",
       "author": "yusen-dev",
       "name": "yusen-dev · living-ascii",
@@ -1501,6 +1510,27 @@
         "authorUrl": "https://github.com/yusen-dev"
       },
       "prompt": "Create an original motion-graphics piece inspired by “Living ASCII field” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A landscape rebuilt as a grid of monospace stroke glyphs that keep the image colours: dotted sky above, dense grass of | /  strokes below, on a near-black ground.\nMotion: Sway every stroke like grass in the wind in rolling waves, turning each glyph with the strand under it, and loop seamlessly so the last frame flows into the first.\nBest suited to: Calm loops, wallpapers, music visuals and nature or tech openers.\n\nReference credit: yusen-dev · living-ascii\nOriginal reference: https://github.com/yusen-dev/living-ascii\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "splash-motion",
+      "index": 66,
+      "added": "2026-11-11",
+      "title": "Animated app splash",
+      "category": "Interface",
+      "description": "The logo draws itself while the app loads, then opens into it.",
+      "look": "A phone screen filled with one brand colour, a simple line-drawn logo mark in cream centred on it, a tiny loading bar below, and the real app UI waiting underneath in light cards.",
+      "motion": "Start on the flat launch colour, draw the logo stroke by stroke, pop its accent with a small overshoot and let it pulse gently while loading; when ready, finish the loop, scale the mark up as a circular wipe that opens to the app, and let the first cards rise into place.",
+      "use": "App launches, onboarding, product demos and any brand intro that hands off to a UI",
+      "source": {
+        "id": "splashmotion",
+        "author": "Seyed Mostafa Hasani",
+        "name": "Seyed Mostafa Hasani · react-native-splash-motion",
+        "project": "react-native-splash-motion",
+        "description": "An MIT-licensed React Native library that plays a Lottie or dotLottie splash animation natively, before the JavaScript loads, then hands off with an outro.",
+        "url": "https://github.com/seyedmostafahasani/react-native-splash-motion",
+        "authorUrl": "https://github.com/seyedmostafahasani"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Animated app splash” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A phone screen filled with one brand colour, a simple line-drawn logo mark in cream centred on it, a tiny loading bar below, and the real app UI waiting underneath in light cards.\nMotion: Start on the flat launch colour, draw the logo stroke by stroke, pop its accent with a small overshoot and let it pulse gently while loading; when ready, finish the loop, scale the mark up as a circular wipe that opens to the app, and let the first cards rise into place.\nBest suited to: App launches, onboarding, product demos and any brand intro that hands off to a UI.\n\nReference credit: Seyed Mostafa Hasani · react-native-splash-motion\nOriginal reference: https://github.com/seyedmostafahasani/react-native-splash-motion\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
     }
   ]
 }

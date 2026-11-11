@@ -37,10 +37,19 @@ const asciiCells = Array.from({ length: 14 * 22 }, (_, k) => {
 }).join('');
 const livingAscii = `<div class="la-grid">${asciiCells}</div><small class="la-cap">STILL IMAGE → LIVING LOOP</small>`;
 
+// Animated app splash (from seyedmostafahasani's react-native-splash-motion): launch colour, the logo mark draws
+// itself and pulses while the app loads, then it bursts outward to reveal the app.
+const splashRows = [0, 1, 2].map(k => `<div class="sp-row" style="--k:${k}"><i></i><b></b></div>`).join('');
+const splashMotion = `<div class="sp-phone"><div class="sp-app"><div class="sp-bar"><i></i><b></b></div>${splashRows}</div>
+<div class="sp-splash"><svg class="sp-mark" viewBox="0 0 100 100"><circle class="sp-ring" cx="50" cy="50" r="34"/>
+<path class="sp-wave" d="M30 54 Q40 36 50 50 T70 46"/><circle class="sp-dot" cx="70" cy="46" r="5"/></svg><i class="sp-load"></i></div></div>
+<small class="sp-cap">LAUNCH → LOGO → APP</small>`;
+
 export const scoutShapes = {
   'rpg-dialog': rpgDialog,
   'day-night': dayNight,
   'flat-to-3d': flatTo3d,
   'thread-type': threadType,
   'living-ascii': livingAscii,
+  'splash-motion': splashMotion,
 };
