@@ -1,5 +1,5 @@
 /* Motion for the scout-picked styles (scenes-scout.js). Sizes use container units so the cards scale. */
-.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii{container-type:size;overflow:hidden}
+.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion{container-type:size;overflow:hidden}
 
 /* RPG dialogue box */
 .scene-rpg-dialog{background:#7ec8f0;image-rendering:pixelated}
@@ -105,6 +105,36 @@
 @keyframes u-la-sway{0%,100%{transform:rotate(-28deg)}50%{transform:rotate(26deg);filter:brightness(1.35)}}
 @keyframes u-la-drift{0%,100%{opacity:.35}50%{opacity:1}}
 
+/* Animated app splash: 6 s loop. Base styles = the finished app frame (reduced motion). */
+.scene-splash-motion{background:radial-gradient(circle at 50% 40%,#1d2433,#0b0e15 70%)}
+.sp-phone{position:absolute;left:50%;top:7%;width:30cqw;height:62cqw;max-height:80%;transform:translateX(-50%);border-radius:4.4cqw;overflow:hidden;
+ background:#f4f1ea;box-shadow:0 0 0 1cqw #05070b,0 0 0 1.3cqw #2a3142,0 3cqw 6cqw rgba(0,0,0,.5)}
+.sp-app{position:absolute;inset:0;padding:5cqw 2.6cqw;display:flex;flex-direction:column;gap:2cqw;animation:u-sp-app 6s ease-out infinite}
+.sp-bar{display:flex;align-items:center;gap:1.6cqw;margin-bottom:1cqw}
+.sp-bar i{width:5cqw;height:5cqw;border-radius:1.4cqw;background:#1f8a70}
+.sp-bar b{height:1.6cqw;width:12cqw;border-radius:1cqw;background:#2b2b2b}
+.sp-row{height:9cqw;border-radius:2cqw;background:#fff;box-shadow:0 .5cqw 1.4cqw rgba(0,0,0,.08);display:flex;align-items:center;gap:1.6cqw;padding:0 1.8cqw;
+ animation:u-sp-row 6s cubic-bezier(.2,.9,.3,1.2) infinite;animation-delay:calc(var(--k) * .08s)}
+.sp-row i{flex:none;width:5cqw;height:5cqw;border-radius:50%;background:hsl(calc(150 + var(--k) * 40) 45% 60%)}
+.sp-row b{height:1.3cqw;flex:1;border-radius:1cqw;background:#d9d4c8}
+.sp-splash{position:absolute;inset:0;display:grid;place-items:center;background:#1f8a70;opacity:0;animation:u-sp-splash 6s ease-in-out infinite}
+.sp-mark{width:16cqw;height:16cqw;overflow:visible;animation:u-sp-mark 6s cubic-bezier(.3,1.4,.5,1) infinite}
+.sp-ring,.sp-wave{fill:none;stroke:#f4f1ea;stroke-width:7;stroke-linecap:round}
+.sp-ring{stroke-dasharray:214;stroke-dashoffset:0;animation:u-sp-ring 6s ease-in-out infinite;transform-origin:50% 50%;transform:rotate(-90deg)}
+.sp-wave{stroke-dasharray:60;stroke-dashoffset:0;animation:u-sp-wave 6s ease-in-out infinite}
+.sp-dot{fill:#ffd166;transform-origin:70px 46px;animation:u-sp-dot 6s ease-in-out infinite}
+.sp-load{position:absolute;bottom:14%;left:50%;width:10cqw;height:.8cqw;margin-left:-5cqw;border-radius:1cqw;background:rgba(244,241,234,.25);overflow:hidden}
+.sp-load::after{content:"";position:absolute;inset:0;width:40%;border-radius:1cqw;background:#f4f1ea;animation:u-sp-load 1.2s ease-in-out infinite}
+.sp-cap{position:absolute;left:0;right:0;bottom:6%;text-align:center;font:600 1.8cqw/1 ui-monospace,Menlo,monospace;letter-spacing:.24em;color:#8fd3bf}
+@keyframes u-sp-splash{0%,62%{opacity:1;clip-path:circle(150% at 50% 50%)}74%,100%{opacity:1;clip-path:circle(0% at 50% 50%)}}
+@keyframes u-sp-mark{0%,6%{transform:scale(.6)}20%{transform:scale(1)}36%,52%{transform:scale(1)}44%{transform:scale(1.08)}62%{transform:scale(.9)}72%,100%{transform:scale(3)}}
+@keyframes u-sp-ring{0%,6%{stroke-dashoffset:214}26%,100%{stroke-dashoffset:0}}
+@keyframes u-sp-wave{0%,20%{stroke-dashoffset:60}34%,100%{stroke-dashoffset:0}}
+@keyframes u-sp-dot{0%,32%{transform:scale(0)}38%{transform:scale(1.5)}42%,100%{transform:scale(1)}}
+@keyframes u-sp-load{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
+@keyframes u-sp-app{0%,66%{transform:scale(1.08);filter:blur(.4cqw)}78%,100%{transform:scale(1);filter:none}}
+@keyframes u-sp-row{0%,68%{transform:translateY(6cqw);opacity:0}80%,100%{transform:translateY(0);opacity:1}}
+
 @media (prefers-reduced-motion:reduce){
-  :is(.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii) *,:is(.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii) *::after{animation:none!important}
+  :is(.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion) *,:is(.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion) *::after{animation:none!important}
 }
