@@ -1,0 +1,1 @@
+GSAP 3.12.5, copyright GreenSock. The bundled distribution is subject to the GSAP Standard License: https://gsap.com/standard-license. Its license notice is also included in the header of gsap.min.js.
