@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1088,height=800">
+<title>Inflated: how a bouncy castle stays up</title>
+<style>
+@font-face{font-family:Fredoka;src:url('assets/fonts/fredoka600.woff2');font-weight:600}
+*{box-sizing:border-box}html,body{margin:0;width:1088px;height:800px;overflow:hidden}
+#root{position:relative;width:1088px;height:800px;overflow:hidden;background:#79d1b4}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+.cap{position:absolute;right:64px;top:80px;width:420px;text-align:right;color:#fff;font:600 40px/1.05 Fredoka,sans-serif;letter-spacing:.01em;text-shadow:0 3px 0 rgba(20,90,70,.35)}
+.cap span{display:block}
+.grain{position:absolute;inset:0;pointer-events:none;background:url('assets/noise.png') repeat;opacity:.05;mix-blend-mode:multiply}
+</style>
+</head>
+<body><main id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1088" data-height="800" data-fps="30">
+<canvas id="stage" class="clip" data-start="0" data-duration="6" data-track-index="1" data-layout-ignore></canvas>
+<div class="cap" id="c0">NO AIR,<br>NO CASTLE</div><div class="cap" id="c1">THE BLOWER<br>PUSHES AIR IN</div>
+<div class="cap" id="c2">SEAMS LEAK<br>ALL THE TIME</div><div class="cap" id="c3">MORE IN THAN OUT,<br>SO IT STAYS UP</div>
+<div class="grain" data-layout-ignore></div></main>
+<script src="assets/vendor/three.min.js"></script><script src="assets/vendor/gsap.min.js"></script><script>
+/* Motion Index original: glossy inflatables that sag and crease when short of air and round out when full. Inspired by Futurepedia's 3D Style Atlas (Inflated); our own code. */
+(() => {
+ const T=THREE, W=1088, H=800, D=6, PI=Math.PI;
+ const clamp=n=>Math.max(0,Math.min(1,n)), smooth=(a,b,t)=>{const x=clamp((t-a)/(b-a));return x*x*(3-2*x)};
+ const back=x=>{x=clamp(x);const c=1.6;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+ const renderer=new T.WebGLRenderer({canvas:document.querySelector('#stage'),antialias:true,alpha:true,preserveDrawingBuffer:true});
+ renderer.setPixelRatio(1);renderer.setSize(W,H,false);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=.92;
+ renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
+ const scene=new T.Scene(),camera=new T.PerspectiveCamera(30,W/H,.1,100);
+ const env=new T.Scene();env.add(new T.Mesh(new T.SphereGeometry(10),new T.MeshBasicMaterial({color:0x2f6e5c,side:T.BackSide})));
+ [[-4,5,5,4,2],[5,3,3,2,5],[0,8,0,6,6]].forEach(([x,y,z,w,h])=>{const b=new T.Mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({color:0xffffff}));b.material.color.multiplyScalar(4);b.position.set(x,y,z);b.lookAt(0,0,0);env.add(b)});
+ scene.environment=new T.PMREMGenerator(renderer).fromScene(env,.02).texture;
+ scene.add(new T.HemisphereLight(0xffffff,0x4aa58a,.7));const key=new T.DirectionalLight(0xfff4e6,3.0);key.position.set(-4,9,6);key.castShadow=true;
+ Object.assign(key.shadow.camera,{left:-8,right:8,top:8,bottom:-8});key.shadow.mapSize.set(2048,2048);key.shadow.radius=10;key.shadow.bias=-.0006;scene.add(key);
+ const floor=new T.Mesh(new T.PlaneGeometry(80,80),new T.ShadowMaterial({opacity:.3}));floor.rotation.x=-PI/2;floor.receiveShadow=true;scene.add(floor);
+ const vinyl=c=>new T.MeshPhysicalMaterial({color:c,roughness:.3,clearcoat:1,clearcoatRoughness:.08,envMapIntensity:.55});
+ const C={red:vinyl(0xf0463c),yel:vinyl(0xffc531),blu:vinyl(0x2f7ff0),wht:vinyl(0xf6f3ee),gry:vinyl(0x3b4552)};
+ // Every inflatable keeps its rest shape; fullness f squashes it to the floor, spreads it and adds creases.
+ const blobs=[];
+ function blob(geo,mat,x,z,delay,ry=0){geo.computeBoundingBox();geo.translate(0,-geo.boundingBox.min.y,0);const m=new T.Mesh(geo,mat);m.position.set(x,0,z);m.rotation.y=ry;m.castShadow=m.receiveShadow=true;scene.add(m);
+  blobs.push({m,base:Float32Array.from(geo.attributes.position.array),delay,h:geo.boundingBox.max.y-geo.boundingBox.min.y});return m}
+ function pillow(w,h,d,bulge){const g=new T.BoxGeometry(w,h,d,28,10,28),p=g.attributes.position;for(let i=0;i<p.count;i++){let x=p.getX(i),y=p.getY(i),z=p.getZ(i);const ax=x/(w/2),ay=y/(h/2),az=z/(d/2);
+   x*=1+bulge*(1-ay*ay)*(1-az*az)*.6/w*2;z*=1+bulge*(1-ay*ay)*(1-ax*ax)*.6/d*2;y*=1+bulge*(1-ax*ax)*(1-az*az)*.6/h*2;p.setXYZ(i,x,y,z)}g.computeVertexNormals();return g}
+ const tower=(r,h)=>{const g=new T.CylinderGeometry(r,r,h,48,20),p=g.attributes.position;for(let i=0;i<p.count;i++){const y=p.getY(i),k=1+.12*Math.cos(y/h*PI);p.setX(i,p.getX(i)*k);p.setZ(i,p.getZ(i)*k)}g.computeVertexNormals();return g};
+ const X=[-2.1,2.1],Z=[-1.7,1.7];
+ blob(pillow(5.2,.55,4.4,.35),C.blu,0,0,0);
+ X.forEach((x,i)=>Z.forEach((z,j)=>{const tw=blob(tower(.48,2.6),i^j?C.red:C.yel,x,z,.08+(i+j)*.06);tw.position.y=.45;blob(new T.ConeGeometry(.62,.9,48,8),i^j?C.yel:C.red,x,z,.2+(i+j)*.06).position.y=3.0}));
+ [[0,-1.7,0],[-2.1,0,PI/2],[2.1,0,PI/2]].forEach(([x,z,ry],i)=>{const g=new T.CapsuleGeometry(.32,3.0,10,32);g.rotateZ(PI/2);const m=blob(g,C.red,x,z,.14+i*.05,ry);m.position.y=.95;
+  const g2=new T.CapsuleGeometry(.26,3.0,10,32);g2.rotateZ(PI/2);const m2=blob(g2,C.yel,x,z,.18+i*.05,ry);m2.position.y=1.5});
+ blobs.forEach(b=>b.m.userData.y0=b.m.position.y);
+ const seams=[];X.forEach(x=>Z.forEach(z=>[1.15,1.95].forEach(y=>{const s=new T.Mesh(new T.TorusGeometry(.52,.025,8,48),C.wht);s.rotation.x=PI/2;s.position.set(x,y,z);s.castShadow=true;scene.add(s);seams.push({s,y})})));
+ // Blower: a box with a spinning fan, joined to the castle by a fat hose.
+ const blower=new T.Group();blower.position.set(-4.1,0,.2);scene.add(blower);
+ const box=new T.Mesh(new T.CylinderGeometry(.62,.7,1.0,32),C.gry);box.position.y=.5;box.castShadow=true;blower.add(box);
+ const fan=new T.Group();fan.position.set(0,1.02,0);blower.add(fan);for(let i=0;i<5;i++){const b=new T.Mesh(new T.BoxGeometry(.5,.03,.16),C.wht);b.position.x=.25;b.rotation.x=.4;const p=new T.Group();p.rotation.y=i/5*PI*2;p.add(b);fan.add(p)}
+ const grill=new T.Mesh(new T.TorusGeometry(.6,.04,8,40),C.wht);grill.rotation.x=PI/2;grill.position.y=1.03;blower.add(grill);
+ const hosePath=new T.CatmullRomCurve3([[-3.7,.55,.5],[-3.2,.25,.7],[-2.65,.3,.6]].map(p=>new T.Vector3(...p)));
+ const hose=new T.Mesh(new T.TubeGeometry(hosePath,40,.2,16,false),C.gry);hose.castShadow=true;scene.add(hose);
+ const arrowG=new T.ConeGeometry(.2,.42,24);arrowG.rotateZ(-PI/2);const arrows=[0,1,2].map(()=>{const a=new T.Mesh(arrowG,C.wht);a.castShadow=true;scene.add(a);return a});
+ const leaks=[];for(let i=0;i<8;i++){const a=new T.Mesh(new T.ConeGeometry(.1,.26,16),C.wht);scene.add(a);leaks.push({a,x:X[i%2],z:Z[(i>>1)%2],y:1.15+(i>>2)*.8,ang:i*1.7})}
+ const ball=new T.Mesh(new T.SphereGeometry(.32,32,16),C.yel);ball.castShadow=true;scene.add(ball);
+ const caps=[0,1,2,3].map(i=>document.querySelector('#c'+i)),capT=[[0,.95],[1.0,2.6],[2.7,3.95],[4.05,5.3]];
+ function draw(t){
+  const air=smooth(1.0,2.5,t)*(1-smooth(5.3,5.95,t));
+  blobs.forEach(b=>{const raw=clamp((air-b.delay)/(1-b.delay*.6)),f=t<5.3?back(raw)*.98+.02:raw*.98+.02,g=b.m.geometry,p=g.attributes.position,s=b.base;
+   for(let i=0;i<p.count;i++){const x=s[i*3],y=s[i*3+1],z=s[i*3+2],sq=.06+.94*f,cr=(1-f)*(.08*Math.sin(x*7+z*5)+.05*Math.sin(y*9+x*3));
+    p.setXYZ(i,x*(1+(1-f)*.25)+cr,y*sq*(1+cr),z*(1+(1-f)*.25)+cr*.6)}p.needsUpdate=true;g.computeVertexNormals();
+   b.m.position.y=b.m.userData.y0*(.06+.94*f)});
+  seams.forEach(q=>{q.s.position.y=q.y*(.06+.94*air);q.s.scale.setScalar(.85+.15*air);q.s.visible=air>.15});
+  const run=smooth(.9,1.2,t)*(1-smooth(5.2,5.4,t));fan.rotation.y=t*30*run;
+  arrows.forEach((a,i)=>{const k=(t*1.4+i/3)%1;a.position.copy(hosePath.getPoint(k)).add(new T.Vector3(0,.42,0));a.visible=run>.3;const tg=hosePath.getTangent(k);a.rotation.y=-Math.atan2(tg.z,tg.x);a.scale.setScalar(.8+.4*Math.sin(k*PI))});
+  const lk=smooth(2.7,3.0,t)*(1-smooth(5.25,5.35,t));leaks.forEach((L,i)=>{const k=(t*.9+i*.37)%1;L.a.visible=lk>.05;L.a.position.set(L.x+Math.cos(L.ang)*(.55+k*.5),L.y+k*.2,L.z+Math.sin(L.ang)*(.55+k*.5));
+   L.a.rotation.z=-PI/2;L.a.rotation.y=-L.ang;L.a.scale.setScalar(lk*(1.4-k)*1.3)});
+  const bt=(t-2.5)%0.62,hb=4*bt/.62*(1-bt/.62),on=smooth(2.5,2.7,t)*(1-smooth(5.05,5.25,t));ball.visible=on>.01;ball.position.set(.2,.62+.32*.9+hb*1.8*on,.9);ball.scale.set(1+(1-hb)*.18*on,1-(1-hb)*.18*on,1+(1-hb)*.18*on);
+  const sway=Math.sin(t/D*PI*2);camera.position.set(-3.2+sway*.6,6.0,16.4);camera.lookAt(.1,.95,0);
+  renderer.render(scene,camera);
+  caps.forEach((el,i)=>{const [a,b]=capT[i],o=smooth(a,a+.25,t)*(1-smooth(b-.2,b,t));el.style.opacity=o;el.style.transform=`translateY(${(1-o)*16}px) scale(${.92+.08*o})`});
+ }
+ document.fonts.ready.then(()=>{
+  const clock={t:0},tl=gsap.timeline({paused:true});tl.to(clock,{t:D,duration:D,ease:'none',onUpdate:()=>draw(clock.t)},0);
+  window.__timelines=window.__timelines||{};window.__timelines["main"]=tl;window.addEventListener('hf-seek',e=>draw(e.detail.time));draw(0);
+ });
+})();
+</script>
+</body></html>

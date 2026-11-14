@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1088,height=800">
+<title>X-ray scan: why a kettle switches itself off</title>
+<style>
+@font-face{font-family:Jakarta;src:url('assets/fonts/jakarta800.ttf');font-weight:800}
+@font-face{font-family:Plex;src:url('assets/fonts/plexmono700.ttf');font-weight:700}
+@font-face{font-family:Plex;src:url('assets/fonts/plexmono500.ttf');font-weight:500}
+*{box-sizing:border-box}html,body{margin:0;width:1088px;height:800px;overflow:hidden}
+#root{position:relative;width:1088px;height:800px;overflow:hidden;background:#070b12}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+svg{position:absolute;inset:0;width:1088px;height:800px;pointer-events:none}
+.kick{position:absolute;left:46px;top:40px;font:500 14px/1 Plex,monospace;letter-spacing:.2em;color:#ff9f4a}
+.head{position:absolute;left:46px;top:62px;font:800 30px/1.08 Jakarta,sans-serif;color:#eef6ff;letter-spacing:-.005em}
+.lab{position:absolute;left:0;top:0;color:#eef6ff;white-space:nowrap}
+.lab b{display:block;font:800 21px/1 Jakarta,sans-serif;letter-spacing:.02em}
+.lab i{display:block;margin-top:5px;font:500 14px/1 Plex,monospace;font-style:normal;color:#9fb6cc}
+.lab.hot b{color:#ffb06a}
+.scale{position:absolute;right:56px;bottom:46px;font:500 13px/1 Plex,monospace;color:#9fb6cc;text-align:center}
+.scale div{width:110px;height:8px;border:1.5px solid #9fb6cc;border-top:0;margin-top:6px}
+.grain{position:absolute;inset:0;pointer-events:none;background:url('assets/noise.png') repeat;opacity:.08;mix-blend-mode:screen}
+</style>
+</head>
+<body><main id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1088" data-height="800" data-fps="30">
+<canvas id="stage" class="clip" data-start="0" data-duration="6" data-track-index="1" data-layout-ignore></canvas>
+<svg id="leads" data-layout-ignore></svg>
+<div class="kick">SCAN 04 / CROSS-SECTION</div><div class="head">WHY A KETTLE<br>SWITCHES ITSELF OFF</div>
+<div class="lab hot" id="l0"><b>HEATING ELEMENT</b><i>turns current into heat</i></div>
+<div class="lab" id="l1"><b>WATER</b><i>boils near 100 °C</i></div>
+<div class="lab hot" id="l2"><b>STEAM SWITCH</b><i>steam bends a strip: click, off</i></div>
+<div class="scale">100 mm<div></div></div>
+<div class="grain" data-layout-ignore></div></main>
+<script src="assets/vendor/three.min.js"></script><script src="assets/vendor/gsap.min.js"></script><script>
+/* Motion Index original: a scan plane turns a solid object into a radiograph, then lights its inner parts in turn. Inspired by Futurepedia's 3D Style Atlas (X-Ray); our own code. */
+(() => {
+ const T=THREE, W=1088, H=800, D=6, PI=Math.PI;
+ const clamp=n=>Math.max(0,Math.min(1,n)), smooth=(a,b,t)=>{const x=clamp((t-a)/(b-a));return x*x*(3-2*x)};
+ const rng=(s=>()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296})(3);
+ const renderer=new T.WebGLRenderer({canvas:document.querySelector('#stage'),antialias:true,preserveDrawingBuffer:true});
+ renderer.setPixelRatio(1);renderer.setSize(W,H,false);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.localClippingEnabled=true;
+ const scene=new T.Scene();scene.background=new T.Color(0x070b12);const camera=new T.PerspectiveCamera(30,W/H,.1,100);
+ const env=new T.Scene();env.add(new T.Mesh(new T.SphereGeometry(10),new T.MeshBasicMaterial({color:0x4a5466,side:T.BackSide})));
+ [[-5,4,3],[5,2,-2]].forEach(([x,y,z])=>{const b=new T.Mesh(new T.PlaneGeometry(2.4,8),new T.MeshBasicMaterial({color:0xffffff}));b.material.color.multiplyScalar(5);b.position.set(x,y,z);b.lookAt(0,0,0);env.add(b)});
+ scene.environment=new T.PMREMGenerator(renderer).fromScene(env,.02).texture;
+ scene.add(new T.HemisphereLight(0x9fb8d8,0x05070a,.4));const key=new T.DirectionalLight(0xffffff,1.6);key.position.set(-3,5,4);scene.add(key);
+ // Clip planes: the solid keeps x > p, the radiograph keeps x < p; p sweeps with the scan bar.
+ const solidClip=new T.Plane(new T.Vector3(1,0,0),0),rayClip=new T.Plane(new T.Vector3(-1,0,0),0);
+ const xray=(color,base,rim,alpha=1)=>new T.ShaderMaterial({uniforms:{c:{value:new T.Color(color)},base:{value:base},rim:{value:rim},a:{value:alpha}},clipping:true,clippingPlanes:[rayClip],
+  transparent:true,depthWrite:false,side:T.DoubleSide,blending:T.AdditiveBlending,
+  vertexShader:`#include <clipping_planes_pars_vertex>
+   varying vec3 vN;varying vec3 vV;void main(){vec4 mvPosition=modelViewMatrix*vec4(position,1.);vN=normalize(normalMatrix*normal);vV=normalize(-mvPosition.xyz);gl_Position=projectionMatrix*mvPosition;
+   #include <clipping_planes_vertex>
+   }`,
+  fragmentShader:`#include <clipping_planes_pars_fragment>
+   uniform vec3 c;uniform float base,rim,a;varying vec3 vN;varying vec3 vV;void main(){
+   #include <clipping_planes_fragment>
+   float f=1.-abs(dot(normalize(vN),normalize(vV)));float i=base+pow(f,2.2)*rim;gl_FragColor=vec4(c*i*a,1.);}`});
+ const steel=new T.MeshStandardMaterial({color:0xe2e5e9,metalness:.92,roughness:.3,clippingPlanes:[solidClip]}),blackP=new T.MeshStandardMaterial({color:0x2a2d34,roughness:.45,clippingPlanes:[solidClip]});
+ const kettle=new T.Group();scene.add(kettle);
+ const both=(geo,solidMat,ray)=>{const a=new T.Mesh(geo,solidMat),b=new T.Mesh(geo,ray);kettle.add(a,b);return [a,b]};
+ const prof=[[.0,0],[.98,0],[1.04,.06],[1.14,.6],[1.12,1.2],[1.0,1.75],[.86,2.05],[.8,2.12]].map(([r,y])=>new T.Vector2(r,y));
+ const shellRay=xray(0x9fd8ff,.05,.9);
+ both(new T.LatheGeometry(prof,80),steel,shellRay);
+ both(new T.LatheGeometry([[0,2.32],[.4,2.28],[.74,2.16],[.8,2.12]].map(([r,y])=>new T.Vector2(r,y)),64),steel,shellRay);
+ const knob=both(new T.CylinderGeometry(.12,.16,.16,24),blackP,xray(0x9fd8ff,.04,.6));knob.forEach(m=>m.position.y=2.4);
+ const base=both(new T.CylinderGeometry(1.15,1.2,.22,64),blackP,xray(0x9fd8ff,.05,.5));base.forEach(m=>m.position.y=-.11);
+ const tubeAlong=(pts,r)=>new T.TubeGeometry(new T.CatmullRomCurve3(pts.map(p=>new T.Vector3(...p))),60,r,16,false);
+ both(tubeAlong([[-.95,.8,0],[-1.45,1.1,0],[-1.75,1.75,0],[-1.95,2.15,0]],.13),steel,shellRay);
+ const hp=[[1.0,1.95,0],[1.55,1.95,0],[1.78,1.55,0],[1.72,.8,0],[1.1,.4,0]];both(tubeAlong(hp,.13),blackP,xray(0x9fd8ff,.05,.7));
+ // Inner parts drawn only in the radiograph: element coil, water volume, steam channel, switch strip.
+ const coilPts=[];for(let i=0;i<=200;i++){const a=i/200*PI*2*2.2,r=.25+i/200*.6;coilPts.push(new T.Vector3(Math.cos(a)*r,.16,Math.sin(a)*r))}
+ const hot=xray(0xff8a3a,.25,1.4,0),coil=new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(coilPts),300,.045,8,false),hot);kettle.add(coil);
+ const water=xray(0x58b4ff,.06,.7,0);const wv=new T.Mesh(new T.LatheGeometry([[0,.24],[.96,.24],[1.06,.6],[1.04,1.2],[.98,1.45],[0,1.45]].map(([r,y])=>new T.Vector2(r,y)),64),water);kettle.add(wv);
+ const steamCh=xray(0xffffff,.1,.9,0);const ch=new T.Mesh(tubeAlong([[.55,1.95,0],[.95,2.0,0],[1.35,1.98,0],[1.6,1.85,0]],.05),steamCh);kettle.add(ch);
+ const strip=new T.Group();strip.position.set(1.62,1.72,0);kettle.add(strip);const sm=xray(0xff8a3a,.3,1.2,0);const sb=new T.Mesh(new T.BoxGeometry(.32,.04,.16),sm);sb.position.x=.16;strip.add(sb);
+ const bubbles=[];const bm=xray(0xcfeaff,.1,1.6,0);for(let i=0;i<26;i++){const b=new T.Mesh(new T.SphereGeometry(.035+rng()*.03,12,8),bm);b.userData={x:(rng()-.5)*1.4,z:(rng()-.5)*1.4,o:rng(),v:.5+rng()*.6};kettle.add(b);bubbles.push(b)}
+ const puffs=[];for(let i=0;i<10;i++){const p=new T.Mesh(new T.SphereGeometry(.05,10,8),steamCh);p.userData={o:i/10};kettle.add(p);puffs.push(p)}
+ const chCurve=new T.CatmullRomCurve3([[.2,1.5,0],[.55,1.95,0],[.95,2.0,0],[1.35,1.98,0],[1.6,1.85,0]].map(p=>new T.Vector3(...p)));
+ // Scanner bed grid and the scan bar.
+ const gridTex=(()=>{const c=document.createElement('canvas');c.width=c.height=512;const g=c.getContext('2d');g.fillStyle='#0a1019';g.fillRect(0,0,512,512);g.strokeStyle='rgba(120,170,220,.16)';g.lineWidth=1;
+  for(let i=0;i<=512;i+=32){g.beginPath();g.moveTo(i,0);g.lineTo(i,512);g.stroke();g.beginPath();g.moveTo(0,i);g.lineTo(512,i);g.stroke()}const t=new T.CanvasTexture(c);t.wrapS=t.wrapT=T.RepeatWrapping;t.repeat.set(6,6);t.colorSpace=T.SRGBColorSpace;return t})();
+ const bed=new T.Mesh(new T.PlaneGeometry(30,30),new T.MeshBasicMaterial({map:gridTex}));bed.rotation.x=-PI/2;bed.position.y=-.23;scene.add(bed);
+ const bar=new T.Group();scene.add(bar);const sheet=new T.Mesh(new T.PlaneGeometry(4.4,3.6),new T.MeshBasicMaterial({color:0x7fc8ff,transparent:true,opacity:.12,side:T.DoubleSide,depthWrite:false,blending:T.AdditiveBlending}));
+ sheet.rotation.y=PI/2;sheet.position.y=1.5;const edge=new T.LineLoop(new T.BufferGeometry().setFromPoints([[0,-.3,-2.2],[0,3.3,-2.2],[0,3.3,2.2],[0,-.3,2.2]].map(p=>new T.Vector3(...p))),new T.LineBasicMaterial({color:0xbfe6ff}));bar.add(sheet,edge);
+ const labs=[0,1,2].map(i=>document.querySelector('#l'+i)),svg=document.querySelector('#leads');
+ const lines=labs.map(()=>{const l=document.createElementNS('http://www.w3.org/2000/svg','polyline');l.setAttribute('fill','none');l.setAttribute('stroke','#cfe6ff');l.setAttribute('stroke-width','1.4');svg.appendChild(l);return l});
+ const anchors=[new T.Vector3(.55,.16,.55),new T.Vector3(-.4,1.0,.6),new T.Vector3(1.62,1.72,0)],offs=[[-270,70],[-300,-80],[40,-150]];
+ function draw(t){
+  const sweep=smooth(.35,1.55,t),back=smooth(5.35,5.95,t),p=-2.3+(sweep-back)*4.8;solidClip.constant=-p;rayClip.constant=p;bar.position.x=p;bar.visible=(sweep>0&&sweep<1)||(back>0&&back<1);
+  const on=[smooth(1.6,1.9,t),smooth(2.6,2.9,t),smooth(3.6,3.9,t)],off=1-back;
+  hot.uniforms.a.value=(.25+.75*on[0]*(1+.15*Math.sin(t*9)))*sweep*off*(1-.75*smooth(4.3,4.7,t));
+  water.uniforms.a.value=(.35+.65*on[1])*sweep*off;steamCh.uniforms.a.value=(.25+.75*on[2])*sweep*off;sm.uniforms.a.value=(.3+.7*on[2])*sweep*off;bm.uniforms.a.value=on[1]*sweep*off;
+  strip.rotation.z=-.5*smooth(4.15,4.3,t)*off;
+  bubbles.forEach(b=>{const u=b.userData,k=(u.o+t*u.v)%1;b.position.set(u.x*(1-k*.2),.3+k*1.1,u.z*(1-k*.2));b.scale.setScalar(.5+k)});
+  puffs.forEach(q=>{const k=(q.userData.o+t*.9)%1;q.position.copy(chCurve.getPoint(k));q.visible=on[2]>.05});
+  kettle.rotation.y=-.5+Math.sin(t/D*PI*2)*.25;
+  camera.position.set(.6,3.4,7.6);camera.lookAt(.2,1.05,0);camera.updateMatrixWorld();kettle.updateMatrixWorld();
+  renderer.render(scene,camera);
+  labs.forEach((el,i)=>{const a=anchors[i].clone();kettle.localToWorld(a);const v=a.project(camera),x=(v.x*.5+.5)*W,y=(-v.y*.5+.5)*H,r=smooth(0,.3,on[i]-0)*off;
+   const lx=x+offs[i][0],ly=y+offs[i][1],ex=lx+(offs[i][0]<0?el._w+8:-8);
+   lines[i].setAttribute('points',`${x},${y} ${x+(ex-x)*r*.6},${y+(ly+12-y)*r} ${x+(ex-x)*r},${y+(ly+12-y)*r}`);lines[i].style.opacity=r>0?.9:0;
+   el.style.transform=`translate(${offs[i][0]<0?lx:lx}px,${ly}px)`;el.style.opacity=r});
+ }
+ document.fonts.ready.then(()=>{
+  labs.forEach(el=>el._w=el.offsetWidth);
+  const clock={t:0},tl=gsap.timeline({paused:true});tl.to(clock,{t:D,duration:D,ease:'none',onUpdate:()=>draw(clock.t)},0);
+  window.__timelines=window.__timelines||{};window.__timelines["main"]=tl;window.addEventListener('hf-seek',e=>draw(e.detail.time));draw(0);
+ });
+})();
+</script>
+</body></html>

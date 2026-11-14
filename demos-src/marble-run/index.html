@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1088,height=800">
+<title>Marble run: how a help desk routes tickets</title>
+<style>
+@font-face{font-family:Oswald;src:url('assets/fonts/oswald600.woff2');font-weight:600}
+@font-face{font-family:Plex;src:url('assets/fonts/plexmono700.ttf');font-weight:700}
+*{box-sizing:border-box}html,body{margin:0;width:1088px;height:800px;overflow:hidden}
+#root{position:relative;width:1088px;height:800px;overflow:hidden;background:#5a7f86}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+.cnt{position:absolute;left:0;top:0;display:flex;flex-direction:column;align-items:center;gap:6px}
+.digits{display:flex;gap:3px}
+.digits span{position:relative;display:grid;place-items:center;width:30px;height:40px;background:#18171a;color:#f3ead8;font:700 26px/1 Plex,monospace;border-radius:3px;box-shadow:0 3px 6px rgba(0,0,0,.35);overflow:hidden}
+.digits span::after{content:'';position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.7)}
+.cap{font:600 17px/1 Oswald,sans-serif;letter-spacing:.12em;color:#2a1b10}
+.grain{position:absolute;inset:0;pointer-events:none;background:url('assets/noise.png') repeat;opacity:.06;mix-blend-mode:multiply}
+</style>
+</head>
+<body><main id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1088" data-height="800" data-fps="30">
+<canvas id="stage" class="clip" data-start="0" data-duration="6" data-track-index="1" data-layout-ignore></canvas>
+<div id="cnts"></div><div class="grain" data-layout-ignore></div></main>
+<script src="assets/vendor/three.min.js"></script><script src="assets/vendor/gsap.min.js"></script><script>
+/* Motion Index original: a wooden marble run where each gate is a rule and each jar an outcome. Inspired by Futurepedia's 3D Style Atlas (Marble Run); our own code. */
+(() => {
+ const T=THREE, W=1088, H=800, D=6, PI=Math.PI;
+ const clamp=n=>Math.max(0,Math.min(1,n)), smooth=(a,b,t)=>{const x=clamp((t-a)/(b-a));return x*x*(3-2*x)};
+ const rng=(s=>()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296})(5);
+ const renderer=new T.WebGLRenderer({canvas:document.querySelector('#stage'),antialias:true,preserveDrawingBuffer:true});
+ renderer.setPixelRatio(1);renderer.setSize(W,H,false);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+ renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
+ const scene=new T.Scene();const camera=new T.PerspectiveCamera(30,W/H,.1,100);
+ const tex=(w,h,draw)=>{const c=document.createElement('canvas');c.width=w;c.height=h;draw(c.getContext('2d'),w,h);const t=new T.CanvasTexture(c);t.colorSpace=T.SRGBColorSpace;t.anisotropy=8;return t};
+ const grainWood=(base,dark,lite,n)=>tex(1024,1024,(g,w,h)=>{g.fillStyle=base;g.fillRect(0,0,w,h);for(let i=0;i<n;i++){const y=rng()*h;g.strokeStyle=rng()<.6?dark:lite;g.globalAlpha=.08+rng()*.12;g.lineWidth=1+rng()*3;
+  g.beginPath();for(let x=0;x<=w;x+=20)g.lineTo(x,y+Math.sin(x*.01+i)*8);g.stroke()}g.globalAlpha=1});
+ const walnut=grainWood('#6a4126','#2e180b','#9a6a45',240),maple=grainWood('#e2c08a','#a77d48','#f6dfb5',160);
+ // Studio: cool backdrop, warm key from the upper left.
+ const bg=new T.Mesh(new T.PlaneGeometry(80,50),new T.MeshStandardMaterial({color:0x4f7a82,roughness:1}));bg.position.z=-6;scene.add(bg);
+ scene.add(new T.HemisphereLight(0xfff2de,0x3b4f52,.8));
+ const key=new T.DirectionalLight(0xffe7c4,2.6);key.position.set(-5,7,8);key.castShadow=true;Object.assign(key.shadow.camera,{left:-9,right:9,top:7,bottom:-6});key.shadow.mapSize.set(2048,2048);key.shadow.bias=-.0005;key.shadow.radius=5;scene.add(key);
+ const env=new T.Scene();env.add(new T.Mesh(new T.SphereGeometry(10),new T.MeshBasicMaterial({color:0x8fa9ad,side:T.BackSide})));const sb=new T.Mesh(new T.PlaneGeometry(6,3),new T.MeshBasicMaterial({color:0xffffff}));sb.material.color.multiplyScalar(4);sb.position.set(-4,5,6);sb.lookAt(0,0,0);env.add(sb);
+ scene.environment=new T.PMREMGenerator(renderer).fromScene(env,.03).texture;
+ const board=new T.Mesh(new T.BoxGeometry(10.4,7.6,.3),new T.MeshStandardMaterial({map:walnut,roughness:.55}));board.position.set(0,.5,-.3);board.receiveShadow=true;scene.add(board);
+ const brass=new T.MeshStandardMaterial({color:0xc9a043,metalness:1,roughness:.28}),mapleM=new T.MeshStandardMaterial({map:maple,roughness:.5});
+ // Rails: maple strips on brass pins. Rail 1 runs right, rail 2 runs left over the three jars.
+ const R1=[new T.Vector3(-3.7,3.05,0),new T.Vector3(3.35,2.05,0)],R2=[new T.Vector3(3.6,1.0,0),new T.Vector3(-2.75,.05,0)];
+ function rail(a,b){const len=a.distanceTo(b),m=new T.Mesh(new T.BoxGeometry(len+.4,.09,.42),mapleM);m.position.copy(a).lerp(b,.5);m.position.y-=.2;m.position.z=.3;m.rotation.z=Math.atan2(b.y-a.y,b.x-a.x);m.castShadow=m.receiveShadow=true;scene.add(m);
+  const lip=new T.Mesh(new T.BoxGeometry(len+.4,.14,.05),mapleM);lip.position.copy(m.position);lip.position.z=.5;lip.position.y+=.07;lip.rotation.z=m.rotation.z;lip.castShadow=true;scene.add(lip);
+  for(let k=0;k<=4;k++){const p=a.clone().lerp(b,k/4);const pin=new T.Mesh(new T.CylinderGeometry(.045,.045,.34,12),brass);pin.rotation.x=PI/2;pin.position.set(p.x,p.y-.28,.0);pin.castShadow=true;scene.add(pin)}}
+ rail(...R1);rail(...R2);
+ const hop=new T.Group();[[0,.55,1.2,.1],[-.55,.25,.1,.7],[.55,.4,.1,.4]].forEach(([x,y,w,h])=>{const m=new T.Mesh(new T.BoxGeometry(w,h,.62),mapleM);m.position.set(x,y,.3);m.castShadow=true;hop.add(m)});
+ hop.position.set(-4.0,3.05,0);scene.add(hop);
+ const tag=(txt,w)=>{const map=tex(400,140,(g,cw,ch)=>{g.fillStyle='#f1c84a';g.fillRect(0,0,cw,ch);g.strokeStyle='#8a6a1d';g.lineWidth=4;g.strokeRect(10,10,cw-20,ch-20);g.fillStyle='#2a1b10';g.font='600 70px Oswald';g.textAlign='center';g.textBaseline='middle';g.fillText(txt,cw/2,ch/2+4)});
+  const m=new T.Mesh(new T.BoxGeometry(w,.36,.03),[0,0,0,0,new T.MeshStandardMaterial({map,roughness:.7}),0].map(x=>x||new T.MeshStandardMaterial({color:0xd9ad3b})));m.castShadow=true;scene.add(m);return m};
+ const hopTag=tag('TICKETS',1.25);hopTag.position.set(-4.0,3.95,.62);
+ // Gates: brass paddles that swing open for the marbles that match their rule.
+ const jarsX=[2.35,-.05,-2.6],rules=['bug','bill'],gates=[];
+ [0,1].forEach(i=>{const x=jarsX[i],y=R2[0].y+(R2[1].y-R2[0].y)*(x-R2[0].x)/(R2[1].x-R2[0].x);const g=new T.Group();g.position.set(x+.32,y+.02,.3);
+  const pad=new T.Mesh(new T.BoxGeometry(.06,.5,.4),brass);pad.position.y=.25;pad.castShadow=true;g.add(pad);const hub=new T.Mesh(new T.CylinderGeometry(.08,.08,.5,16),brass);hub.rotation.x=PI/2;g.add(hub);scene.add(g);gates.push({g,x,y});
+  const t=tag(i?'BILLING?':'BUG?',i?1.3:.95);t.position.set(x+.1,y+.95,.1);t.rotation.z=(i?-.04:.05)});
+ // Jars on a maple plinth with burnt-in labels.
+ const glass=new T.MeshPhysicalMaterial({color:0xffffff,roughness:.04,transmission:0,transparent:true,opacity:.22,clearcoat:1,side:T.DoubleSide,depthWrite:false});
+ const names=['ENGINEERS','BILLING','HELP DESK'];
+ jarsX.forEach(x=>{const prof=[[.0,0],[.55,0],[.6,.08],[.6,1.2],[.5,1.35],[.5,1.48]].map(([r,y])=>new T.Vector2(r,y));const j=new T.Mesh(new T.LatheGeometry(prof,48),glass);j.position.set(x,-2.35,.75);j.renderOrder=2;scene.add(j);
+  const rim=new T.Mesh(new T.TorusGeometry(.5,.025,8,48),new T.MeshPhysicalMaterial({color:0xffffff,transparent:true,opacity:.5,roughness:.05}));rim.rotation.x=PI/2;rim.position.set(x,-.87,.75);scene.add(rim)});
+ const plTex=tex(2048,256,(g,w,h)=>{g.drawImage(maple.image,0,0,w,h);g.fillStyle='rgba(60,30,10,.85)';g.font='600 64px Oswald';g.textAlign='center';g.textBaseline='middle';
+  jarsX.forEach((x,i)=>{g.save();g.filter='blur(1px)';g.fillText(names[i],w/2+x/8.4*w,h*.78);g.restore()})});
+ const plinth=new T.Mesh(new T.BoxGeometry(8.4,1.0,2.0),[mapleM,mapleM,mapleM,mapleM,new T.MeshStandardMaterial({map:plTex,roughness:.5}),mapleM]);plinth.position.set(0,-2.85,.75);plinth.castShadow=plinth.receiveShadow=true;scene.add(plinth);
+ const floor=new T.Mesh(new T.PlaneGeometry(40,20),new T.MeshStandardMaterial({color:0x6b8f95,roughness:1}));floor.rotation.x=-PI/2;floor.position.y=-3.35;floor.receiveShadow=true;scene.add(floor);
+ // Marbles: a periodic stream (one every quarter second, 24 per loop) so frame 6 matches frame 0.
+ const kinds={bug:0xd8322f,bill:0x2f9a4c,other:0x2c58c9},pattern='obxobbxoxbobxoobxbxoobxo'.split('').map(c=>c==='x'?'bug':c==='b'?'bill':'other');
+ const swirl=tex(256,128,(g,w,h)=>{g.fillStyle='#fff';g.fillRect(0,0,w,h);g.fillStyle='rgba(255,255,255,0)';g.clearRect(0,0,w,h);g.fillStyle='#ffffff';g.beginPath();for(let x=0;x<=w;x+=4)g.lineTo(x,h/2+Math.sin(x/w*PI*4)*20);for(let x=w;x>=0;x-=4)g.lineTo(x,h/2+Math.sin(x/w*PI*4)*20+12);g.fill()});
+ const mats={};Object.entries(kinds).forEach(([k,c])=>mats[k]=new T.MeshPhysicalMaterial({color:c,roughness:.08,clearcoat:1,clearcoatRoughness:.05,map:null,emissive:0x000000}));
+ const swirlMat=new T.MeshBasicMaterial({map:swirl,transparent:true,depthWrite:false});
+ const r=.17,V=3.6,G=14,P=.25;
+ const seg=(a,b)=>({a,b,len:a.distanceTo(b)});
+ function plan(kind){const jar=kind==='bug'?0:kind==='bill'?1:2,steps=[];let t=0;
+  const roll=(a,b)=>{const d=a.distanceTo(b)/V;steps.push({t0:t,t1:t+d,a,b,mode:'roll'});t+=d};
+  const fall=(a,b)=>{const d=Math.sqrt(2*Math.max(.05,a.y-b.y)/G);steps.push({t0:t,t1:t+d,a,b,mode:'fall'});t+=d};
+  const lift=v=>v.clone().add(new T.Vector3(0,r,.3));
+  roll(lift(R1[0]),lift(R1[1]));fall(lift(R1[1]).add(new T.Vector3(.25,0,0)),lift(R2[0]));
+  const gx=jarsX[jar],gy=R2[0].y+(R2[1].y-R2[0].y)*(gx-R2[0].x)/(R2[1].x-R2[0].x),end=jar===2?lift(R2[1]):lift(new T.Vector3(gx,gy,0));
+  roll(lift(R2[0]),end);return {steps,arrive:t,jar,dropFrom:end}}
+ const plans={bug:plan('bug'),bill:plan('bill'),other:plan('other')};
+ const pool=[];for(let i=0;i<70;i++){const m=new T.Mesh(new T.SphereGeometry(r,24,16),mats.other);m.castShadow=true;const s=new T.Mesh(new T.SphereGeometry(r*1.002,24,16),swirlMat);m.add(s);scene.add(m);pool.push(m)}
+ const slot=(j,n)=>new T.Vector3(jarsX[j]+[-.25,.05,.28,-.08,.2][n%5]*.95,-2.35+r+.04+Math.floor(n/3)*.27+(n%3)*.035,.75+[.12,-.18,.06,.2,-.1][n%5]);
+ const cntWrap=document.querySelector('#cnts');const cnts=names.map(n=>{const d=document.createElement('div');d.className='cnt';d.innerHTML=`<div class="digits"><span>0</span><span>0</span></div>`;cntWrap.appendChild(d);return d});
+ function draw(t){
+  const drain=smooth(5.35,5.85,t);let used=0;const counts=[0,0,0],slots=[0,0,0],gateOpen=[0,0];
+  for(let k=-40;k<=24;k++){const s=k*P;const kind=pattern[((k%24)+24)%24],p=plans[kind],age=t-s;if(age<0)continue;
+   const m=pool[used++];if(!m)break;m.material=mats[kind];m.visible=true;
+   if(age<p.arrive){const st=p.steps.find(q=>age>=q.t0&&age<q.t1)||p.steps[p.steps.length-1];const u=clamp((age-st.t0)/(st.t1-st.t0));
+    if(st.mode==='roll'){m.position.copy(st.a).lerp(st.b,u);m.rotation.z=-(age*V)/r*(st.b.x>st.a.x?1:-1)}else{m.position.copy(st.a).lerp(st.b,u);m.position.y=st.a.y+(st.b.y-st.a.y)*u*u}
+    if(p.jar<2){const gp=p.steps[2],d=gp.t1-age;if(d<.35&&d>-.1)gateOpen[p.jar]=Math.max(gateOpen[p.jar],1-Math.abs(d-.12)/.25)}}
+   else{if(s+p.arrive<0){m.visible=false;continue}
+    const n=slots[p.jar]++,to=slot(p.jar,n),fall=Math.sqrt(2*Math.max(.05,p.dropFrom.y-to.y)/G),a2=age-p.arrive;
+    if(a2<fall){const u=a2/fall;m.position.copy(p.dropFrom).lerp(to,u);m.position.y=p.dropFrom.y+(to.y-p.dropFrom.y)*u*u}
+    else{m.position.copy(to);m.position.y-=drain*1.6;counts[p.jar]++}
+    m.visible=drain<.99}}
+  for(let i=used;i<pool.length;i++)pool[i].visible=false;
+  gates.forEach((g,i)=>g.g.rotation.z=-gateOpen[i]*1.2);
+  const ease=smooth(0,2.2,t),wide=smooth(2.0,3.6,t)*(1-smooth(5.4,6,t)),sx=Math.sin(t/D*PI*2)*.3;
+  camera.position.set(-1.8+wide*1.8+sx,2.7-wide*2.1,10.6+wide*4.6-ease*.6*(1-wide));camera.lookAt(-1.0+wide*1.0,1.95-wide*2.4,0);camera.updateMatrixWorld();
+  renderer.render(scene,camera);
+  const shown=counts.map(c=>Math.round(c*(1-drain)));
+  cnts.forEach((el,i)=>{const v=new T.Vector3(jarsX[i],-2.47,1.78).project(camera),x=(v.x*.5+.5)*W,y=(-v.y*.5+.5)*H;el.style.transform=`translate(${x}px,${y}px) translateX(-50%)`;
+   const sp=el._sp,txt=String(shown[i]).padStart(2,'0');sp[0].textContent=txt[0];sp[1].textContent=txt[1];el.style.opacity=wide})}
+ document.fonts.ready.then(()=>{
+  cnts.forEach(el=>{el._sp=el.querySelectorAll('span')});
+  const clock={t:0},tl=gsap.timeline({paused:true});tl.to(clock,{t:D,duration:D,ease:'none',onUpdate:()=>draw(clock.t)},0);
+  window.__timelines=window.__timelines||{};window.__timelines["main"]=tl;window.addEventListener('hf-seek',e=>draw(e.detail.time));draw(0);
+ });
+})();
+</script>
+</body></html>
