@@ -128,6 +128,15 @@
       "description": "MIT-licensed three.js shaders that turn a still image into a seamless swaying ASCII loop.",
       "url": "https://github.com/yusen-dev/living-ascii",
       "authorUrl": "https://github.com/yusen-dev"
+    },
+    {
+      "id": "futurepedia",
+      "author": "Futurepedia",
+      "name": "Futurepedia · 3D Style Atlas",
+      "project": "3D Style Atlas (three.js looks for 3D explainers)",
+      "description": "A free gallery of code-built three.js looks for 3D animated explainers, each shown with a sample clip. Our entries are original re-creations of the looks, not copies of its code or clips.",
+      "url": "https://www.futurepedia.io/resources/3d-style-atlas/view",
+      "authorUrl": "https://www.futurepedia.io/"
     }
   ],
   "entries": [
@@ -1531,6 +1540,121 @@
         "authorUrl": "https://github.com/seyedmostafahasani"
       },
       "prompt": "Create an original motion-graphics piece inspired by “Animated app splash” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A phone screen filled with one brand colour, a simple line-drawn logo mark in cream centred on it, a tiny loading bar below, and the real app UI waiting underneath in light cards.\nMotion: Start on the flat launch colour, draw the logo stroke by stroke, pop its accent with a small overshoot and let it pulse gently while loading; when ready, finish the loop, scale the mark up as a circular wipe that opens to the app, and let the first cards rise into place.\nBest suited to: App launches, onboarding, product demos and any brand intro that hands off to a UI.\n\nReference credit: Seyed Mostafa Hasani · react-native-splash-motion\nOriginal reference: https://github.com/seyedmostafahasani/react-native-splash-motion\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "low-poly",
+      "index": 67,
+      "added": "2026-11-14",
+      "title": "Low-poly world",
+      "category": "3D",
+      "description": "A faceted miniature landscape where a process plays out stage by stage.",
+      "look": "Flat-shaded triangles, one tone per facet with small shifts between neighbours, in a short palette of sand, leaf green, dusty rock and teal water under a warm hazy sky. Faceted trees and clouds, simple props (turbines, houses, poles) and paper-flag labels with a numbered circle.",
+      "motion": "Fly the camera along the route between stages, raising one numbered flag as each stage starts; animate the world itself (spinning blades, drifting clouds, a pulse along a line, windows lighting up), then pull back to a wide shot with every flag in view.",
+      "use": "Processes that happen in a place: energy, water, supply chains, journeys",
+      "source": {
+        "id": "futurepedia",
+        "author": "Futurepedia",
+        "name": "Futurepedia · 3D Style Atlas",
+        "project": "3D Style Atlas (three.js looks for 3D explainers)",
+        "description": "A free gallery of code-built three.js looks for 3D animated explainers, each shown with a sample clip. Our entries are original re-creations of the looks, not copies of its code or clips.",
+        "url": "https://www.futurepedia.io/resources/3d-style-atlas/view",
+        "authorUrl": "https://www.futurepedia.io/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Low-poly world” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Flat-shaded triangles, one tone per facet with small shifts between neighbours, in a short palette of sand, leaf green, dusty rock and teal water under a warm hazy sky. Faceted trees and clouds, simple props (turbines, houses, poles) and paper-flag labels with a numbered circle.\nMotion: Fly the camera along the route between stages, raising one numbered flag as each stage starts; animate the world itself (spinning blades, drifting clouds, a pulse along a line, windows lighting up), then pull back to a wide shot with every flag in view.\nBest suited to: Processes that happen in a place: energy, water, supply chains, journeys.\n\nReference credit: Futurepedia · 3D Style Atlas\nOriginal reference: https://www.futurepedia.io/resources/3d-style-atlas/view\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets.",
+      "demo": "/demos/low-poly.mp4",
+      "poster": "/demos/low-poly.jpg"
+    },
+    {
+      "id": "soft-clay",
+      "index": 68,
+      "added": "2026-11-14",
+      "title": "Soft clay stop-motion",
+      "category": "3D",
+      "description": "Lumpy plasticine models filmed like tabletop stop-motion.",
+      "look": "Chunky, slightly lopsided clay shapes with fingerprints, pits and tool marks, a few colours from one box of clay, soft key light and a seamless paper backdrop that curves up into the wall. Labels are fat rounded words with a pressed-clay edge.",
+      "motion": "Step the animation at 12 frames per second with a tiny boil between frames. Grow and pop things in with a squash-and-overshoot, one idea at a time, and let a friendly prop (a sun with a face) react at the payoff.",
+      "use": "Warm, non-technical explainers: growth, habits, savings, simple how-tos",
+      "source": {
+        "id": "futurepedia",
+        "author": "Futurepedia",
+        "name": "Futurepedia · 3D Style Atlas",
+        "project": "3D Style Atlas (three.js looks for 3D explainers)",
+        "description": "A free gallery of code-built three.js looks for 3D animated explainers, each shown with a sample clip. Our entries are original re-creations of the looks, not copies of its code or clips.",
+        "url": "https://www.futurepedia.io/resources/3d-style-atlas/view",
+        "authorUrl": "https://www.futurepedia.io/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Soft clay stop-motion” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Chunky, slightly lopsided clay shapes with fingerprints, pits and tool marks, a few colours from one box of clay, soft key light and a seamless paper backdrop that curves up into the wall. Labels are fat rounded words with a pressed-clay edge.\nMotion: Step the animation at 12 frames per second with a tiny boil between frames. Grow and pop things in with a squash-and-overshoot, one idea at a time, and let a friendly prop (a sun with a face) react at the payoff.\nBest suited to: Warm, non-technical explainers: growth, habits, savings, simple how-tos.\n\nReference credit: Futurepedia · 3D Style Atlas\nOriginal reference: https://www.futurepedia.io/resources/3d-style-atlas/view\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets.",
+      "demo": "/demos/soft-clay.mp4",
+      "poster": "/demos/soft-clay.jpg"
+    },
+    {
+      "id": "tiny-diorama",
+      "index": 69,
+      "added": "2026-11-14",
+      "title": "Tiny diorama tile",
+      "category": "3D",
+      "description": "A whole little world on one floating tile.",
+      "look": "A thick floating slab whose cut sides show grass, soil, clay and rock, topped with chunky rounded buildings, a winding road, lollipop trees, peg people and a small vehicle, all in matte toy-paint colours against a soft gradient.",
+      "motion": "Float the tile gently while the camera sways around it. Move one traveller along the road from stop to stop, pop a numbered sign above each stop as it is reached and light the active one, with small life everywhere (bobbing people, puffing chimney).",
+      "use": "Systems and journeys with a few stops: deliveries, recycling, a request moving through a company",
+      "source": {
+        "id": "futurepedia",
+        "author": "Futurepedia",
+        "name": "Futurepedia · 3D Style Atlas",
+        "project": "3D Style Atlas (three.js looks for 3D explainers)",
+        "description": "A free gallery of code-built three.js looks for 3D animated explainers, each shown with a sample clip. Our entries are original re-creations of the looks, not copies of its code or clips.",
+        "url": "https://www.futurepedia.io/resources/3d-style-atlas/view",
+        "authorUrl": "https://www.futurepedia.io/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Tiny diorama tile” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A thick floating slab whose cut sides show grass, soil, clay and rock, topped with chunky rounded buildings, a winding road, lollipop trees, peg people and a small vehicle, all in matte toy-paint colours against a soft gradient.\nMotion: Float the tile gently while the camera sways around it. Move one traveller along the road from stop to stop, pop a numbered sign above each stop as it is reached and light the active one, with small life everywhere (bobbing people, puffing chimney).\nBest suited to: Systems and journeys with a few stops: deliveries, recycling, a request moving through a company.\n\nReference credit: Futurepedia · 3D Style Atlas\nOriginal reference: https://www.futurepedia.io/resources/3d-style-atlas/view\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets.",
+      "demo": "/demos/tiny-diorama.mp4",
+      "poster": "/demos/tiny-diorama.jpg"
+    },
+    {
+      "id": "neon-sign",
+      "index": 70,
+      "added": "2026-11-14",
+      "title": "Neon sign diagram",
+      "category": "3D",
+      "description": "A diagram bent from glass tube on a brick wall at night.",
+      "look": "Thin glass tubes mounted off a painted brick wall on clear standoffs, black-painted returns at each end, milky grey glass when unlit, bright tinted cores and a soft coloured light pool on the bricks when lit. Small glowing captions in a thin rounded face.",
+      "motion": "Strike each part on in the order the idea happens, with a short transformer stutter before it holds. Let flowing parts (waves, signals) shimmer gently, light the caption with its part, and power everything down together to loop.",
+      "use": "How something works in a few steps: signals, electricity, light, a simple flow",
+      "source": {
+        "id": "futurepedia",
+        "author": "Futurepedia",
+        "name": "Futurepedia · 3D Style Atlas",
+        "project": "3D Style Atlas (three.js looks for 3D explainers)",
+        "description": "A free gallery of code-built three.js looks for 3D animated explainers, each shown with a sample clip. Our entries are original re-creations of the looks, not copies of its code or clips.",
+        "url": "https://www.futurepedia.io/resources/3d-style-atlas/view",
+        "authorUrl": "https://www.futurepedia.io/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Neon sign diagram” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Thin glass tubes mounted off a painted brick wall on clear standoffs, black-painted returns at each end, milky grey glass when unlit, bright tinted cores and a soft coloured light pool on the bricks when lit. Small glowing captions in a thin rounded face.\nMotion: Strike each part on in the order the idea happens, with a short transformer stutter before it holds. Let flowing parts (waves, signals) shimmer gently, light the caption with its part, and power everything down together to loop.\nBest suited to: How something works in a few steps: signals, electricity, light, a simple flow.\n\nReference credit: Futurepedia · 3D Style Atlas\nOriginal reference: https://www.futurepedia.io/resources/3d-style-atlas/view\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets.",
+      "demo": "/demos/neon-sign.mp4",
+      "poster": "/demos/neon-sign.jpg"
+    },
+    {
+      "id": "blueprint-build",
+      "index": 71,
+      "added": "2026-11-14",
+      "title": "Blueprint to object",
+      "category": "3D",
+      "description": "A drafting sheet whose drawing stands up into a real object.",
+      "look": "A deep-blue blueprint sheet on a walnut desk: paper grain, fold creases, a fine grid, a border and title block, white plotted linework with dashed hidden lines, dimensions and view labels. The object appears first as a white wireframe, then as a solid material.",
+      "motion": "Plot the drawing line by line from straight above, tilt the camera into a three-quarter view as the wireframe grows up out of its floor plan, fade the solid in and drop loose parts into place, then pin two or three numbered callouts to the features they describe.",
+      "use": "Plans, set-ups and how-it-is-made: furniture, products, rooms, builds",
+      "source": {
+        "id": "futurepedia",
+        "author": "Futurepedia",
+        "name": "Futurepedia · 3D Style Atlas",
+        "project": "3D Style Atlas (three.js looks for 3D explainers)",
+        "description": "A free gallery of code-built three.js looks for 3D animated explainers, each shown with a sample clip. Our entries are original re-creations of the looks, not copies of its code or clips.",
+        "url": "https://www.futurepedia.io/resources/3d-style-atlas/view",
+        "authorUrl": "https://www.futurepedia.io/"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Blueprint to object” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A deep-blue blueprint sheet on a walnut desk: paper grain, fold creases, a fine grid, a border and title block, white plotted linework with dashed hidden lines, dimensions and view labels. The object appears first as a white wireframe, then as a solid material.\nMotion: Plot the drawing line by line from straight above, tilt the camera into a three-quarter view as the wireframe grows up out of its floor plan, fade the solid in and drop loose parts into place, then pin two or three numbered callouts to the features they describe.\nBest suited to: Plans, set-ups and how-it-is-made: furniture, products, rooms, builds.\n\nReference credit: Futurepedia · 3D Style Atlas\nOriginal reference: https://www.futurepedia.io/resources/3d-style-atlas/view\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets.",
+      "demo": "/demos/blueprint-build.mp4",
+      "poster": "/demos/blueprint-build.jpg"
     }
   ]
 }

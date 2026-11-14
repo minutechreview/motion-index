@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1088,height=800">
+<title>Neon sign: how Wi-Fi reaches your phone</title>
+<style>
+@font-face{font-family:Quicksand;src:url('assets/fonts/quicksand500.woff2');font-weight:500}
+*{box-sizing:border-box}html,body{margin:0;width:1088px;height:800px;overflow:hidden}
+#root{position:relative;width:1088px;height:800px;overflow:hidden;background:#07080b}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+.cap{position:absolute;left:0;top:0;font:500 26px/1 Quicksand,sans-serif;letter-spacing:.14em;white-space:nowrap;transform:translate(-50%,-50%);color:#5d6168}
+.cap.on{color:#fff}
+.vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 45%,rgba(0,0,0,.55) 100%)}
+.grain{position:absolute;inset:0;pointer-events:none;background:url('assets/noise.png') repeat;opacity:.06}
+</style>
+</head>
+<body><main id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1088" data-height="800" data-fps="30">
+<canvas id="stage" class="clip" data-start="0" data-duration="6" data-track-index="1" data-layout-ignore></canvas>
+<div class="cap" id="c1" data-glow="#4fe3ff">ROUTER</div>
+<div class="cap" id="c2" data-glow="#ff5fd2">RADIO WAVES</div>
+<div class="cap" id="c3" data-glow="#7dff9a">YOUR PHONE</div>
+<div class="vignette" data-layout-ignore></div><div class="grain" data-layout-ignore></div></main>
+<script src="assets/vendor/three.min.js"></script><script src="assets/vendor/gsap.min.js"></script><script>
+/* Motion Index original: a diagram bent from glass tube on a brick wall. Inspired by Futurepedia's 3D Style Atlas (Neon Sign); our own code. */
+(() => {
+ const T=THREE, W=1088, H=800, D=6, V=(x,y)=>new T.Vector2(x,y);
+ const clamp=n=>Math.max(0,Math.min(1,n)), smooth=(a,b,t)=>{const x=clamp((t-a)/(b-a));return x*x*(3-2*x)};
+ const hash=n=>{const s=Math.sin(n*91.7)*43758.5453;return s-Math.floor(s)};
+ // A tube strikes on with a few stutters, like a real transformer warming up.
+ const strike=(at,t,seed)=>{if(t<at)return 0;const k=t-at;if(k>.32)return 1;return hash(Math.floor(k*40)+seed*13)>.45?.25+k*2:0};
+ const renderer=new T.WebGLRenderer({canvas:document.querySelector('#stage'),antialias:true,preserveDrawingBuffer:true});
+ renderer.setPixelRatio(1);renderer.setSize(W,H,false);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
+ const scene=new T.Scene(),camera=new T.PerspectiveCamera(32,W/H,.1,100);
+ scene.add(new T.HemisphereLight(0x7080a8,0x141414,.9));const street=new T.DirectionalLight(0x9fb2d8,.9);street.position.set(-6,8,7);scene.add(street);
+ // Painted brick wall: colour, mortar and a little grime, drawn once.
+ const BW=2048,BH=1280,bc=document.createElement('canvas');bc.width=BW;bc.height=BH;const b=bc.getContext('2d');
+ b.fillStyle='#3a3836';b.fillRect(0,0,BW,BH);
+ for(let r=0;r<BH/40;r++)for(let c=-1;c<BW/120+1;c++){const x=c*120+(r%2)*60,y=r*40,h=hash(r*99+c);
+  b.fillStyle=`hsl(${8+h*10},${14+h*8}%,${27+h*9}%)`;b.fillRect(x+3,y+3,114,34);b.fillStyle='rgba(0,0,0,.18)';b.fillRect(x+3,y+31,114,6)}
+ for(let i=0;i<900;i++){b.fillStyle=`rgba(${hash(i)*40|0},${hash(i+1)*40|0},${hash(i+2)*40|0},.25)`;b.fillRect(hash(i*3)*BW,hash(i*5)*BH,2+hash(i*7)*5,2+hash(i*11)*5)}
+ const brick=new T.CanvasTexture(bc);brick.colorSpace=T.SRGBColorSpace;
+ const wall=new T.Mesh(new T.PlaneGeometry(16,10),new T.MeshStandardMaterial({map:brick,roughness:.95}));wall.position.set(0,4.2,0);scene.add(wall);
+ // Wet pavement: dark and glossy, drawn over the mirrored glow so the sign reflects in it.
+ const ground=new T.Mesh(new T.PlaneGeometry(30,14),new T.MeshStandardMaterial({color:0x0b0c10,roughness:.3,metalness:.4,transparent:true,opacity:.7}));
+ ground.rotation.x=-Math.PI/2;ground.position.set(0,-.55,7);ground.renderOrder=5;scene.add(ground);
+ const reflect=new T.Group();reflect.scale.y=-1;reflect.position.y=-1.1;scene.add(reflect);
+ // Shapes are 2D paths on the wall; each one becomes glass tube plus glow.
+ const rrect=(cx,cy,w,h,r)=>{const p=[],q=[[cx+w/2-r,cy+h/2-r,0],[cx-w/2+r,cy+h/2-r,1],[cx-w/2+r,cy-h/2+r,2],[cx+w/2-r,cy-h/2+r,3]];
+  q.forEach(([x,y,k])=>{for(let i=0;i<=8;i++){const a=(k+i/8)*Math.PI/2;p.push(V(x+Math.cos(a)*r,y+Math.sin(a)*r))}});p.push(p[0].clone());return p};
+ const arc=(cx,cy,r,a0,a1,n=24)=>Array.from({length:n+1},(_,i)=>{const a=a0+(a1-a0)*i/n;return V(cx+Math.cos(a)*r,cy+Math.sin(a)*r)});
+ const line=(x0,y0,x1,y1)=>[V(x0,y0),V((x0+x1)/2,(y0+y1)/2),V(x1,y1)];
+ const shapes=[];const Z=.32;
+ function tube(points,color,at,seed,group='a'){
+  const curve=new T.CatmullRomCurve3(points.map(p=>new T.Vector3(p.x,p.y,Z)),false,'centripetal',.2);
+  const geo=new T.TubeGeometry(curve,Math.max(16,points.length*4),.045,10,false);
+  const glass=new T.MeshPhysicalMaterial({color:0x9aa1aa,roughness:.25,transmission:0,transparent:true,opacity:.55,clearcoat:1});
+  const core=new T.Mesh(geo,glass);scene.add(core);
+  const halos=[[.08,.55],[.15,.18]].map(([r,o])=>{const m=new T.Mesh(new T.TubeGeometry(curve,geo.parameters.tubularSegments,r,10,false),
+   new T.MeshBasicMaterial({color,transparent:true,opacity:0,blending:T.AdditiveBlending,depthWrite:false}));m.userData.o=o;scene.add(m);return m});
+  const mirror=new T.Mesh(halos[0].geometry,new T.MeshBasicMaterial({color,transparent:true,opacity:0,blending:T.AdditiveBlending,depthWrite:false}));mirror.position.z=1.6;reflect.add(mirror);
+  // Wall spill: a soft light pool drawn once, faded with the tube.
+  const xs=points.map(p=>p.x),ys=points.map(p=>p.y),minX=Math.min(...xs)-1.2,maxX=Math.max(...xs)+1.2,minY=Math.min(...ys)-1.2,maxY=Math.max(...ys)+1.2;
+  const sc=document.createElement('canvas'),S=96;sc.width=(maxX-minX)*S;sc.height=(maxY-minY)*S;const g=sc.getContext('2d');
+  g.strokeStyle=new T.Color(color).getStyle();g.lineWidth=.4*S;g.lineCap=g.lineJoin='round';g.filter=`blur(${.5*S}px)`;g.beginPath();
+  points.forEach((p,i)=>{const x=(p.x-minX)*S,y=(maxY-p.y)*S;i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke();
+  const spillTex=new T.CanvasTexture(sc);spillTex.colorSpace=T.SRGBColorSpace;
+  const spill=new T.Mesh(new T.PlaneGeometry(maxX-minX,maxY-minY),new T.MeshBasicMaterial({map:spillTex,transparent:true,opacity:0,blending:T.AdditiveBlending,depthWrite:false}));
+  spill.position.set((minX+maxX)/2,(minY+maxY)/2,.02);scene.add(spill);
+  // Clear standoffs hold the tube off the wall; black-painted returns run back into it at each end.
+  [0,.5,.999].forEach(k=>{const p=curve.getPoint(k);const s=new T.Mesh(new T.CylinderGeometry(.03,.03,Z,8),glass);s.rotation.x=Math.PI/2;s.position.set(p.x,p.y,Z/2);scene.add(s)});
+  [0,1].forEach(k=>{const p=curve.getPoint(k);const r=new T.Mesh(new T.CylinderGeometry(.05,.05,Z,10),new T.MeshStandardMaterial({color:0x111111,roughness:.6}));r.rotation.x=Math.PI/2;r.position.set(p.x,p.y,Z/2);scene.add(r)});
+  const s={core,halos,mirror,spill,color:new T.Color(color),at,seed,group};shapes.push(s);return s;
+ }
+ const CY='#4fe3ff',PK='#ff5fd2',GR='#7dff9a',YL='#ffd45c';
+ tube(rrect(-3.5,2.3,2,.8,.22),CY,.35,1);tube(line(-4.1,2.7,-4.4,3.9),CY,.4,2);tube(line(-2.9,2.7,-2.6,3.9),CY,.45,3);
+ [[-4.15,2.3],[-3.75,2.3],[-3.35,2.3]].forEach(([x,y],i)=>tube(arc(x,y,.07,0,Math.PI*2,10),GR,.6+i*.08,4+i));
+ const waves=[1,1.7,2.4].map((r,i)=>tube(arc(-2,2.9,r,-.55,.75),PK,1.45+i*.45,7+i,'w'));
+ tube(rrect(3.2,2.7,1.15,2.1,.2),GR,3.45,10);tube(line(3,3.55,3.4,3.55),GR,3.5,11);
+ tube([V(2.85,2.55),V(3.12,2.28),V(3.62,2.9)],YL,3.95,12);
+ const caps=[['#c1',[-3.5,1.25],.6],['#c2',[0,1.25],1.6],['#c3',[3.2,1.25],3.7]].map(([s,p,at])=>({el:document.querySelector(s),p:new T.Vector3(p[0],p[1],Z),at}));
+ function draw(t){
+  const off=1-smooth(5.4,5.9,t);
+  shapes.forEach(s=>{let k=strike(s.at,t,s.seed)*off;
+   if(s.group==='w'){k*=.75+.25*Math.sin(t*9-s.seed)}
+   s.core.material.color.copy(new T.Color(0x9aa1aa)).lerp(new T.Color(0xffffff).lerp(s.color,.35),k);s.core.material.emissive.copy(new T.Color(0xffffff).lerp(s.color,.45)).multiplyScalar(k*1.1);s.core.material.opacity=.55+.45*k;
+   s.halos.forEach(h=>h.material.opacity=h.userData.o*k);s.mirror.material.opacity=.6*k;s.spill.material.opacity=.95*k});
+  caps.forEach(c=>{const k=strike(c.at,t,c.at*7)*off,v=c.p.clone().project(camera),g=c.el.dataset.glow;
+   c.el.style.left=`${(v.x*.5+.5)*W}px`;c.el.style.top=`${(-v.y*.5+.5)*H}px`;c.el.classList.toggle('on',k>.5);
+   c.el.style.textShadow=k>.5?`0 0 4px #fff,0 0 12px ${g},0 0 28px ${g},0 0 54px ${g}`:'none'});
+  const m=smooth(0,6,t);camera.position.set(.7-m*1.3,2.3+m*.2,13.4-m*1);camera.lookAt(-.2,2,0);camera.updateMatrixWorld();
+  renderer.render(scene,camera);
+ }
+ document.fonts.ready.then(()=>{
+  const clock={t:0},tl=gsap.timeline({paused:true});tl.to(clock,{t:D,duration:D,ease:'none',onUpdate:()=>draw(clock.t)},0);
+  window.__timelines=window.__timelines||{};window.__timelines["main"]=tl;window.addEventListener('hf-seek',e=>draw(e.detail.time));draw(0);
+ });
+})();
+</script>
+</body></html>

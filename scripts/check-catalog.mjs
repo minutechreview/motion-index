@@ -5,7 +5,7 @@ import { newChecker, libraryOrder } from '../public/freshness.js';
 const catalog = JSON.parse(readFileSync('public/catalog.json', 'utf8'));
 const {entries,sources} = catalog;
 const app = readFileSync('public/app.js', 'utf8') + readFileSync('public/scenes-ultra.js', 'utf8') + readFileSync('public/scenes-scout.js', 'utf8');
-assert.equal(entries.length, 66);
+assert.equal(entries.length, 71);
 assert.equal(new Set(entries.map(e=>e.id)).size, entries.length);
 assert.equal(new Set(sources.map(source=>source.id)).size, sources.length);
 const featured = entries.filter(entry=>entry.featured).sort((a,b)=>a.featured-b.featured);
@@ -28,6 +28,7 @@ for (const entry of entries) {
   assert.ok(entry.source.url.startsWith('https://'));
   assert.ok(sources.some(source=>source.id===entry.source.id && source.author===entry.source.author), `Missing creator credit: ${entry.id}`);
   assert.ok(entry.prompt.includes(entry.source.name) && entry.prompt.includes(entry.source.url), `Prompt missing credit: ${entry.id}`);
+  if (entry.demo) { assert.ok(existsSync(`public${entry.demo}`) && existsSync(`public${entry.poster}`), `Missing demo files: ${entry.id}`); continue; }
   assert.ok(app.includes(`${entry.id.includes('-') ? "'" + entry.id + "'" : entry.id}:`), `Missing preview: ${entry.id}`);
 }
 // Freshness: every style has a first-seen date, and New / ordering follow the catalog's window.

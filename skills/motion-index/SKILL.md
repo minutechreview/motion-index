@@ -6,7 +6,7 @@ description: Pick a motion-graphics style from Motion Index (60 credited styles 
 # Motion Index
 
 `catalog.json` (next to this file) holds the library. Each entry in `entries` has `id`, `title`, `category`
-(Product, Type, Data, Editorial, Illustration, Interface, Abstract), `description`, `look`, `motion`, `use`
+(Product, Type, Data, Editorial, Illustration, Interface, Abstract, 3D), `description`, `look`, `motion`, `use`
 (what it suits), `source` (the original creator: `author`, `project`, `url`) and `prompt` (a copy-ready brief
 with the placeholder `[YOUR TOPIC OR BRAND]`).
 

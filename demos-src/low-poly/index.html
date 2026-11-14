@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1088,height=800">
+<title>Low-poly world: how a wind farm powers a town</title>
+<style>
+@font-face{font-family:Oswald;src:url('assets/fonts/oswald600.woff2');font-weight:600}
+*{box-sizing:border-box}html,body{margin:0;width:1088px;height:800px;overflow:hidden}
+#root{position:relative;width:1088px;height:800px;overflow:hidden;background:linear-gradient(180deg,#9fc3cf 0%,#d9d3bd 55%,#ecd2b0 100%)}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+.flag{position:absolute;left:0;top:0;width:0;height:0;font-family:Oswald,sans-serif}
+.pole{position:absolute;left:-1px;bottom:0;width:2px;background:#3d3a35;transform-origin:bottom center}
+.card{position:absolute;left:0;display:flex;align-items:center;gap:10px;padding:7px 14px 7px 8px;background:#f6efe0;color:#2c2a26;font:600 22px/1 Oswald,sans-serif;letter-spacing:.06em;white-space:nowrap;clip-path:polygon(0 0,100% 0,94% 50%,100% 100%,0 100%);box-shadow:0 6px 14px rgba(40,30,20,.18);transform-origin:left center}
+.num{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#2f6f6a;color:#f6efe0;font-size:17px;letter-spacing:0}
+.title{position:absolute;left:44px;top:38px;color:#2c2a26;font:600 22px/1.2 Oswald,sans-serif;letter-spacing:.14em;opacity:.78}
+.grain{position:absolute;inset:0;pointer-events:none;background:url('assets/noise.png') repeat;opacity:.07;mix-blend-mode:multiply}
+</style>
+</head>
+<body><main id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1088" data-height="800" data-fps="30">
+<canvas id="stage" class="clip" data-start="0" data-duration="6" data-track-index="1" data-layout-ignore></canvas>
+<div class="title">HOW A WIND FARM POWERS A TOWN</div>
+<div class="flag" id="f1"><i class="pole"></i><div class="card"><span class="num">1</span>WIND</div></div>
+<div class="flag" id="f2"><i class="pole"></i><div class="card"><span class="num">2</span>TURBINES</div></div>
+<div class="flag" id="f3"><i class="pole"></i><div class="card"><span class="num">3</span>TOWN</div></div>
+<div class="grain" data-layout-ignore></div></main>
+<script src="assets/vendor/three.min.js"></script><script src="assets/vendor/gsap.min.js"></script><script>
+/* Motion Index original: a faceted low-poly landscape. Inspired by Futurepedia's 3D Style Atlas (Low-Poly); our own code. */
+(() => {
+ const T=THREE, W=1088, H=800, D=6;
+ const clamp=n=>Math.max(0,Math.min(1,n)), smooth=(a,b,t)=>{const x=clamp((t-a)/(b-a));return x*x*(3-2*x)};
+ const rng=(s=>()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296})(7);
+ const hash=(x,z)=>{const s=Math.sin(x*127.1+z*311.7)*43758.5453;return s-Math.floor(s)};
+ const vnoise=(x,z)=>{const xi=Math.floor(x),zi=Math.floor(z),xf=x-xi,zf=z-zi,u=xf*xf*(3-2*xf),v=zf*zf*(3-2*zf);
+  const a=hash(xi,zi),b=hash(xi+1,zi),c=hash(xi,zi+1),d=hash(xi+1,zi+1);return a+(b-a)*u+(c-a)*v+(a-b-c+d)*u*v};
+ const fbm=(x,z)=>vnoise(x*.18,z*.18)*.6+vnoise(x*.4,z*.4)*.28+vnoise(x*.9,z*.9)*.12;
+ const bump=(x,z,cx,cz,r,h)=>h*Math.exp(-((x-cx)**2+(z-cz)**2)/(r*r));
+ // Sea on the left, a grassy ridge in the middle, peaks behind, a flat shelf for the town.
+ function height(x,z){
+  let h=-1.6+clamp((x+9)/9)*2.6;
+  h+=bump(x,z,4,-3,5,2.6)+bump(x,z,6,-13,4,6.4)+bump(x,z,11,-10,4,5.2)+bump(x,z,1,-14,4,5)+bump(x,z,16,-6,4.5,4.4)+bump(x,z,-4,-15,4,3.6);
+  h+=(fbm(x+30,z+30)-.5)*1.6*clamp((x+6)/8);
+  const town=Math.exp(-((x+3.5)**2+(z-5)**2)/9);return h*(1-town)+.55*town;
+ }
+ const renderer=new T.WebGLRenderer({canvas:document.querySelector('#stage'),antialias:true,alpha:true,preserveDrawingBuffer:true});
+ renderer.setPixelRatio(1);renderer.setSize(W,H,false);renderer.outputColorSpace=T.SRGBColorSpace;
+ renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=.92;
+ renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
+ const scene=new T.Scene();scene.fog=new T.Fog(0xe6d8bd,34,80);
+ const camera=new T.PerspectiveCamera(34,W/H,.1,200);
+ scene.add(new T.HemisphereLight(0xfff1dc,0x5d7a4c,1.0));
+ const sun=new T.DirectionalLight(0xffe2b8,2.6);sun.position.set(-16,12,8);sun.castShadow=true;
+ Object.assign(sun.shadow.camera,{left:-24,right:24,top:24,bottom:-24,near:1,far:80});sun.shadow.mapSize.set(2048,2048);sun.shadow.bias=-.0006;scene.add(sun);
+ // Terrain: one flat-shaded triangle per facet, each tinted by height with a small random shift.
+ const geo=new T.PlaneGeometry(56,48,46,40).toNonIndexed();geo.rotateX(-Math.PI/2);
+ const pos=geo.attributes.position,colors=[];
+ for(let i=0;i<pos.count;i++){const x=pos.getX(i),z=pos.getZ(i);pos.setY(i,height(x,z)+(hash(x*3.1,z*2.7)-.5)*.25)}
+ const pal={sand:[.9,.72,.48],grass:[.38,.62,.24],grass2:[.27,.5,.21],rock:[.52,.42,.43],snow:[.96,.94,.9]};
+ for(let i=0;i<pos.count;i+=3){
+  const y=(pos.getY(i)+pos.getY(i+1)+pos.getY(i+2))/3, j=(rng()-.5)*.08;
+  let c=y<.15?pal.sand:y<3.3?(rng()<.5?pal.grass:pal.grass2):y<6?pal.rock:pal.snow;
+  for(let k=0;k<3;k++)colors.push(c[0]+j,c[1]+j,c[2]+j*.6);
+ }
+ geo.setAttribute('color',new T.Float32BufferAttribute(colors,3));geo.computeVertexNormals();
+ const land=new T.Mesh(geo,new T.MeshStandardMaterial({vertexColors:true,flatShading:true,roughness:.95}));land.receiveShadow=true;land.castShadow=true;scene.add(land);
+ const waterGeo=new T.PlaneGeometry(70,56,28,22).toNonIndexed();waterGeo.rotateX(-Math.PI/2);
+ const water=new T.Mesh(waterGeo,new T.MeshStandardMaterial({color:0x58b3b0,flatShading:true,roughness:.35,metalness:.05,transparent:true,opacity:.92}));
+ water.position.set(-6,0,0);water.receiveShadow=true;scene.add(water);const wBase=Float32Array.from(waterGeo.attributes.position.array);
+ const flat=c=>new T.MeshStandardMaterial({color:c,flatShading:true,roughness:.9});
+ const add=(g,m,x,y,z,parent=scene)=>{const o=new T.Mesh(g,m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o};
+ // Trees on the grass, kept off the town shelf and the water.
+ const leaf=[flat(0x3f7a45),flat(0x2f6640),flat(0x5b8f45)],trunk=flat(0x6b4b35);
+ for(let n=0,tries=0;n<85&&tries<2000;tries++){
+  const x=-6+rng()*26,z=-16+rng()*30,y=height(x,z);
+  if(y<.35||y>3.2||Math.hypot(x+3.5,z-5)<3.6||Math.hypot(x-4,z+3)<2.2)continue;
+  const s=.42+rng()*.42,g=new T.Group();g.position.set(x,y,z);g.rotation.y=rng()*6;scene.add(g);
+  add(new T.CylinderGeometry(.07*s,.1*s,.5*s,5),trunk,0,.25*s,0,g);
+  add(new T.ConeGeometry(.45*s,1.2*s,rng()<.5?5:6),leaf[n%3],0,1*s,0,g);n++;
+ }
+ // Wind turbines on the ridge.
+ const white=flat(0xf1ece2),turbines=[];
+ [[2.6,-4.2],[5.2,-2.4],[4.4,-6.4],[7.4,-4.8]].forEach(([x,z],i)=>{
+  const g=new T.Group();g.position.set(x,height(x,z),z);g.rotation.y=.5;scene.add(g);
+  add(new T.CylinderGeometry(.06,.13,3.4,6),white,0,1.7,0,g);add(new T.BoxGeometry(.22,.2,.44),white,0,3.42,0,g);
+  const hub=new T.Group();hub.position.set(0,3.42,.26);g.add(hub);
+  for(let b=0;b<3;b++){const p=new T.Group();p.rotation.z=b*Math.PI*2/3;hub.add(p);add(new T.BoxGeometry(.11,1.5,.03),white,0,.75,0,p)}
+  turbines.push({hub,phase:i*.7});
+ });
+ // Town: little houses that light up when the power arrives.
+ const roofs=[flat(0xb85d4a),flat(0x8f4e44),flat(0xc9845a)],walls=flat(0xefe3cc),windows=[];
+ [[-5,4],[-3.6,6.2],[-2.2,4.2],[-4.4,7.6],[-1.6,6.8],[-5.8,6]].forEach(([x,z],i)=>{
+  const g=new T.Group();g.position.set(x,height(x,z),z);g.rotation.y=i*.6;g.scale.setScalar(.72);scene.add(g);
+  add(new T.BoxGeometry(.9,.7,.8),walls,0,.35,0,g);const roof=add(new T.ConeGeometry(.75,.6,4),roofs[i%3],0,1,0,g);roof.rotation.y=Math.PI/4;
+  const win=new T.Mesh(new T.PlaneGeometry(.26,.24),new T.MeshBasicMaterial({color:0x3a3a40}));win.position.set(0,.38,.41);g.add(win);windows.push(win);
+ });
+ // Power line from the ridge to the town, with a pulse that travels down it.
+ const route=new T.CatmullRomCurve3([[3.6,0,-3.4],[1.4,0,-.6],[-.6,0,2.2],[-2.2,0,4.6]].map(([x,,z])=>new T.Vector3(x,height(x,z)+1.1,z)));
+ route.points.forEach(p=>add(new T.CylinderGeometry(.03,.04,1.1,5),flat(0x5a4636),p.x,p.y-.55,p.z));
+ scene.add(new T.Line(new T.BufferGeometry().setFromPoints(route.getPoints(60)),new T.LineBasicMaterial({color:0x3d3a35})));
+ const pulse=new T.Mesh(new T.IcosahedronGeometry(.16,0),new T.MeshBasicMaterial({color:0xfff2a8}));scene.add(pulse);
+ // Faceted clouds drifting in from the sea, plus streaks of wind.
+ const clouds=[],cloudMat=new T.MeshStandardMaterial({color:0xffffff,emissive:0x8a8580,flatShading:true,roughness:1});
+ for(let c=0;c<6;c++){const g=new T.Group();for(let k=0;k<4;k++){const m=add(new T.IcosahedronGeometry(.6+rng()*.45,0),cloudMat,k*.8-1.2,rng()*.4,rng()*.6,g);m.castShadow=false}
+  g.userData={x:-22+c*6.5,y:8.4+rng()*1.6,z:-11+rng()*9,v:.7+rng()*.4};g.scale.setScalar(.7+rng()*.3);scene.add(g);clouds.push(g)}
+ const gusts=[];
+ for(let k=0;k<14;k++){const m=new T.Mesh(new T.BoxGeometry(1.4,.03,.03),new T.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.7}));
+  m.userData={y:2.2+rng()*2.8,z:-6+rng()*9,o:rng()*20};scene.add(m);gusts.push(m)}
+ // Camera route: sea and wind, the ridge, the town, then a wide view, then back to the start.
+ const shots=[[[-17,7,10],[-4,3.2,-5]],[[-5.5,6.8,11],[4.6,4.3,-4.4]],[[-8.6,4.6,12.6],[-3.3,.9,5]],[[-8,13.5,23],[.5,1.6,-1.5]]];
+ const lerpV=(a,b,k)=>a.map((v,i)=>v+(b[i]-v)*k);
+ function cam(t){
+  const keys=[0,1.6,3.1,4.5,5.35,6],shot=[0,1,2,3,3,0];
+  let i=0;while(i<keys.length-2&&t>keys[i+1])i++;
+  const k=smooth(keys[i],keys[i+1],t),a=shots[shot[i]],b=shots[shot[i+1]];
+  return [lerpV(a[0],b[0],k),lerpV(a[1],b[1],k)];
+ }
+ const flags=[['#f1',[-7.2,.3,-3.2],.35],['#f2',[5.2,4.6,-2.4],1.75],['#f3',[-3.5,1.7,5.4],3.25]].map(([id,p,at])=>({el:document.querySelector(id),p:new T.Vector3(...p),at}));
+ function draw(t){
+  const [cp,lp]=cam(t);camera.position.set(...cp);camera.lookAt(...lp);camera.updateMatrixWorld();
+  const wp=waterGeo.attributes.position;
+  for(let i=0;i<wp.count;i++){const x=wBase[i*3],z=wBase[i*3+2];wp.setY(i,Math.sin(x*.6+t*1.9)*.07+Math.cos(z*.7+t*1.4)*.07)}
+  wp.needsUpdate=true;waterGeo.computeVertexNormals();
+  clouds.forEach(c=>{const u=c.userData;c.position.set(u.x+t*u.v,u.y,u.z)});
+  gusts.forEach(g=>{const u=g.userData,x=-14+((u.o+t*7)%20);g.position.set(x,u.y+Math.sin(x*.5)*.2,u.z);g.material.opacity=.55*Math.sin(clamp((x+14)/20)*Math.PI)});
+  const spin=smooth(.9,2.4,t)*(1-smooth(5.35,6,t));
+  turbines.forEach(tb=>tb.hub.rotation.z=-(tb.phase+t*.35+spin*t*2.6));
+  const run=smooth(2.2,3.3,t)*(1-smooth(5.35,5.5,t));pulse.position.copy(route.getPoint(Math.min(.999,run)));pulse.visible=run>.01&&run<.98;
+  const lit=smooth(3.2,3.6,t)*(1-smooth(5.35,6,t));windows.forEach((w,i)=>w.material.color.setRGB(.23+.77*lit,.23+.67*lit,.25+.35*lit));
+  const hide=1-smooth(5.3,5.6,t);
+  flags.forEach(f=>{const v=f.p.clone().project(camera),x=(v.x*.5+.5)*W,y=(-v.y*.5+.5)*H,r=smooth(f.at,f.at+.35,t)*hide;
+   f.el.style.transform=`translate(${x}px,${y}px)`;f.el.style.opacity=r>0?1:0;
+   const pole=f.el.querySelector('.pole'),card=f.el.querySelector('.card');pole.style.height='64px';pole.style.transform=`scaleY(${r})`;
+   card.style.top=`${-64-2}px`;card.style.transform=`translateY(-100%) scaleX(${smooth(.45,1,r)})`;});
+  renderer.render(scene,camera);
+ }
+ document.fonts.ready.then(()=>{
+  const clock={t:0},tl=gsap.timeline({paused:true});tl.to(clock,{t:D,duration:D,ease:'none',onUpdate:()=>draw(clock.t)},0);
+  window.__timelines=window.__timelines||{};window.__timelines["main"]=tl;window.addEventListener('hf-seek',e=>draw(e.detail.time));draw(0);
+ });
+})();
+</script>
+</body></html>

@@ -74,7 +74,7 @@ const escapeText = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;'
 function updateFilters() {
  const newCount=entries.filter(isNew).length;
  const communityCount=entries.filter(e=>e.community).length;
- const names=['All',...(newCount?['New']:[]),...(communityCount?['Community']:[]),'Product','Type','Data','Editorial','Illustration','Interface','Abstract'];
+ const names=['All',...(newCount?['New']:[]),...(communityCount?['Community']:[]),'Product','Type','Data','Editorial','Illustration','Interface','Abstract','3D'];
  $('#filters').innerHTML=names.map(name=>{const count=name==='All'?entries.length:name==='New'?newCount:name==='Community'?communityCount:entries.filter(e=>e.category===name).length; return `<button class="filter ${category===name?'active':''}" data-category="${name}" aria-pressed="${category===name}">${name}<span>${count}</span></button>`}).join('');
 }
 function render() {

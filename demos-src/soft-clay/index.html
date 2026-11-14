@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1088,height=800">
+<title>Soft clay: how a seed becomes a flower</title>
+<style>
+@font-face{font-family:Fredoka;src:url('assets/fonts/fredoka600.woff2');font-weight:600}
+*{box-sizing:border-box}html,body{margin:0;width:1088px;height:800px;overflow:hidden}
+#root{position:relative;width:1088px;height:800px;overflow:hidden;background:#b9d3cf}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+.word{position:absolute;left:700px;font:600 62px/1 Fredoka,sans-serif;color:#2f4f5b;letter-spacing:.01em;white-space:nowrap;transform-origin:left center;
+ text-shadow:0 1px 0 #2a4651,0 2px 0 #263f49,0 3px 0 #223943,0 4px 0 #1e333c,0 5px 0 #1a2d35,0 12px 16px rgba(30,45,50,.3)}
+#w1{top:250px}#w2{top:350px}#w3{top:450px}
+.word b{display:inline-block;width:52px;height:52px;margin-right:14px;border-radius:50%;background:#c44f3f;color:#fbf3e4;font-size:34px;line-height:54px;text-align:center;vertical-align:6px;text-shadow:none;box-shadow:inset 0 -5px 0 rgba(0,0,0,.18),0 8px 12px rgba(40,55,52,.3)}
+.grain{position:absolute;inset:0;pointer-events:none;background:url('assets/noise.png') repeat;opacity:.09;mix-blend-mode:multiply}
+</style>
+</head>
+<body><main id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1088" data-height="800" data-fps="30">
+<canvas id="stage" class="clip" data-start="0" data-duration="6" data-track-index="1" data-layout-ignore></canvas>
+<div class="word" id="w1"><b>1</b>Water</div>
+<div class="word" id="w2"><b>2</b>Sprout</div>
+<div class="word" id="w3"><b>3</b>Bloom</div>
+<div class="grain" data-layout-ignore></div></main>
+<script src="assets/vendor/three.min.js"></script><script src="assets/vendor/gsap.min.js"></script><script>
+/* Motion Index original: plasticine models shot like stop-motion. Inspired by Futurepedia's 3D Style Atlas (Soft Clay); our own code. */
+(() => {
+ const T=THREE, W=1088, H=800, D=6, FPS=12;
+ const clamp=n=>Math.max(0,Math.min(1,n)), smooth=(a,b,t)=>{const x=clamp((t-a)/(b-a));return x*x*(3-2*x)};
+ const pop=(a,t,d=.42)=>{const x=clamp((t-a)/d);if(x<=0)return 0;return x>=1?1:1+Math.sin(x*Math.PI*1.5)*(1-x)*.45-(1-x)**3}; // squash-in with overshoot
+ const hash3=(x,y,z)=>{const s=Math.sin(x*127.1+y*311.7+z*74.7)*43758.5453;return s-Math.floor(s)};
+ const noise3=(x,y,z)=>{const xi=Math.floor(x),yi=Math.floor(y),zi=Math.floor(z),f=v=>v*v*(3-2*v),u=f(x-xi),v=f(y-yi),w=f(z-zi);let r=0;
+  for(let a=0;a<2;a++)for(let b=0;b<2;b++)for(let c=0;c<2;c++)r+=hash3(xi+a,yi+b,zi+c)*(a?u:1-u)*(b?v:1-v)*(c?w:1-w);return r};
+ const renderer=new T.WebGLRenderer({canvas:document.querySelector('#stage'),antialias:true,preserveDrawingBuffer:true});
+ renderer.setPixelRatio(1);renderer.setSize(W,H,false);renderer.outputColorSpace=T.SRGBColorSpace;
+ renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1;renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
+ const scene=new T.Scene(),camera=new T.PerspectiveCamera(30,W/H,.1,100);
+ scene.add(new T.HemisphereLight(0xfff6ea,0x8aa6a2,1.3));
+ const key=new T.DirectionalLight(0xfff0dc,2.3);key.position.set(-5,8,6);key.castShadow=true;key.shadow.mapSize.set(2048,2048);key.shadow.radius=9;key.shadow.bias=-.0005;
+ Object.assign(key.shadow.camera,{left:-8,right:8,top:8,bottom:-8});scene.add(key);
+ const rim=new T.DirectionalLight(0xd8ecff,.9);rim.position.set(6,4,-6);scene.add(rim);
+ // Fingerprints, pits and tool marks: a height field turned into one shared normal map.
+ const N=512,hc=new Float32Array(N*N),rnd=(s=>()=>(s=(s*16807)%2147483647)/2147483647)(11);
+ for(let k=0;k<26;k++){const cx=rnd()*N,cy=rnd()*N,r=30+rnd()*50,ph=rnd()*6;
+  for(let y=-r;y<r;y++)for(let x=-r;x<r;x++){const d=Math.hypot(x,y*1.3);if(d>r)continue;const i=((cy+y+N)%N|0)*N+((cx+x+N)%N|0);hc[i]+=Math.sin(d*.9+ph)*.35*(1-d/r)}}
+ for(let k=0;k<420;k++){const cx=rnd()*N,cy=rnd()*N,r=1.5+rnd()*3.5;for(let y=-r;y<r;y++)for(let x=-r;x<r;x++){const d=Math.hypot(x,y);if(d<r){const i=((cy+y+N)%N|0)*N+((cx+x+N)%N|0);hc[i]-=.9*(1-d/r)}}}
+ for(let k=0;k<14;k++){const x0=rnd()*N,y0=rnd()*N,a=rnd()*Math.PI,len=40+rnd()*90;for(let s=0;s<len;s++){const x=(x0+Math.cos(a)*s+N)%N|0,y=(y0+Math.sin(a)*s+N)%N|0;hc[y*N+x]-=.8;hc[y*N+(x+1)%N]-=.4}}
+ const nc=document.createElement('canvas');nc.width=nc.height=N;const ctx=nc.getContext('2d'),img=ctx.createImageData(N,N);
+ for(let y=0;y<N;y++)for(let x=0;x<N;x++){const dx=hc[y*N+(x+1)%N]-hc[y*N+(x-1+N)%N],dy=hc[((y+1)%N)*N+x]-hc[((y-1+N)%N)*N+x],l=Math.hypot(dx,dy,1.2),o=(y*N+x)*4;
+  img.data[o]=(-dx/l*.5+.5)*255;img.data[o+1]=(-dy/l*.5+.5)*255;img.data[o+2]=(1.2/l*.5+.5)*255;img.data[o+3]=255}
+ ctx.putImageData(img,0,0);const normalMap=new T.CanvasTexture(nc);normalMap.wrapS=normalMap.wrapT=T.RepeatWrapping;normalMap.repeat.set(3,3);
+ const clay=c=>new T.MeshPhysicalMaterial({color:c,roughness:.82,sheen:.6,sheenRoughness:.7,sheenColor:new T.Color(0xffffff),normalMap,normalScale:new T.Vector2(.3,.3)});
+ // Every clay part is a little lopsided: displace it with low-frequency noise.
+ function lumpy(geo,amp=.06,freq=1.6,seed=0){const p=geo.attributes.position,v=new T.Vector3();geo.computeVertexNormals();const n=geo.attributes.normal;
+  for(let i=0;i<p.count;i++){v.fromBufferAttribute(p,i);const k=(noise3(v.x*freq+seed,v.y*freq,v.z*freq)-.5)*2*amp;p.setXYZ(i,v.x+n.getX(i)*k,v.y+n.getY(i)*k,v.z+n.getZ(i)*k)}
+  geo.computeVertexNormals();return geo}
+ const part=(geo,mat,x,y,z,parent=scene)=>{const m=new T.Mesh(geo,mat);m.position.set(x,y,z);m.castShadow=m.receiveShadow=true;parent.add(m);return m};
+ // Seamless paper backdrop: a floor that curves up into a wall.
+ const coveGeo=new T.PlaneGeometry(36,1,1,60),cp=coveGeo.attributes.position;
+ for(let i=0;i<cp.count;i++){const u=Math.floor(i/2)/60,L=12+Math.PI*1.5+12,d=u*L;let y,z;
+  if(d<12){y=0;z=10-d}else if(d<12+Math.PI*1.5){const a=(d-12)/3;y=3-Math.cos(a)*3;z=-2-Math.sin(a)*3}else{y=3+(d-12-Math.PI*1.5);z=-5}
+  cp.setXYZ(i,cp.getX(i),y,z)}
+ coveGeo.computeVertexNormals();
+ const back=new T.Mesh(coveGeo,new T.MeshStandardMaterial({color:0xd2e5de,roughness:1,side:T.DoubleSide}));back.receiveShadow=true;scene.add(back);
+ // Pot, soil and seed.
+ const potProfile=[[0,0],[.9,0],[1.02,.08],[1.22,1.25],[1.42,1.32],[1.46,1.62],[1.25,1.66],[1.22,1.45],[0,1.45]].map(([x,y])=>new T.Vector2(x,y));
+ const pot=part(lumpy(new T.LatheGeometry(potProfile,64),.05,1.4,3),clay(0xc8645a),0,0,0);
+ part(lumpy(new T.CylinderGeometry(1.2,1.2,.16,48,4),.05,2.2,5),clay(0x5b3d32),0,1.42,0);
+ const plant=new T.Group();plant.position.y=1.5;scene.add(plant);
+ const stemCurve=new T.CatmullRomCurve3([[0,0,0],[.12,.7,0],[-.08,1.4,.05],[.04,2.05,0]].map(a=>new T.Vector3(...a)));
+ const stemMat=clay(0x6f9a4c);let stem=null;
+ const leafGeo=lumpy(new T.SphereGeometry(.42,32,20),.04,2.5,7);leafGeo.scale(1,.28,.55);
+ const leaves=[[.65,1,.35],[1.15,-1,-.35]].map(([h,side,tilt])=>{const g=new T.Group();g.position.copy(stemCurve.getPoint(h/2.05*.98));plant.add(g);
+  const l=part(leafGeo,clay(0x7fb05a),side*.4,0,0,g);l.rotation.z=side*.35;l.rotation.y=tilt;return g});
+ const flower=new T.Group();flower.position.set(.04,2.08,0);plant.add(flower);
+ const petals=[];for(let i=0;i<6;i++){const p=new T.Group();p.rotation.y=i/6*Math.PI*2;flower.add(p);
+  const m=part(lumpy(new T.SphereGeometry(.36,28,16),.04,2.3,i),clay(0xe58aa6),.36,0,0,p);m.scale.set(1,.3,.62);m.rotation.z=.35;petals.push(p)}
+ const centre=part(lumpy(new T.SphereGeometry(.26,28,18),.04,3,9),clay(0xf2c94c),0,.08,0,flower);
+ // Water drops falling into the pot.
+ const dropGeo=lumpy(new T.SphereGeometry(.16,24,16),.02,3,2);dropGeo.scale(1,1.35,1);
+ const drops=[0,1,2].map(i=>part(dropGeo,clay(0x6fb2d6),(i-1)*.35,0,.1*i));
+ // Clay sun with a face.
+ const sun=new T.Group();sun.position.set(-1.7,4.6,-1.2);scene.add(sun);
+ part(lumpy(new T.SphereGeometry(.62,40,28),.05,1.8,4),clay(0xf2c24a),0,0,0,sun);
+ for(let i=0;i<8;i++){const r=part(lumpy(new T.ConeGeometry(.15,.42,16,3),.02,3,i),clay(0xf2b23a),0,0,0,sun);const a=i/8*Math.PI*2;r.position.set(Math.cos(a)*.88,Math.sin(a)*.88,0);r.rotation.z=a-Math.PI/2}
+ const dark=clay(0x3b2e2a);[-.2,.2].forEach(x=>part(new T.SphereGeometry(.07,16,12),dark,x,.12,.57,sun));
+ const smile=part(new T.TorusGeometry(.2,.045,10,24,Math.PI),dark,0,-.08,.56,sun);smile.rotation.z=Math.PI;
+ // Words are pinned to points in the scene.
+ const words=[['#w1',[1.9,3.2,0],.55],['#w2',[2.1,2.3,0],1.85],['#w3',[1.6,4.5,0],3.65]].map(([s,p,at])=>({el:document.querySelector(s),p:new T.Vector3(...p),at}));
+ function setStem(k){if(stem){plant.remove(stem);stem.geometry.dispose()}if(k<.02){stem=null;return}
+  const pts=[];for(let i=0;i<=24;i++)pts.push(stemCurve.getPoint(i/24*k));stem=part(new T.TubeGeometry(new T.CatmullRomCurve3(pts),24,.075,10),stemMat,0,0,0,plant)}
+ function draw(time){
+  const t=Math.floor(time*FPS)/FPS, f=Math.floor(time*FPS), jit=(s)=>(hash3(f,s,1)-.5)*.012; // stop-motion: 12 fps steps with a tiny boil
+  const out=smooth(5.3,5.95,t), keep=1-out;
+  drops.forEach((d,i)=>{const s=.25+i*.28,k=clamp((t-s)/.6);d.visible=k>0&&k<1;d.position.y=4.2-k*k*2.9;d.position.x=(i-1)*.3+jit(i)});
+  const grow=smooth(1.45,3.1,t)*keep;setStem(grow);
+  leaves.forEach((l,i)=>{const s=pop(1.95+i*.45,t)*keep;l.scale.setScalar(Math.max(.001,s));l.position.copy(stemCurve.getPoint(Math.min(grow,[.32,.56][i])))});
+  const bud=pop(3.05,t)*keep;flower.scale.setScalar(Math.max(.001,bud));flower.position.copy(stemCurve.getPoint(Math.max(.01,grow)));
+  petals.forEach((p,i)=>{const o=pop(3.5+i*.06,t,.5)*keep;p.scale.setScalar(Math.max(.001,o))});
+  sun.rotation.z=Math.sin(t*1.6)*.08+jit(9);sun.position.y=4.6+Math.max(0,Math.sin((t-3.5)*6))*.12*smooth(3.5,3.7,t)*(1-smooth(4.2,4.4,t));
+  pot.rotation.y=jit(3)*4;plant.rotation.z=jit(4)*1.5;
+  const push=smooth(0,5.3,time)*(1-out);camera.position.set(3.4-push*.8,4.3-push*.3,13.2-push*1.8);camera.lookAt(1.3,2.35,0);camera.updateMatrixWorld();
+  words.forEach(w=>{const v=w.p.clone().project(camera),s=pop(w.at,t,.4)*keep,x=(v.x*.5+.5)*W,y=(-v.y*.5+.5)*H;
+   w.el.style.transform=`scale(${Math.max(0,s)})`;w.el.style.opacity=s>0?1:0});
+  renderer.render(scene,camera);
+ }
+ document.fonts.ready.then(()=>{
+  const clock={t:0},tl=gsap.timeline({paused:true});tl.to(clock,{t:D,duration:D,ease:'none',onUpdate:()=>draw(clock.t)},0);
+  window.__timelines=window.__timelines||{};window.__timelines["main"]=tl;window.addEventListener('hf-seek',e=>draw(e.detail.time));draw(0);
+ });
+})();
+</script>
+</body></html>

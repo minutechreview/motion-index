@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1088,height=800">
+<title>Tiny diorama: where your recycling goes</title>
+<style>
+@font-face{font-family:Fredoka;src:url('assets/fonts/fredoka600.woff2');font-weight:600}
+*{box-sizing:border-box}html,body{margin:0;width:1088px;height:800px;overflow:hidden}
+#root{position:relative;width:1088px;height:800px;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,#e9eef0 0%,#c5d3da 60%,#a9bcc7 100%)}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+.sign{position:absolute;left:0;top:0;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border-radius:20px;background:#fffaf0;color:#33414a;font:600 22px/1 Fredoka,sans-serif;white-space:nowrap;box-shadow:0 6px 0 #d9cfbd,0 12px 18px rgba(30,45,60,.22);transform-origin:50% 100%}
+.sign b{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#2f6b5e;color:#fffaf0;font-size:18px}
+.sign.on b{background:#d0473a}
+.title{position:absolute;left:0;top:44px;width:100%;text-align:center;color:#33414a;font:600 30px/1 Fredoka,sans-serif}
+.grain{position:absolute;inset:0;pointer-events:none;background:url('assets/noise.png') repeat;opacity:.06;mix-blend-mode:multiply}
+</style>
+</head>
+<body><main id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1088" data-height="800" data-fps="30">
+<canvas id="stage" class="clip" data-start="0" data-duration="6" data-track-index="1" data-layout-ignore></canvas>
+<div class="title">Where your recycling goes</div>
+<div class="sign" id="s1"><b>1</b>Sorted at home</div>
+<div class="sign" id="s2"><b>2</b>Picked up</div>
+<div class="sign" id="s3"><b>3</b>Made new</div>
+<div class="grain" data-layout-ignore></div></main>
+<script src="assets/vendor/three.min.js"></script><script src="assets/vendor/gsap.min.js"></script><script>
+/* Motion Index original: a little world on one floating tile. Inspired by Futurepedia's 3D Style Atlas (Tiny Diorama); our own code. */
+(() => {
+ const T=THREE, W=1088, H=800, D=6;
+ const clamp=n=>Math.max(0,Math.min(1,n)), smooth=(a,b,t)=>{const x=clamp((t-a)/(b-a));return x*x*(3-2*x)};
+ const pop=(a,t,d=.35)=>{const x=clamp((t-a)/d);return x<=0?0:x>=1?1:1+Math.sin(x*Math.PI*1.4)*(1-x)*.5-(1-x)**3};
+ const rng=(s=>()=>(s=(s*16807)%2147483647)/2147483647)(5);
+ const renderer=new T.WebGLRenderer({canvas:document.querySelector('#stage'),antialias:true,alpha:true,preserveDrawingBuffer:true});
+ renderer.setPixelRatio(1);renderer.setSize(W,H,false);renderer.outputColorSpace=T.SRGBColorSpace;
+ renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1;renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
+ const scene=new T.Scene(),camera=new T.PerspectiveCamera(26,W/H,.1,100);
+ scene.add(new T.HemisphereLight(0xffffff,0xb5c2b0,1.5));
+ const sun=new T.DirectionalLight(0xfff3e0,2.4);sun.position.set(-6,10,5);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);sun.shadow.radius=6;sun.shadow.bias=-.0005;
+ Object.assign(sun.shadow.camera,{left:-7,right:7,top:7,bottom:-7});scene.add(sun);
+ const mat=c=>new T.MeshStandardMaterial({color:c,roughness:.78});
+ const world=new T.Group();scene.add(world);
+ const mesh=(g,m,x,y,z,parent=world)=>{const o=new T.Mesh(g,m);o.position.set(x,y,z);o.castShadow=o.receiveShadow=true;parent.add(o);return o};
+ // Rounded blocks: an extruded rounded rectangle with a soft bevel.
+ function block(w,h,d,r=.12){const s=new T.Shape(),x=-w/2+r,y=-d/2+r,iw=w-2*r,id=d-2*r;
+  s.moveTo(x,-d/2);s.lineTo(x+iw,-d/2);s.quadraticCurveTo(w/2,-d/2,w/2,y);s.lineTo(w/2,y+id);s.quadraticCurveTo(w/2,d/2,x+iw,d/2);s.lineTo(x,d/2);s.quadraticCurveTo(-w/2,d/2,-w/2,y+id);s.lineTo(-w/2,y);s.quadraticCurveTo(-w/2,-d/2,x,-d/2);
+  const g=new T.ExtrudeGeometry(s,{depth:Math.max(.01,h-2*r*.6),bevelEnabled:true,bevelThickness:r*.6,bevelSize:r*.6,bevelSegments:4,curveSegments:8});g.rotateX(-Math.PI/2);g.translate(0,r*.6,0);return g}
+ // The tile: grass on top, then soil, clay and rock showing on the cut sides.
+ [[.18,0x8cbf5a,0],[.45,0x8a5a3c,-.18],[.3,0xb2794d,-.63],[.32,0x8d8a86,-.93]].forEach(([h,c,y],i)=>mesh(block(7.6-i*.04,h,5.6-i*.04,.3),mat(c),0,y-h-.01,0));
+ for(let i=0;i<30;i++){const x=(rng()-.5)*7.2,z=rng()<.5?2.79:-2.79;mesh(new T.SphereGeometry(.05+rng()*.05,8,6),mat(0x6d6a66),x,-.75-rng()*.4,z)}
+ // Road from the houses to the recycling plant.
+ const road=new T.CatmullRomCurve3([[-2.4,.19,1.25],[-1.2,.19,1.6],[.4,.19,.8],[1.6,.19,-.4],[2.4,.19,-.9]].map(a=>new T.Vector3(...a)));
+ const ribbon=(curve,w,y)=>{const v=[],idx=[];for(let i=0;i<=80;i++){const p=curve.getPoint(i/80),d=curve.getTangent(i/80);v.push(p.x-d.z*w,y,p.z+d.x*w,p.x+d.z*w,y,p.z-d.x*w);if(i<80){const a=i*2;idx.push(a,a+2,a+1,a+1,a+2,a+3)}}
+  const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(v,3));g.setIndex(idx);g.computeVertexNormals();return g};
+ const roadMesh=mesh(ribbon(road,.3,.2),new T.MeshStandardMaterial({color:0x4a5058,roughness:.9,side:T.DoubleSide}),0,0,0);mesh(ribbon(road,.36,.195),mat(0xd9d2c0),0,0,0);
+ for(let i=0;i<10;i++){const p=road.getPoint(i/10+.04);mesh(new T.BoxGeometry(.05,.02,.16),mat(0xf3eedf),p.x,.212,p.z).lookAt(road.getPoint(i/10+.06).setY(.212))}
+ // Houses with recycling bins.
+ const house=(x,z,wall,roof,rot)=>{const g=new T.Group();g.position.set(x,.18,z);g.rotation.y=rot;world.add(g);
+  mesh(block(1,.85,.9,.08),mat(wall),0,0,0,g);const r=mesh(new T.ConeGeometry(.8,.55,4),mat(roof),0,1.13,0,g);r.rotation.y=Math.PI/4;r.scale.set(1,1,.82);
+  mesh(new T.BoxGeometry(.24,.38,.04),mat(0x6b4f3a),0,.2,.46,g);mesh(new T.BoxGeometry(.22,.2,.04),mat(0xbfe0f0),.3,.52,.46,g);return g};
+ house(-2.7,-.5,0xf4e6cc,0xd25c4a,.25);house(-1.4,-1,0xdde9e2,0x3f7d6e,-.1);
+ const bins=[0x3f7fbf,0x4f9b5a,0xe0b73a].map((c,i)=>{const b=new T.Group();b.position.set(-2.1+i*.3,.18,.5);world.add(b);
+  mesh(block(.24,.36,.24,.04),mat(c),0,0,0,b);const lid=mesh(block(.27,.06,.27,.02),mat(new T.Color(c).multiplyScalar(.8).getHex()),0,.36,0,b);return {b,lid}});
+ // Recycling plant with a conveyor and a chimney.
+ const plant=new T.Group();plant.position.set(2.5,.18,-1.6);plant.rotation.y=-.35;world.add(plant);
+ mesh(block(2,1.1,1.3,.1),mat(0xe9edf0),0,0,0,plant);mesh(block(2.1,.14,1.4,.06),mat(0x3f7d6e),0,1.1,0,plant);
+ mesh(new T.CylinderGeometry(.16,.2,1.4,20),mat(0xc9d1d6),.6,1.1,-.2,plant);
+ const arrow=new T.Mesh(new T.TorusGeometry(.3,.07,10,30,Math.PI*1.6),mat(0x4f9b5a));arrow.position.set(-.3,.62,.66);plant.add(arrow);
+ const puffs=[0,1,2].map(i=>mesh(new T.SphereGeometry(.2,16,12),mat(0xf6f7f8),.6,2.1,-.2,plant));
+ // Lollipop trees, a pond and peg people.
+ for(const [x,z] of [[-3.4,-2.1],[-3.3,1.9],[-.6,-2.2],[.6,-2.3],[3.3,.6],[3.2,1.8],[1.4,2],[-1,2.1],[3.4,-2.2]]){
+  const h=.4+rng()*.3;mesh(new T.CylinderGeometry(.04,.05,h,8),mat(0x7a5a40),x,.18+h/2,z);mesh(new T.SphereGeometry(.24+rng()*.12,20,14),mat(rng()<.5?0x5aa05a:0x7dbb5c),x,.18+h+.18,z)}
+ const pond=mesh(new T.CylinderGeometry(.6,.6,.03,32),new T.MeshStandardMaterial({color:0x7fc3d6,roughness:.2}),-.4,.19,-1.6);pond.scale.z=.7;
+ const person=(x,z,c)=>{const g=new T.Group();g.position.set(x,.18,z);world.add(g);mesh(new T.CapsuleGeometry(.07,.16,6,12),mat(c),0,.15,0,g);mesh(new T.SphereGeometry(.065,14,10),mat(0xf0c9a5),0,.33,0,g);return g};
+ const peeps=[person(-2.3,.75,0xd25c4a),person(1.6,-1,0x3f7fbf),person(.2,-1.5,0xe0b73a)];
+ // Collection truck.
+ const truck=new T.Group();truck.scale.setScalar(1.45);world.add(truck);
+ mesh(block(.62,.38,.36,.05),mat(0x2f6fb5),-.1,.08,0,truck);mesh(block(.26,.3,.34,.05),mat(0xf4f1ea),.3,.08,0,truck);mesh(new T.BoxGeometry(.03,.12,.26),mat(0x9fd1e6),.43,.28,0,truck);
+ [[-.25,.18],[-.25,-.18],[.28,.18],[.28,-.18]].forEach(([x,z])=>{const w=mesh(new T.CylinderGeometry(.08,.08,.06,16),mat(0x2d3136),x,.08,z,truck);w.rotation.x=Math.PI/2});
+ const signs=[['#s1',[-2.1,1.7,.4],.3],['#s2',[0,1.3,1.2],1.3],['#s3',[2.4,2.05,-1.6],3.3]].map(([s,p,at])=>({el:document.querySelector(s),p:new T.Vector3(...p),at}));
+ function draw(t){
+  const out=smooth(5.35,5.95,t),keep=1-out;
+  world.position.y=Math.sin(t/D*Math.PI*2)*.06;
+  const a=-.55+Math.sin(t/D*Math.PI*2)*.12,r=16.4;camera.position.set(Math.sin(a)*r,9.2,Math.cos(a)*r);camera.lookAt(0,-.1,0);camera.updateMatrixWorld();
+  bins.forEach((b,i)=>{const o=smooth(.4+i*.12,.6+i*.12,t)*(1-smooth(1+i*.1,1.2+i*.1,t));b.lid.rotation.x=-o*1.1;b.lid.position.z=-o*.1});
+  const drive=smooth(1.2,4.1,t)*keep,p=road.getPoint(drive),q=road.getPoint(Math.min(1,drive+.01));
+  truck.position.copy(p);truck.position.y=.2+Math.abs(Math.sin(t*22))*.012*(drive>0&&drive<1);truck.rotation.y=Math.atan2(-(q.z-p.z),q.x-p.x);
+  puffs.forEach((m,i)=>{const k=((t*.6+i/3)%1),on=smooth(3.6,4,t)*keep;m.position.y=1.9+k*1.1;m.scale.setScalar((.4+k*.9)*on);m.material.opacity=1});
+  arrow.rotation.z=-t*1.5*smooth(3.6,4,t);
+  peeps.forEach((g,i)=>{g.position.y=.18+Math.max(0,Math.sin(t*6+i*2))*.05;g.rotation.y=Math.sin(t*1.3+i)*.6});
+  signs.forEach(s=>{const v=s.p.clone();v.y+=world.position.y;v.project(camera);const k=pop(s.at,t)*keep;
+   s.el.style.transform=`translate(${(v.x*.5+.5)*W}px,${(-v.y*.5+.5)*H}px) translate(-50%,-100%) scale(${k})`;s.el.style.opacity=k>0?1:0;
+   s.el.classList.toggle('on',(s.at===.3&&t<1.3)||(s.at===1.3&&t>=1.3&&t<3.3)||(s.at===3.3&&t>=3.3))});
+  renderer.render(scene,camera);
+ }
+ document.fonts.ready.then(()=>{
+  const clock={t:0},tl=gsap.timeline({paused:true});tl.to(clock,{t:D,duration:D,ease:'none',onUpdate:()=>draw(clock.t)},0);
+  window.__timelines=window.__timelines||{};window.__timelines["main"]=tl;window.addEventListener('hf-seek',e=>draw(e.detail.time));draw(0);
+ });
+})();
+</script>
+</body></html>
