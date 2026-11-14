@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1088,height=800">
+<title>Blueprint build: a birdhouse from plan to object</title>
+<style>
+@font-face{font-family:DMMono;src:url('assets/fonts/dmmono500.ttf');font-weight:500}
+*{box-sizing:border-box}html,body{margin:0;width:1088px;height:800px;overflow:hidden}
+#root{position:relative;width:1088px;height:800px;overflow:hidden;background:#2a1d14}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+.note{position:absolute;left:0;top:0;width:0;height:0;font:500 22px/1.15 DMMono,monospace;color:#f2f6ff;letter-spacing:.06em;white-space:nowrap}
+.note i{position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;background:#f2f6ff}
+.note s{position:absolute;left:0;top:0;height:2px;background:#f2f6ff;transform-origin:left center;text-decoration:none}
+.note span{position:absolute;display:flex;align-items:center;gap:10px;top:-16px}
+.note b{display:grid;place-items:center;width:30px;height:30px;border:2px solid #f2f6ff;border-radius:50%;font-weight:500}
+.grain{position:absolute;inset:0;pointer-events:none;background:url('assets/noise.png') repeat;opacity:.07}
+</style>
+</head>
+<body><main id="root" data-composition-id="main" data-start="0" data-duration="6" data-width="1088" data-height="800" data-fps="30">
+<canvas id="stage" class="clip" data-start="0" data-duration="6" data-track-index="1" data-layout-ignore></canvas>
+<div class="note" id="n1"><i></i><s></s><span><b>1</b>ENTRY HOLE</span></div>
+<div class="note" id="n2"><i></i><s></s><span><b>2</b>SLOPED ROOF</span></div>
+<div class="note" id="n3"><i></i><s></s><span><b>3</b>PERCH</span></div>
+<div class="grain" data-layout-ignore></div></main>
+<script src="assets/vendor/three.min.js"></script><script src="assets/vendor/gsap.min.js"></script><script>
+/* Motion Index original: a drafting sheet whose drawing stands up into an object. Inspired by Futurepedia's 3D Style Atlas (Blueprint Build); our own code. */
+(() => {
+ const T=THREE, W=1088, H=800, D=6;
+ const clamp=n=>Math.max(0,Math.min(1,n)), smooth=(a,b,t)=>{const x=clamp((t-a)/(b-a));return x*x*(3-2*x)};
+ const hash=n=>{const s=Math.sin(n*91.7)*43758.5453;return s-Math.floor(s)};
+ const renderer=new T.WebGLRenderer({canvas:document.querySelector('#stage'),antialias:true,preserveDrawingBuffer:true});
+ renderer.setPixelRatio(1);renderer.setSize(W,H,false);renderer.outputColorSpace=T.SRGBColorSpace;renderer.toneMapping=T.ACESFilmicToneMapping;
+ renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
+ const scene=new T.Scene(),camera=new T.PerspectiveCamera(30,W/H,.1,100);
+ scene.add(new T.HemisphereLight(0xf4f0ff,0x3a2a1e,1.25));
+ const lamp=new T.DirectionalLight(0xfff0dc,2.2);lamp.position.set(-4,9,5);lamp.castShadow=true;lamp.shadow.mapSize.set(2048,2048);lamp.shadow.radius=5;
+ Object.assign(lamp.shadow.camera,{left:-6,right:6,top:6,bottom:-6});scene.add(lamp);
+ const tex=(w,h,fn)=>{const c=document.createElement('canvas');c.width=w;c.height=h;fn(c.getContext('2d'),w,h);const t=new T.CanvasTexture(c);t.colorSpace=T.SRGBColorSpace;t.anisotropy=8;return t};
+ // Walnut desk.
+ const desk=tex(2048,2048,(g,w,h)=>{g.fillStyle='#4a2f1e';g.fillRect(0,0,w,h);for(let i=0;i<260;i++){const y=hash(i)*h;g.strokeStyle=`rgba(${20+hash(i+1)*30|0},${10+hash(i+2)*15|0},5,${.25+hash(i+3)*.3})`;g.lineWidth=1+hash(i+4)*3;g.beginPath();g.moveTo(0,y);for(let x=0;x<=w;x+=32)g.lineTo(x,y+Math.sin(x*.01+i)*6);g.stroke()}});
+ const deskM=new T.Mesh(new T.PlaneGeometry(44,32),new T.MeshStandardMaterial({map:desk,roughness:.55}));deskM.rotation.x=-Math.PI/2;deskM.position.y=-.01;deskM.receiveShadow=true;scene.add(deskM);
+ // The sheet: blueprint blue, grain, fold creases, grid and title block. The drawing is a second layer redrawn as it plots.
+ const SW=6.4,SH=4.4,PX=2048,PY=Math.round(PX*SH/SW),u=PX/SW,sx=x=>(x+SW/2)*u,sy=z=>(z+SH/2)*u;
+ const paper=tex(PX,PY,(g,w,h)=>{const gr=g.createLinearGradient(0,0,w,h);gr.addColorStop(0,'#1f4f9a');gr.addColorStop(1,'#173f84');g.fillStyle=gr;g.fillRect(0,0,w,h);
+  for(let i=0;i<40000;i++){g.fillStyle=`rgba(255,255,255,${hash(i)*.05})`;g.fillRect(hash(i*3)*w,hash(i*7)*h,2,2)}
+  g.strokeStyle='rgba(255,255,255,.08)';g.lineWidth=1;for(let x=0;x<w;x+=u*.2){g.beginPath();g.moveTo(x,0);g.lineTo(x,h);g.stroke()}for(let y=0;y<h;y+=u*.2){g.beginPath();g.moveTo(0,y);g.lineTo(w,y);g.stroke()}
+  [[w/3,0,w/3,h],[2*w/3,0,2*w/3,h],[0,h/2,w,h/2]].forEach(([a,b,c,d])=>{const lg=g.createLinearGradient(a-12,b,a+12,b);g.strokeStyle='rgba(0,0,0,.18)';g.lineWidth=5;g.beginPath();g.moveTo(a,b);g.lineTo(c,d);g.stroke();g.strokeStyle='rgba(255,255,255,.1)';g.lineWidth=2;g.beginPath();g.moveTo(a+4,b);g.lineTo(c+4,d);g.stroke()});
+  g.strokeStyle='rgba(240,246,255,.85)';g.lineWidth=4;g.strokeRect(u*.15,u*.15,w-u*.3,h-u*.3);
+  const tb=[w-u*2.15,h-u*.95,u*2,u*.8];g.lineWidth=3;g.strokeRect(...tb);g.beginPath();g.moveTo(tb[0],tb[1]+u*.45);g.lineTo(tb[0]+tb[2],tb[1]+u*.45);g.stroke();
+  g.fillStyle='rgba(240,246,255,.92)';g.font=`500 ${u*.2}px DMMono`;g.fillText('BIRDHOUSE',tb[0]+u*.12,tb[1]+u*.32);g.font=`500 ${u*.11}px DMMono`;g.fillText('DRG B-01      SCALE 1:4',tb[0]+u*.12,tb[1]+u*.66)});
+ const sheet=new T.Mesh(new T.PlaneGeometry(SW,SH),new T.MeshStandardMaterial({map:paper,roughness:.9}));sheet.rotation.x=-Math.PI/2;sheet.receiveShadow=true;scene.add(sheet);
+ const inkC=document.createElement('canvas');inkC.width=PX;inkC.height=PY;const ink=inkC.getContext('2d'),inkT=new T.CanvasTexture(inkC);inkT.colorSpace=T.SRGBColorSpace;
+ const inkM=new T.Mesh(new T.PlaneGeometry(SW,SH),new T.MeshBasicMaterial({map:inkT,transparent:true,depthWrite:false}));inkM.rotation.x=-Math.PI/2;inkM.position.y=.003;scene.add(inkM);
+ // Birdhouse dimensions in sheet units; the floor plan sits where the model will stand.
+ const BW=1.1,BD=1.1,WH=1.15,AP=1.62,FX=1.25,FZ=.15,EX=-1.55,EZ=.55;
+ const strokes=[], push=(pts,w=4,dash=null)=>strokes.push({pts,w,dash,len:pts.slice(1).reduce((s,p,i)=>s+Math.hypot(p[0]-pts[i][0],p[1]-pts[i][1]),0)});
+ const circle=(cx,cz,r,n=40)=>Array.from({length:n+1},(_,i)=>[cx+Math.cos(i/n*Math.PI*2)*r,cz+Math.sin(i/n*Math.PI*2)*r]);
+ push([[EX-BW/2,EZ],[EX+BW/2,EZ],[EX+BW/2,EZ-WH],[EX,EZ-AP],[EX-BW/2,EZ-WH],[EX-BW/2,EZ]]); // front elevation
+ push(circle(EX,EZ-.78,.16));push([[EX-.06,EZ-.42],[EX-.06,EZ-.3]],3);push([[EX-BW/2-.12,EZ-WH-.06],[EX,EZ-AP-.1],[EX+BW/2+.12,EZ-WH-.06]],3);
+ push([[FX-BW/2,FZ-BD/2],[FX+BW/2,FZ-BD/2],[FX+BW/2,FZ+BD/2],[FX-BW/2,FZ+BD/2],[FX-BW/2,FZ-BD/2]]); // floor plan
+ push([[FX-BW/2+.08,FZ-BD/2+.08],[FX+BW/2-.08,FZ-BD/2+.08],[FX+BW/2-.08,FZ+BD/2-.08],[FX-BW/2+.08,FZ+BD/2-.08],[FX-BW/2+.08,FZ-BD/2+.08]],2,[14,10]);
+ [[-.25,-.25],[.25,-.25],[-.25,.25],[.25,.25]].forEach(([a,b])=>push(circle(FX+a,FZ+b,.05,16),2));
+ push([[EX-BW/2,EZ+.25],[EX+BW/2,EZ+.25]],2);push([[FX+BW/2+.25,FZ-BD/2],[FX+BW/2+.25,FZ+BD/2]],2);
+ const labels=[['220',EX,EZ+.42],['220',FX+BW/2+.52,FZ+.06],['FRONT',EX,EZ+.72],['FLOOR',FX,FZ+BD/2+.36]];
+ const total=strokes.reduce((s,k)=>s+k.len,0);
+ function plot(p){ink.clearRect(0,0,PX,PY);ink.strokeStyle='#f2f6ff';ink.fillStyle='#f2f6ff';ink.lineCap=ink.lineJoin='round';let left=p*total;
+  for(const k of strokes){if(left<=0)break;ink.lineWidth=k.w;ink.setLineDash(k.dash||[]);ink.beginPath();ink.moveTo(sx(k.pts[0][0]),sy(k.pts[0][1]));
+   for(let i=1;i<k.pts.length&&left>0;i++){const a=k.pts[i-1],b=k.pts[i],l=Math.hypot(b[0]-a[0],b[1]-a[1]),f=Math.min(1,left/l);ink.lineTo(sx(a[0]+(b[0]-a[0])*f),sy(a[1]+(b[1]-a[1])*f));left-=l}ink.stroke()}
+  ink.setLineDash([]);ink.globalAlpha=smooth(.7,1,p);ink.font=`500 ${u*.14}px DMMono`;ink.textAlign='center';labels.forEach(([s,x,z])=>ink.fillText(s,sx(x),sy(z)));ink.globalAlpha=1;inkT.needsUpdate=true}
+ // The model: a body with a hole, two roof boards and a perch, plus its wireframe twin.
+ const wood=tex(512,512,(g,w,h)=>{g.fillStyle='#d4a26a';g.fillRect(0,0,w,h);for(let i=0;i<90;i++){const y=hash(i+40)*h;g.strokeStyle=`rgba(140,85,40,${.15+hash(i)*.25})`;g.lineWidth=1+hash(i+2)*2;g.beginPath();g.moveTo(0,y);for(let x=0;x<=w;x+=16)g.lineTo(x,y+Math.sin(x*.02+i)*4);g.stroke()}});
+ const solidM=new T.MeshStandardMaterial({map:wood,roughness:.7,transparent:true,opacity:0});
+ const prof=new T.Shape([[-BW/2,0],[BW/2,0],[BW/2,WH],[0,AP],[-BW/2,WH]].map(([x,y])=>new T.Vector2(x,y)));const hole=new T.Path();hole.absarc(0,.78,.16,0,Math.PI*2,true);prof.holes.push(hole);
+ const bodyG=new T.ExtrudeGeometry(prof,{depth:BD,bevelEnabled:false});bodyG.translate(0,0,-BD/2);
+ const roofL=Math.hypot(BW/2+.12,AP-WH+.06)+.02,roofG=new T.BoxGeometry(roofL,.05,BD+.2);
+ const model=new T.Group();model.position.set(FX,0,FZ);scene.add(model);
+ const wire=new T.LineBasicMaterial({color:0xf2f6ff,transparent:true});
+ const piece=(g,x,y,z,rz=0)=>{const m=new T.Mesh(g,solidM);m.position.set(x,y,z);m.rotation.z=rz;m.castShadow=true;model.add(m);
+  const e=new T.LineSegments(new T.EdgesGeometry(g,20),wire);e.position.copy(m.position);e.rotation.copy(m.rotation);model.add(e);return m};
+ piece(bodyG,0,0,0);const ang=Math.atan2(AP-WH,BW/2);
+ const rl=piece(roofG,-BW/4-.03,(WH+AP)/2+.04,0,ang),rr=piece(roofG,BW/4+.03,(WH+AP)/2+.04,0,-ang);
+ const perch=piece(new T.CylinderGeometry(.035,.035,.32,12),0,.42,BD/2+.16);perch.rotation.x=Math.PI/2;model.children[model.children.length-1].rotation.x=Math.PI/2;
+ const notes=[['#n1',[FX,.78,FZ+BD/2],-1,2.95],['#n2',[FX-BW/4-.05,(WH+AP)/2+.08,FZ],-1,3.35],['#n3',[FX,.42,FZ+BD/2+.3],1,3.75]].map(([s,p,side,at])=>({el:document.querySelector(s),p:new T.Vector3(...p),side,at}));
+ let lastPlot=-1;
+ function draw(t){
+  const back=smooth(5.3,5.95,t),keep=1-back,pp=Math.round(smooth(.05,1.55,t)*keep*200)/200;if(pp!==lastPlot){plot(pp);lastPlot=pp}
+  const tilt=smooth(1.45,2.85,t)*keep;
+  camera.position.set(.2+tilt*2.4,8.6-tilt*4.4,1.1+tilt*4.3);camera.lookAt(.1+tilt*.6,tilt*.55,0);camera.updateMatrixWorld();
+  const rise=smooth(1.7,2.8,t)*keep;model.scale.set(1,Math.max(.001,rise),1);
+  wire.opacity=rise*(1-.55*smooth(3,3.6,t));solidM.opacity=smooth(2.9,3.6,t)*keep;model.traverse(o=>{if(o.isMesh)o.castShadow=solidM.opacity>.05});
+  [rl,rr].forEach((r,i)=>{const d=1-smooth(2.5+i*.15,3.1+i*.15,t);r.position.y=(WH+AP)/2+.04+d*.6});
+  notes.forEach(n=>{const v=n.p.clone().project(camera),x=(v.x*.5+.5)*W,y=(-v.y*.5+.5)*H,k=smooth(n.at,n.at+.35,t)*keep,len=n.side>0?150:-180;
+   n.el.style.transform=`translate(${x}px,${y}px)`;n.el.style.opacity=k>0?1:0;const line=n.el.querySelector('s'),lab=n.el.querySelector('span');
+   line.style.width=`${Math.abs(len)}px`;line.style.left=n.side>0?'0px':`${len}px`;line.style.transformOrigin=n.side>0?'left center':'right center';line.style.transform=`scaleX(${k})`;
+   lab.style.left=n.side>0?`${len+14}px`:'auto';lab.style.right=n.side>0?'auto':`${-len+14}px`;lab.style.opacity=smooth(.5,1,k)});
+  renderer.render(scene,camera);
+ }
+ document.fonts.ready.then(()=>{
+  const clock={t:0},tl=gsap.timeline({paused:true});tl.to(clock,{t:D,duration:D,ease:'none',onUpdate:()=>draw(clock.t)},0);
+  window.__timelines=window.__timelines||{};window.__timelines["main"]=tl;window.addEventListener('hf-seek',e=>draw(e.detail.time));draw(0);
+ });
+})();
+</script>
+</body></html>
