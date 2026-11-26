@@ -1,5 +1,5 @@
 /* Motion for the scout-picked styles (scenes-scout.js). Sizes use container units so the cards scale. */
-.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion{container-type:size;overflow:hidden}
+.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion,.scene-moving-explainer{container-type:size;overflow:hidden}
 
 /* RPG dialogue box */
 .scene-rpg-dialog{background:#7ec8f0;image-rendering:pixelated}
@@ -135,6 +135,27 @@
 @keyframes u-sp-app{0%,66%{transform:scale(1.08);filter:blur(.4cqw)}78%,100%{transform:scale(1);filter:none}}
 @keyframes u-sp-row{0%,68%{transform:translateY(6cqw);opacity:0}80%,100%{transform:translateY(0);opacity:1}}
 
+/* Moving-film explainer: 8 s loop. Base styles = the finished frame (reduced motion). */
+.scene-moving-explainer{background:radial-gradient(circle at 50% 35%,#18233d,#0a0f1c 75%)}
+.ve-cam{position:absolute;inset:0 0 18% 0;transform-origin:50% 45%;animation:u-ve-cam 8s cubic-bezier(.7,0,.2,1) infinite}
+.ve-hero{position:absolute;inset:4% 6% 0;width:88%;height:96%;overflow:visible}
+.ve-route{fill:none;stroke:#5ee0c1;stroke-width:2.2;stroke-linecap:round;stroke-dasharray:150;stroke-dashoffset:0;animation:u-ve-route 8s ease-in-out infinite}
+.ve-node circle{fill:#0a0f1c;stroke:#f4f1ea;stroke-width:2}
+.ve-node text{fill:#f4f1ea;font:700 7px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.08em;text-anchor:middle}
+.ve-n0{animation:u-ve-n0 8s cubic-bezier(.3,1.6,.5,1) infinite}.ve-n1{animation:u-ve-n1 8s cubic-bezier(.3,1.6,.5,1) infinite}.ve-n2{animation:u-ve-n2 8s cubic-bezier(.3,1.6,.5,1) infinite}
+.ve-num{position:absolute;z-index:1;right:9%;top:6%;text-align:right;color:#ffd166;animation:u-ve-num 8s cubic-bezier(.3,1.6,.5,1) infinite}
+.ve-num b{display:block;font:800 13cqw/0.9 ui-sans-serif,system-ui,sans-serif}
+.ve-num small{font:700 1.8cqw/1 ui-monospace,Menlo,monospace;letter-spacing:.24em;color:#f4f1ea}
+.ve-cap{position:absolute;z-index:1;left:0;right:0;bottom:5%;margin:0;text-align:center;font:700 3.6cqw/1.2 ui-sans-serif,system-ui,sans-serif;color:transparent;
+ background:linear-gradient(90deg,#f4f1ea 50%,rgba(244,241,234,.3) 50%) 0 0/200% 100% no-repeat;-webkit-background-clip:text;background-clip:text;animation:u-ve-cap 8s linear infinite}
+@keyframes u-ve-route{0%,4%{stroke-dashoffset:150}38%,90%{stroke-dashoffset:0}98%,100%{stroke-dashoffset:150}}
+@keyframes u-ve-n0{0%,3%{transform:scale(0)}8%{transform:scale(1.25)}11%,90%{transform:scale(1)}96%,100%{transform:scale(0)}}
+@keyframes u-ve-n1{0%,19%{transform:scale(0)}24%{transform:scale(1.25)}27%,90%{transform:scale(1)}96%,100%{transform:scale(0)}}
+@keyframes u-ve-n2{0%,35%{transform:scale(0)}40%{transform:scale(1.25)}43%,90%{transform:scale(1)}96%,100%{transform:scale(0)}}
+@keyframes u-ve-cam{0%,44%{transform:scale(1)}58%,76%{transform:scale(1.35)}90%,100%{transform:scale(1)}}
+@keyframes u-ve-num{0%,56%{transform:scale(0);opacity:0}64%{transform:scale(1.2);opacity:1}70%,86%{transform:scale(1);opacity:1}94%,100%{transform:scale(0);opacity:0}}
+@keyframes u-ve-cap{0%,4%{background-position:100% 0}40%,92%{background-position:0 0}100%{background-position:100% 0}}
+
 @media (prefers-reduced-motion:reduce){
-  :is(.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion) *,:is(.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion) *::after{animation:none!important}
+  :is(.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion,.scene-moving-explainer) *,:is(.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion,.scene-moving-explainer) *::after{animation:none!important}
 }

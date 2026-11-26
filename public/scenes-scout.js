@@ -45,6 +45,13 @@ const splashMotion = `<div class="sp-phone"><div class="sp-app"><div class="sp-b
 <path class="sp-wave" d="M30 54 Q40 36 50 50 T70 46"/><circle class="sp-dot" cx="70" cy="46" r="5"/></svg><i class="sp-load"></i></div></div>
 <small class="sp-cap">LAUNCH → LOGO → APP</small>`;
 
+// Moving-film explainer (from Peter Yang's video-explainer "Motion" mode): one hero visual that keeps changing on the
+// spoken word. A route draws node by node, callouts pop as it arrives, the camera dives in, a number lands, captions track.
+const veNodes = [[22, 62, 'TOPIC'], [80, 30, 'SCRIPT'], [138, 58, 'VIDEO']]
+  .map(([x, y, t], k) => `<g class="ve-node ve-n${k}" style="transform-origin:${x}px ${y}px"><circle cx="${x}" cy="${y}" r="7"/><text x="${x}" y="${y + 17}">${t}</text></g>`).join('');
+const movingExplainer = `<div class="ve-cam"><svg class="ve-hero" viewBox="0 0 160 90"><path class="ve-route" d="M22 62 C45 62 55 30 80 30 S115 58 138 58"/>${veNodes}</svg>
+</div><div class="ve-num"><b>60</b><small>SECONDS</small></div><p class="ve-cap">turn any topic into a video</p>`;
+
 export const scoutShapes = {
   'rpg-dialog': rpgDialog,
   'day-night': dayNight,
@@ -52,4 +59,5 @@ export const scoutShapes = {
   'thread-type': threadType,
   'living-ascii': livingAscii,
   'splash-motion': splashMotion,
+  'moving-explainer': movingExplainer,
 };
