@@ -121,6 +121,15 @@
       "authorUrl": "https://github.com/seyedmostafahasani"
     },
     {
+      "id": "videoexplainer",
+      "author": "Peter Yang",
+      "name": "Peter Yang · video-explainer",
+      "project": "video-explainer",
+      "description": "An MIT-licensed agent skill that turns any topic, doc, codebase or URL into a one-minute explainer video in Motion, Illustrated or 3D style, rendered with HyperFrames.",
+      "url": "https://github.com/petergyang/video-explainer",
+      "authorUrl": "https://github.com/petergyang"
+    },
+    {
       "id": "livingascii",
       "author": "yusen-dev",
       "name": "yusen-dev · living-ascii",
@@ -1885,6 +1894,27 @@
       "prompt": "Create an original motion-graphics piece inspired by “Glassware and light” for [YOUR TOPIC OR BRAND].\n\nVisual direction: Thin clear glass on a dark stone table in front of a warm glowing backdrop striped with shadow. Liquids are clear but strongly tinted, glass carries small white measure marks, and each layer casts its own soft pool of coloured light with caustic lines on the table. A short list of coloured dots names the ingredients.\nMotion: Lift each jug in turn, tilt it over the glass and pour a thin stream while the level rises, light the matching name in the list as it pours, and let the layers settle one above another. Drain and return the jugs to loop.\nBest suited to: Recipes, ratios, mixtures, density and chemistry.\n\nReference credit: Futurepedia · 3D Style Atlas\nOriginal reference: https://www.futurepedia.io/resources/3d-style-atlas/view\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Build it as a deterministic three.js scene: real geometry, lights and a camera, no pre-rendered images or downloaded models, every frame driven by one seekable time value. Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets.",
       "demo": "/demos/glass-light.mp4",
       "poster": "/demos/glass-light.jpg"
+    },
+    {
+      "id": "moving-explainer",
+      "index": 82,
+      "added": "2026-11-26",
+      "title": "Moving-film explainer",
+      "category": "Editorial",
+      "description": "One hero visual keeps transforming while the narration explains, never a slide.",
+      "look": "One full-frame hero visual on a deep navy backdrop (a live route, chart or device) filling most of the frame, a few 1–4 word callouts in large type, one big hero number, and word-synced captions in a band at the bottom.",
+      "motion": "Change the hero every 2–3 seconds on the spoken word: draw the route node by node, pop each callout as the line reaches it, dive the camera into the key detail and land the hero number with an overshoot; objects morph instead of swapping, and the caption lights each word as it is said.",
+      "use": "One-minute explainers of a topic, doc, codebase or how something works",
+      "source": {
+        "id": "videoexplainer",
+        "author": "Peter Yang",
+        "name": "Peter Yang · video-explainer",
+        "project": "video-explainer",
+        "description": "An MIT-licensed agent skill that turns any topic, doc, codebase or URL into a one-minute explainer video in Motion, Illustrated or 3D style, rendered with HyperFrames.",
+        "url": "https://github.com/petergyang/video-explainer",
+        "authorUrl": "https://github.com/petergyang"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “Moving-film explainer” for [YOUR TOPIC OR BRAND].\n\nVisual direction: One full-frame hero visual on a deep navy backdrop (a live route, chart or device) filling most of the frame, a few 1–4 word callouts in large type, one big hero number, and word-synced captions in a band at the bottom.\nMotion: Change the hero every 2–3 seconds on the spoken word: draw the route node by node, pop each callout as the line reaches it, dive the camera into the key detail and land the hero number with an overshoot; objects morph instead of swapping, and the caption lights each word as it is said.\nBest suited to: One-minute explainers of a topic, doc, codebase or how something works.\n\nReference credit: Peter Yang · video-explainer\nOriginal reference: https://github.com/petergyang/video-explainer\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
     }
   ]
 }
