@@ -130,6 +130,15 @@
       "authorUrl": "https://github.com/petergyang"
     },
     {
+      "id": "asciiart",
+      "author": "Edward Jones",
+      "name": "Edward Jones · ascii-art",
+      "project": "ascii-art (Bloom and Butterfly)",
+      "description": "MIT-licensed Python, numpy and pygame pieces that draw 3D animations entirely in text characters: a flower that blooms then blows away, and a butterfly that breaks out of its chrysalis.",
+      "url": "https://github.com/edwardjones7/ascii-art",
+      "authorUrl": "https://github.com/edwardjones7"
+    },
+    {
       "id": "livingascii",
       "author": "yusen-dev",
       "name": "yusen-dev · living-ascii",
@@ -1915,6 +1924,27 @@
         "authorUrl": "https://github.com/petergyang"
       },
       "prompt": "Create an original motion-graphics piece inspired by “Moving-film explainer” for [YOUR TOPIC OR BRAND].\n\nVisual direction: One full-frame hero visual on a deep navy backdrop (a live route, chart or device) filling most of the frame, a few 1–4 word callouts in large type, one big hero number, and word-synced captions in a band at the bottom.\nMotion: Change the hero every 2–3 seconds on the spoken word: draw the route node by node, pop each callout as the line reaches it, dive the camera into the key detail and land the hero number with an overshoot; objects morph instead of swapping, and the caption lights each word as it is said.\nBest suited to: One-minute explainers of a topic, doc, codebase or how something works.\n\nReference credit: Peter Yang · video-explainer\nOriginal reference: https://github.com/petergyang/video-explainer\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
+    },
+    {
+      "id": "ascii-bloom",
+      "index": 83,
+      "added": "2026-11-27",
+      "title": "3D ASCII bloom",
+      "category": "Abstract",
+      "description": "A 3D object built only from text characters grows, turns and blows away.",
+      "look": "A single subject (a flower, butterfly or jellyfish) modelled in 3D and drawn only in monospace glyphs, dense characters like @ % # for the near and bright parts and light ones like : . for the far and dim parts, glowing pink and gold on a near-black ground.",
+      "motion": "Build the shape ring by ring from the centre with a small overshoot while the whole thing turns slowly in 3D so the characters shade as it rotates; hold, then let a gust carry every glyph off sideways in a drifting stream and grow it back to loop.",
+      "use": "Openers, music visuals, quotes, intros and calm loops for tech or nature",
+      "source": {
+        "id": "asciiart",
+        "author": "Edward Jones",
+        "name": "Edward Jones · ascii-art",
+        "project": "ascii-art (Bloom and Butterfly)",
+        "description": "MIT-licensed Python, numpy and pygame pieces that draw 3D animations entirely in text characters: a flower that blooms then blows away, and a butterfly that breaks out of its chrysalis.",
+        "url": "https://github.com/edwardjones7/ascii-art",
+        "authorUrl": "https://github.com/edwardjones7"
+      },
+      "prompt": "Create an original motion-graphics piece inspired by “3D ASCII bloom” for [YOUR TOPIC OR BRAND].\n\nVisual direction: A single subject (a flower, butterfly or jellyfish) modelled in 3D and drawn only in monospace glyphs, dense characters like @ % # for the near and bright parts and light ones like : . for the far and dim parts, glowing pink and gold on a near-black ground.\nMotion: Build the shape ring by ring from the centre with a small overshoot while the whole thing turns slowly in 3D so the characters shade as it rotates; hold, then let a gust carry every glyph off sideways in a drifting stream and grow it back to loop.\nBest suited to: Openers, music visuals, quotes, intros and calm loops for tech or nature.\n\nReference credit: Edward Jones · ascii-art\nOriginal reference: https://github.com/edwardjones7/ascii-art\n\nMake a 6–8 second seamless loop unless the project calls for another duration. Use editable, deterministic animation (CSS/SVG, Canvas, Remotion, or the project's existing motion stack). Keep text legible, define a clear hierarchy, and avoid gratuitous particles, camera shake, lens flares, or generic transitions. Respect reduced-motion settings for web use. Show a working preview, explain how to change the text and colors, and credit the source of inspiration without copying its assets."
     }
   ]
 }

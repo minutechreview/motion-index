@@ -1,5 +1,5 @@
 /* Motion for the scout-picked styles (scenes-scout.js). Sizes use container units so the cards scale. */
-.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion,.scene-moving-explainer{container-type:size;overflow:hidden}
+.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion,.scene-moving-explainer,.scene-ascii-bloom{container-type:size;overflow:hidden}
 
 /* RPG dialogue box */
 .scene-rpg-dialog{background:#7ec8f0;image-rendering:pixelated}
@@ -156,6 +156,24 @@
 @keyframes u-ve-num{0%,56%{transform:scale(0);opacity:0}64%{transform:scale(1.2);opacity:1}70%,86%{transform:scale(1);opacity:1}94%,100%{transform:scale(0);opacity:0}}
 @keyframes u-ve-cap{0%,4%{background-position:100% 0}40%,92%{background-position:0 0}100%{background-position:100% 0}}
 
+/* 3D ASCII bloom: 8 s loop. --ab-spin turns the flower and counter-turns each glyph so it always faces the camera.
+   Base styles = the open flower (reduced motion). */
+@property --ab-spin{syntax:'<angle>';inherits:true;initial-value:0deg}
+.scene-ascii-bloom{background:radial-gradient(circle at 50% 40%,#22101d,#07060a 70%)}
+.ab-stage{position:absolute;inset:0 0 10%;perspective:120cqmin;display:grid;place-items:center}
+.ab-flower{position:relative;width:0;height:0;margin-top:10cqmin;
+ transform-style:preserve-3d;transform:rotateX(62deg) rotateZ(var(--ab-spin));animation:u-ab-turn 8s linear infinite}
+.ab-flower i{--face:rotateZ(calc(-1 * var(--a) - var(--ab-spin))) rotateX(-62deg);position:absolute;left:0;top:0;margin:-2cqmin 0 0 -1.3cqmin;font:800 4cqmin/1 ui-monospace,Menlo,monospace;font-style:normal;
+ color:#ff7ab8;text-shadow:0 0 1.2cqmin rgb(255 80 160 / .6);animation:u-ab-petal 8s ease-in-out infinite;animation-delay:var(--d,0s)}
+.ab-flower i:nth-child(n+40){color:#ffb3d6}
+.ab-flower .ab-core{color:#ffd27a;font-size:5cqmin;text-shadow:0 0 2cqmin rgb(255 200 90 / .8)}
+.ab-flower .ab-st{color:#7fd08a;text-shadow:none;animation-name:u-ab-stem}
+.ab-cap{position:absolute;left:0;right:0;bottom:5%;text-align:center;font:600 1.8cqw/1 ui-monospace,Menlo,monospace;letter-spacing:.24em;color:#f29ac4}
+@keyframes u-ab-turn{to{--ab-spin:360deg}}
+@keyframes u-ab-petal{0%,6%{scale:0;opacity:0;translate:0 0}22%{scale:1.3;opacity:1}30%,60%{scale:1;opacity:1;translate:0 0}
+ 90%{scale:.7;opacity:0;translate:26cqmin -14cqmin 18cqmin}100%{scale:0;opacity:0;translate:0 0}}
+@keyframes u-ab-stem{0%,8%{opacity:0}18%,66%{opacity:1}84%,100%{opacity:0}}
+
 @media (prefers-reduced-motion:reduce){
-  :is(.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion,.scene-moving-explainer) *,:is(.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion,.scene-moving-explainer) *::after{animation:none!important}
+  :is(.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion,.scene-moving-explainer,.scene-ascii-bloom) *,:is(.scene-rpg-dialog,.scene-day-night,.scene-flat-to-3d,.scene-thread-type,.scene-living-ascii,.scene-splash-motion,.scene-moving-explainer,.scene-ascii-bloom) *::after{animation:none!important}
 }

@@ -52,6 +52,21 @@ const veNodes = [[22, 62, 'TOPIC'], [80, 30, 'SCRIPT'], [138, 58, 'VIDEO']]
 const movingExplainer = `<div class="ve-cam"><svg class="ve-hero" viewBox="0 0 160 90"><path class="ve-route" d="M22 62 C45 62 55 30 80 30 S115 58 138 58"/>${veNodes}</svg>
 </div><div class="ve-num"><b>60</b><small>SECONDS</small></div><p class="ve-cap">turn any topic into a video</p>`;
 
+// 3D ASCII bloom (from Edward Jones's ascii-art): a flower built from text characters in 3D. It opens petal by petal
+// while it turns, holds, then the wind lifts every glyph away and it grows back. Glyphs face the camera as it turns.
+const bloomGlyph = t => '@%#*+=-:'[Math.min(7, Math.floor(t * 8))];
+const bloomPetals = [[0, 5, 30, 4], [36, 5, 20, 12]].flatMap(([turn, count, size, lift], layer) =>
+  Array.from({ length: count }, (_, petal) => [2, 4, 6, 8, 10, 12].flatMap(step => {
+    const r = size * step / 12, half = 15 * Math.sin(Math.PI * step / 13);
+    return [-1, 0, 1].map(side => {
+      const a = turn + petal * 72 + side * half * 0.6, z = lift + r * r / size * 0.8;
+      return `<i style="--a:${a}deg;--d:${(layer * 6 + step) * 0.04}s;transform:rotateZ(${a}deg) translateX(${r}cqmin) translateZ(${z}cqmin) var(--face)">${bloomGlyph(step / 13 + layer * 0.1)}</i>`;
+    });
+  })).flat()).join('');
+const bloomStem = Array.from({ length: 6 }, (_, k) => `<i class="ab-st" style="--a:0deg;transform:translateZ(${-k * 6}cqmin) var(--face)">|</i>`).join('');
+const asciiBloom = `<div class="ab-stage"><div class="ab-flower">${bloomStem}<i class="ab-core" style="--a:0deg;transform:translateZ(6cqmin) var(--face)">@</i>${bloomPetals}</div></div>
+<small class="ab-cap">BLOOM → TURN → BLOW AWAY</small>`;
+
 export const scoutShapes = {
   'rpg-dialog': rpgDialog,
   'day-night': dayNight,
@@ -60,4 +75,5 @@ export const scoutShapes = {
   'living-ascii': livingAscii,
   'splash-motion': splashMotion,
   'moving-explainer': movingExplainer,
+  'ascii-bloom': asciiBloom,
 };
